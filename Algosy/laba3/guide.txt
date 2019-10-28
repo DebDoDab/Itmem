@@ -102,7 +102,7 @@ int f(vector<int>& a, int x) {
 Эти две функции написаны выше, желательно не копипастить или подсматривать, а попытаться самому это дело написать.
 Также нужно рассмотреть случаи, когда числа на отрезке нет.
 
-Мой код: https://github.com/DebDoDab/MoeGovno/blob/master/Algosy/laba3/l03z1.cpp
+Мой код: https://github.com/DebDoDab/Itmem/blob/master/Algosy/laba3/l03z1.cpp
 
 
 3B.
@@ -130,7 +130,7 @@ h - высота первой лампы из условия
 check(a, h, m) - какая-то функция, которая будет говорить, проваливаются ли лампы под землю при (высота второй лампы) = m
 Еще не забудьте, что f() возратит высоту второй лампы, а нам нужно вывести высоту последней лампы, поэтому нужно будет где-то посчитать эту самую высоту последней лампы
 
-Мой код: https://github.com/DebDoDab/MoeGovno/blob/master/Algosy/laba3/l03z2.cpp
+Мой код: https://github.com/DebDoDab/Itmem/blob/master/Algosy/laba3/l03z2.cpp
 
 
 
@@ -210,7 +210,7 @@ int pop(vector<int>& Heap) {
 То есть для каждого x должно соблюдаться условие, что оба сына >= a[x]. Давай не забудем, что у некоторых вершин нет сыновей, либо сын только 1
 Делается простым фором по массиву
 
-Мой код: https://github.com/DebDoDab/MoeGovno/blob/master/Algosy/laba3/l03z3.cpp
+Мой код: https://github.com/DebDoDab/Itmem/blob/master/Algosy/laba3/l03z3.cpp
 
 
 3D
@@ -219,7 +219,7 @@ int pop(vector<int>& Heap) {
 Давай сначала просто занесем все эти элементы в кучу, а потом просто достанем все элементы из кучи
 По сути весь код кучи был написан выше, осталось его переварить, написать.
 
-Мой код: https://github.com/DebDoDab/MoeGovno/blob/master/Algosy/laba3/l03z4.cpp
+Мой код: https://github.com/DebDoDab/Itmem/blob/master/Algosy/laba3/l03z4.cpp
 
 
 
@@ -230,7 +230,7 @@ int pop(vector<int>& Heap) {
 У нас строки, а значит буков там всего 28, поэтому используем сортировку подсчетом.
 Вроде все, говорить не о чем. Просто нужно нормально реализовать это дело.
 
-Мой код: https://github.com/DebDoDab/MoeGovno/blob/master/Algosy/laba3/l03z5.cpp
+Мой код: https://github.com/DebDoDab/Itmem/blob/master/Algosy/laba3/l03z5.cpp
 
 
 
