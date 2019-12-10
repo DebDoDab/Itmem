@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="laba15" targetName="laba15" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a8d25f16-380e-4d8c-a594-caeb1e7fb61c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1URmfIi5nvKMzG4Aqx6Wyu0b4pI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Shakun" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="laba15" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--file $PROJECT_DIR$/test/opa.arc --extract" PASS_PARENT_ENVS_2="true" PROJECT_NAME="laba15" TARGET_NAME="laba15" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="laba15" RUN_TARGET_NAME="laba15">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8d25f16-380e-4d8c-a594-caeb1e7fb61c" name="Default Changelist" comment="" />
+      <created>1575327883609</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575327883609</updated>
+      <workItem from="1575327884874" duration="452000" />
+      <workItem from="1575330511935" duration="5150000" />
+      <workItem from="1575353646874" duration="1694000" />
+      <workItem from="1575413907609" duration="14000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="453" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575357863228">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="453" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1575357863228" />
+    <state x="699" y="358" width="581" height="397" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1575354197935">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="699" y="358" width="581" height="397" key="#com.intellij.fileTypes.FileTypeChooser/70.27.1850.1053@70.27.1850.1053" timestamp="1575354197935" />
+    <state x="728" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575330524874">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="728" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1575330524873" />
+    <state x="778" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1575413919138">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="778" y="311" width="424" height="491" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1575413919138" />
+    <state width="1804" height="274" key="GridCell.Tab.0.bottom" timestamp="1575357868967">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="274" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1575357868967" />
+    <state width="1804" height="274" key="GridCell.Tab.0.center" timestamp="1575357868967">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="274" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1575357868967" />
+    <state width="1804" height="274" key="GridCell.Tab.0.left" timestamp="1575357868966">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="274" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1575357868966" />
+    <state width="1804" height="274" key="GridCell.Tab.0.right" timestamp="1575357868967">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="274" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1575357868967" />
+    <state x="484" y="188" key="SettingsEditor" timestamp="1575353839661">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="484" y="188" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1575353839661" />
+    <state x="659" y="252" key="run.anything.popup" timestamp="1575332603035">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="659" y="252" key="run.anything.popup/70.27.1850.1053@70.27.1850.1053" timestamp="1575332603035" />
+    <state x="659" y="196" width="672" height="676" key="search.everywhere.popup" timestamp="1575332735548">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="659" y="196" width="672" height="676" key="search.everywhere.popup/70.27.1850.1053@70.27.1850.1053" timestamp="1575332735548" />
+  </component>
+</project>

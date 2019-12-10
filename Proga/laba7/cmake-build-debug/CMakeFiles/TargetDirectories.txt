@@ -1,0 +1,3 @@
+/home/vadim/CLionProjects/laba7/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/vadim/CLionProjects/laba7/cmake-build-debug/CMakeFiles/laba7.dir
+/home/vadim/CLionProjects/laba7/cmake-build-debug/CMakeFiles/edit_cache.dir

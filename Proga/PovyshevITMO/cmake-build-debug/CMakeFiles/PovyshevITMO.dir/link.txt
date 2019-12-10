@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/PovyshevITMO.dir/main.c.o  -o PovyshevITMO -lm 
