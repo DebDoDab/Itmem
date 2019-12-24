@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/vadim/CLionProjects/laba13/Settings.c" "/home/vadim/CLionProjects/laba13/cmake-build-debug/CMakeFiles/laba13.dir/Settings.c.o"
   "/home/vadim/CLionProjects/laba13/main.c" "/home/vadim/CLionProjects/laba13/cmake-build-debug/CMakeFiles/laba13.dir/main.c.o"
+  "/home/vadim/CLionProjects/laba13/mp3.c" "/home/vadim/CLionProjects/laba13/cmake-build-debug/CMakeFiles/laba13.dir/mp3.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

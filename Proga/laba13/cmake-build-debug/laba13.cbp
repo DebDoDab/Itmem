@@ -78,7 +78,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/vadim/CLionProjects/laba13/Settings.c">
+			<Option target="laba13"/>
+		</Unit>
+		<Unit filename="/home/vadim/CLionProjects/laba13/Settings.h">
+			<Option target="laba13"/>
+		</Unit>
 		<Unit filename="/home/vadim/CLionProjects/laba13/main.c">
+			<Option target="laba13"/>
+		</Unit>
+		<Unit filename="/home/vadim/CLionProjects/laba13/mp3.c">
+			<Option target="laba13"/>
+		</Unit>
+		<Unit filename="/home/vadim/CLionProjects/laba13/mp3.h">
 			<Option target="laba13"/>
 		</Unit>
 		<Unit filename="/home/vadim/CLionProjects/laba13/CMakeLists.txt">

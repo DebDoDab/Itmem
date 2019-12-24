@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/laba13.dir/Settings.c.o"
   "CMakeFiles/laba13.dir/main.c.o"
+  "CMakeFiles/laba13.dir/mp3.c.o"
   "laba13"
   "laba13.pdb"
 )

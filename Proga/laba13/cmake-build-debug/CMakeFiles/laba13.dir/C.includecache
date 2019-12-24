@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/vadim/CLionProjects/laba13/Settings.h
+
 /home/vadim/CLionProjects/laba13/main.c
 stdio.h
 -
@@ -14,5 +16,17 @@ locale.h
 stdlib.h
 -
 string.h
+-
+Settings.h
+/home/vadim/CLionProjects/laba13/Settings.h
+mp3.h
+/home/vadim/CLionProjects/laba13/mp3.h
+
+/home/vadim/CLionProjects/laba13/mp3.h
+Settings.h
+/home/vadim/CLionProjects/laba13/Settings.h
+stdlib.h
+-
+stdio.h
 -
 

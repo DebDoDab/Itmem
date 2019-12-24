@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/97/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/98/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/97/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/98/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vadim/CLionProjects/laba13/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/97/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/98/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/97/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/98/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,6 +123,33 @@ laba13/fast:
 	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/build
 .PHONY : laba13/fast
 
+Settings.o: Settings.c.o
+
+.PHONY : Settings.o
+
+# target to build an object file
+Settings.c.o:
+	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/Settings.c.o
+.PHONY : Settings.c.o
+
+Settings.i: Settings.c.i
+
+.PHONY : Settings.i
+
+# target to preprocess a source file
+Settings.c.i:
+	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/Settings.c.i
+.PHONY : Settings.c.i
+
+Settings.s: Settings.c.s
+
+.PHONY : Settings.s
+
+# target to generate assembly for a file
+Settings.c.s:
+	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/Settings.c.s
+.PHONY : Settings.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -150,6 +177,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/main.c.s
 .PHONY : main.c.s
 
+mp3.o: mp3.c.o
+
+.PHONY : mp3.o
+
+# target to build an object file
+mp3.c.o:
+	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/mp3.c.o
+.PHONY : mp3.c.o
+
+mp3.i: mp3.c.i
+
+.PHONY : mp3.i
+
+# target to preprocess a source file
+mp3.c.i:
+	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/mp3.c.i
+.PHONY : mp3.c.i
+
+mp3.s: mp3.c.s
+
+.PHONY : mp3.s
+
+# target to generate assembly for a file
+mp3.c.s:
+	$(MAKE) -f CMakeFiles/laba13.dir/build.make CMakeFiles/laba13.dir/mp3.c.s
+.PHONY : mp3.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... laba13"
 	@echo "... edit_cache"
+	@echo "... Settings.o"
+	@echo "... Settings.i"
+	@echo "... Settings.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mp3.o"
+	@echo "... mp3.i"
+	@echo "... mp3.s"
 .PHONY : help
 
 
