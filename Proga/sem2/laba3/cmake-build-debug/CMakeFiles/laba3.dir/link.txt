@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/laba3.dir/main.cpp.o CMakeFiles/laba3.dir/Matrix.cpp.o  -o laba3 

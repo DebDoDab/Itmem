@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/CLionProjects/laba3/Matrix.cpp
+Matrix.h
+/home/vadim/CLionProjects/laba3/Matrix.h
+
+/home/vadim/CLionProjects/laba3/Matrix.h
+bits/stdc++.h
+-
+
+/home/vadim/CLionProjects/laba3/main.cpp
+iostream
+-
+Matrix.h
+/home/vadim/CLionProjects/laba3/Matrix.h
+
