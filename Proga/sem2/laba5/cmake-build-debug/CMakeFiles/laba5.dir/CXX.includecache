@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/CLionProjects/laba5/classes.h
+bits/stdc++.h
+-
+classes.tpp
+/home/vadim/CLionProjects/laba5/classes.tpp
+
+/home/vadim/CLionProjects/laba5/classes.tpp
+
+/home/vadim/CLionProjects/laba5/functions.h
+functions.tpp
+/home/vadim/CLionProjects/laba5/functions.tpp
+
+/home/vadim/CLionProjects/laba5/functions.tpp
+
+/home/vadim/CLionProjects/laba5/main.cpp
+bits/stdc++.h
+-
+functions.h
+/home/vadim/CLionProjects/laba5/functions.h
+classes.h
+/home/vadim/CLionProjects/laba5/classes.h
+
