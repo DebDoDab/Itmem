@@ -10,29 +10,70 @@ using namespace std;
 #define LABA1_FUNCTIONAL_H
 
 class Image {
-private:
+public:
+    virtual void inverseColors() = 0;
+
+    virtual void mirrorHorizontal() = 0;
+
+    virtual void mirrorVertical() = 0;
+
+    virtual void clockwizeTurn() = 0;
+
+    virtual void counterclockwizeTurn() = 0;
+
+    virtual void read() = 0;
+
+    virtual void write() = 0;
+};
+
+class ImageColored : public Image {
+public:
     string inputFile, outputFile;
     string header;
-    int height{}, width{}, maxValue{};
+    int height, width, maxValue;
     vector<vector<tuple<char, char, char>>> pixels;
 
 public:
+    ImageColored(const string& input, const string& output);
 
-    Image(const string& input, const string& output);
+    void read() override;
 
-    void inverseColors();
+    void write() override;
 
-    void mirrorHorizontal();
+    void inverseColors() override;
 
-    void mirrorVertical();
+    void mirrorVertical() override;
 
-    void clockwizeTurn();
+    void mirrorHorizontal() override;
 
-    void counterclockwizeTurn();
+    void clockwizeTurn() override;
 
-    void read();
+    void counterclockwizeTurn() override;
+};
 
-    void write();
+class ImageGrayscale : public Image {
+public:
+    string inputFile, outputFile;
+    string header;
+    int height, width, maxValue;
+    vector<vector<char>> pixels;
+
+public:
+    ImageGrayscale(const string& input, const string& output);
+
+    void read() override ;
+
+    void write() override;
+
+    void inverseColors() override;
+
+    void mirrorHorizontal() override;
+
+    void mirrorVertical() override;
+
+    void clockwizeTurn() override;
+
+    void counterclockwizeTurn() override;
 };
 
 #endif //LABA1_FUNCTIONAL_H

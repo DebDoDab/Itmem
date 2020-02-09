@@ -15,8 +15,5 @@ using namespace std;
 
 int main(int argc, char** argv) {
     Settings settings(argc, argv);
-
-    Image image(settings.input, settings.output);
-
-    settings.solve(image);
+    settings.solve();
 }

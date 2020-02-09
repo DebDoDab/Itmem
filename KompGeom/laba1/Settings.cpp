@@ -21,20 +21,29 @@ Settings::Settings(int argc, char **argv) {
     } else {
         cout << "Wrong command\nYou entered: " << argv[3] << endl;
     }
+
+    ifstream fin(input);
+    string s;
+    fin >> s;
+    if (s == "P6") {
+        image = new ImageColored(input, output);
+    } else {
+        image = new ImageGrayscale(input, output);
+    }
 }
 
-void Settings::solve(Image& image) {
+void Settings::solve() {
     if (inverseColors) {
-        image.inverseColors();
+        image->inverseColors();
     } else if (mirrorHorizontal) {
-        image.mirrorHorizontal();
+        image->mirrorHorizontal();
     } else if (mirrorVertical) {
-        image.mirrorVertical();
+        image->mirrorVertical();
     } else if (clockwizeTurn) {
-        image.clockwizeTurn();
+        image->clockwizeTurn();
     } else if (counterclockwizeTurn) {
-        image.counterclockwizeTurn();
+        image->counterclockwizeTurn();
     }
 
-    image.write();
+    image->write();
 }

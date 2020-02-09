@@ -12,7 +12,7 @@ using t3 = tuple<char, char, char>;
 #define g1 get<1>
 #define g2 get<2>
 
-void Image::inverseColors() {
+void ImageColored::inverseColors() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             g0(pixels[i][j]) = 255 - g0(pixels[i][j]);
@@ -22,7 +22,15 @@ void Image::inverseColors() {
     }
 }
 
-void Image::mirrorHorizontal() {
+void ImageGrayscale::inverseColors() {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            pixels[i][j] = 255 - pixels[i][j];
+        }
+    }
+}
+
+void ImageColored::mirrorHorizontal() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < (width >> 1); j++) {
             swap(pixels[i][j], pixels[i][width - j - 1]);
@@ -30,13 +38,27 @@ void Image::mirrorHorizontal() {
     }
 }
 
-void Image::mirrorVertical() {
+void ImageGrayscale::mirrorHorizontal() {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < (width >> 1); j++) {
+            swap(pixels[i][j], pixels[i][width - j - 1]);
+        }
+    }
+}
+
+void ImageColored::mirrorVertical() {
     for (int i = 0; i < (height >> 1); i++) {
         swap(pixels[i], pixels[height - i - 1]);
     }
 }
 
-void Image::clockwizeTurn() {
+void ImageGrayscale::mirrorVertical() {
+    for (int i = 0; i < (height >> 1); i++) {
+        swap(pixels[i], pixels[height - i - 1]);
+    }
+}
+
+void ImageColored::clockwizeTurn() {
     auto temp = pixels;
     pixels.assign(width, vector<t3>(height, {0, 0, 0}));
     for (int i = 0; i < width; i++) {
@@ -46,7 +68,17 @@ void Image::clockwizeTurn() {
     }
 }
 
-void Image::counterclockwizeTurn() {
+void ImageGrayscale::clockwizeTurn() {
+    auto temp = pixels;
+    pixels.assign(width, vector<char>(height, 0));
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            pixels[i][j] = temp[height - j - 1][i];
+        }
+    }
+}
+
+void ImageColored::counterclockwizeTurn() {
     auto temp = pixels;
     pixels.assign(width, vector<t3>(height, {0, 0, 0}));
     for (int i = 0; i < width; i++) {
@@ -56,7 +88,17 @@ void Image::counterclockwizeTurn() {
     }
 }
 
-void Image::read() {
+void ImageGrayscale::counterclockwizeTurn() {
+    auto temp = pixels;
+    pixels.assign(width, vector<char>(height, 0));
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            pixels[i][j] = temp[j][width - i - 1];
+        }
+    }
+}
+
+void ImageColored::read() {
     ifstream cin(inputFile);
     cin >> header; ///P6
     cin >> height >> width;
@@ -73,7 +115,22 @@ void Image::read() {
     }
 }
 
-void Image::write() {
+void ImageGrayscale::read() {
+    ifstream cin(inputFile);
+    cin >> header; ///P5
+    cin >> height >> width;
+    cin >> maxValue;
+    cin.ignore();
+
+    pixels.assign(height, vector<char>(width, 0));
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            cin.read(&pixels[i][j], 1);
+        }
+    }
+}
+
+void ImageColored::write() {
     ofstream fout(outputFile);
     fout << header << "\n" << height << " " << width << "\n" << maxValue << "\n";
     for (int i = 0; i < height; i++) {
@@ -85,7 +142,24 @@ void Image::write() {
     }
 }
 
-Image::Image(const string& input, const string& output) {
+void ImageGrayscale::write() {
+    ofstream fout(outputFile);
+    fout << header << "\n" << height << " " << width << "\n" << maxValue << "\n";
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            fout.write(&pixels[i][j], 1);
+        }
+    }
+}
+
+ImageColored::ImageColored(const string& input, const string& output) {
+    inputFile = input;
+    outputFile = output;
+    height = width = maxValue = 0;
+    this->read();
+}
+
+ImageGrayscale::ImageGrayscale(const string& input, const string& output) {
     inputFile = input;
     outputFile = output;
     height = width = maxValue = 0;

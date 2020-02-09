@@ -27,10 +27,11 @@ public:
     bool mirrorVertical = false;
     bool clockwizeTurn = false;
     bool counterclockwizeTurn = false;
+    Image* image = nullptr;
 
 public:
     Settings(int argc, char** argv);
-    void solve(Image& image);
+    void solve();
 };
 
 
