@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/laba1.dir/main.cpp.o CMakeFiles/laba1.dir/Settings.cpp.o CMakeFiles/laba1.dir/Functional.cpp.o  -o laba1 

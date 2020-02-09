@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.cpp
+bits/stdc++.h
+-
+Functional.h
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.h
+
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.h
+bits/stdc++.h
+-
+
