@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Exceptions.cpp">
+			<Option target="laba1"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Exceptions.h">
+			<Option target="laba1"/>
+		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.cpp">
 			<Option target="laba1"/>
 		</Unit>

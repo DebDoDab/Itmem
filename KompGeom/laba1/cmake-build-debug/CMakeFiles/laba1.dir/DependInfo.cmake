@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Exceptions.cpp" "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/laba1.dir/Exceptions.cpp.o"
   "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.cpp" "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/laba1.dir/Functional.cpp.o"
   "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Settings.cpp" "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/laba1.dir/Settings.cpp.o"
   "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/main.cpp" "/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/laba1.dir/main.cpp.o"

@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/laba1.dir/Exceptions.cpp.o"
   "CMakeFiles/laba1.dir/Functional.cpp.o"
   "CMakeFiles/laba1.dir/Settings.cpp.o"
   "CMakeFiles/laba1.dir/main.cpp.o"

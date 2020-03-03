@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/100/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/103/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/100/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/103/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/100/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/103/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/100/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/103/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,33 @@ laba1: cmake_check_build_system
 laba1/fast:
 	$(MAKE) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/build
 .PHONY : laba1/fast
+
+Exceptions.o: Exceptions.cpp.o
+
+.PHONY : Exceptions.o
+
+# target to build an object file
+Exceptions.cpp.o:
+	$(MAKE) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/Exceptions.cpp.o
+.PHONY : Exceptions.cpp.o
+
+Exceptions.i: Exceptions.cpp.i
+
+.PHONY : Exceptions.i
+
+# target to preprocess a source file
+Exceptions.cpp.i:
+	$(MAKE) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/Exceptions.cpp.i
+.PHONY : Exceptions.cpp.i
+
+Exceptions.s: Exceptions.cpp.s
+
+.PHONY : Exceptions.s
+
+# target to generate assembly for a file
+Exceptions.cpp.s:
+	$(MAKE) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/Exceptions.cpp.s
+.PHONY : Exceptions.cpp.s
 
 Functional.o: Functional.cpp.o
 
@@ -213,6 +240,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... laba1"
 	@echo "... edit_cache"
+	@echo "... Exceptions.o"
+	@echo "... Exceptions.i"
+	@echo "... Exceptions.s"
 	@echo "... Functional.o"
 	@echo "... Functional.i"
 	@echo "... Functional.s"

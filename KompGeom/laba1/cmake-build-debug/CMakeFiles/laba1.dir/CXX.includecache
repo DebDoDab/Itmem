@@ -6,21 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.h
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Exceptions.h
 bits/stdc++.h
 -
 
-/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Settings.h
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.cpp
 bits/stdc++.h
 -
 Functional.h
 /home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.h
+Exceptions.h
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Exceptions.h
 
-/home/vadim/Desktop/MoeGovno/KompGeom/laba1/main.cpp
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.h
 bits/stdc++.h
 -
-Functional.h
-/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Functional.h
-Settings.h
-/home/vadim/Desktop/MoeGovno/KompGeom/laba1/Settings.h
 

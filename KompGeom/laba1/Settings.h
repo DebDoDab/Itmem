@@ -22,11 +22,13 @@ using namespace std;
 class Settings {
 public:
     string input, output;
-    bool inverseColors = false;
-    bool mirrorHorizontal = false;
-    bool mirrorVertical = false;
-    bool clockwizeTurn = false;
-    bool counterclockwizeTurn = false;
+    enum Command {
+        inverseColors = 0,
+        mirrorHorizontal = 1,
+        mirrorVertical = 2,
+        clockwizeTurn = 3,
+        counterclockwizeTurn = 4
+    } cmd;
     Image* image = nullptr;
 
 public:

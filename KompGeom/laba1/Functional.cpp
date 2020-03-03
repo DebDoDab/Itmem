@@ -4,6 +4,7 @@
 
 #include <bits/stdc++.h>
 #include "Functional.h"
+#include "Exceptions.h"
 
 using namespace std;
 
@@ -15,9 +16,9 @@ using t3 = tuple<char, char, char>;
 void ImageColored::inverseColors() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            g0(pixels[i][j]) = 255 - g0(pixels[i][j]);
-            g1(pixels[i][j]) = 255 - g1(pixels[i][j]);
-            g2(pixels[i][j]) = 255 - g2(pixels[i][j]);
+            g0(pixels[i][j]) = maxValue - g0(pixels[i][j]);
+            g1(pixels[i][j]) = maxValue - g1(pixels[i][j]);
+            g2(pixels[i][j]) = maxValue - g2(pixels[i][j]);
         }
     }
 }
@@ -66,6 +67,7 @@ void ImageColored::clockwizeTurn() {
             pixels[i][j] = temp[height - j - 1][i];
         }
     }
+    swap(width, height);
 }
 
 void ImageGrayscale::clockwizeTurn() {
@@ -76,6 +78,7 @@ void ImageGrayscale::clockwizeTurn() {
             pixels[i][j] = temp[height - j - 1][i];
         }
     }
+    swap(width, height);
 }
 
 void ImageColored::counterclockwizeTurn() {
@@ -86,6 +89,7 @@ void ImageColored::counterclockwizeTurn() {
             pixels[i][j] = temp[j][width - i - 1];
         }
     }
+    swap(width, height);
 }
 
 void ImageGrayscale::counterclockwizeTurn() {
@@ -96,43 +100,73 @@ void ImageGrayscale::counterclockwizeTurn() {
             pixels[i][j] = temp[j][width - i - 1];
         }
     }
+    swap(width, height);
 }
 
 void ImageColored::read() {
     ifstream cin(inputFile);
     cin >> header; ///P6
-    cin >> height >> width;
+    cin >> width >> height;
     cin >> maxValue;
     cin.ignore();
 
     pixels.assign(height, vector<t3>(width, {0, 0, 0}));
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
+            if (cin.eof()) {
+                throw WrongSize();
+            }
+
             cin.read(&g0(pixels[i][j]), 1);
+            if (cin.eof()) {
+                throw WrongSize();
+            }
+
             cin.read(&g1(pixels[i][j]), 1);
+            if (cin.eof()) {
+                throw WrongSize();
+            }
+
             cin.read(&g2(pixels[i][j]), 1);
         }
+    }
+
+    char x;
+    while (!cin.eof()) {
+        cin >> x;
+//        cout << x;
+    }
+
+    if (!cin.eof()) {
+        throw WrongSize();
     }
 }
 
 void ImageGrayscale::read() {
     ifstream cin(inputFile);
     cin >> header; ///P5
-    cin >> height >> width;
+    cin >> width >> height;
     cin >> maxValue;
     cin.ignore();
 
     pixels.assign(height, vector<char>(width, 0));
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
+            if (cin.eof()) {
+                throw WrongSize();
+            }
             cin.read(&pixels[i][j], 1);
         }
+    }
+
+    if (!cin.eof()) {
+        throw WrongSize();
     }
 }
 
 void ImageColored::write() {
     ofstream fout(outputFile);
-    fout << header << "\n" << height << " " << width << "\n" << maxValue << "\n";
+    fout << header << "\n" << width << " " << height << "\n" << maxValue << "\n";
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             fout.write(&g0(pixels[i][j]), 1);
@@ -144,7 +178,7 @@ void ImageColored::write() {
 
 void ImageGrayscale::write() {
     ofstream fout(outputFile);
-    fout << header << "\n" << height << " " << width << "\n" << maxValue << "\n";
+    fout << header << "\n" << width << " " << height << "\n" << maxValue << "\n";
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             fout.write(&pixels[i][j], 1);

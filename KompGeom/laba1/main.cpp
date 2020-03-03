@@ -14,6 +14,10 @@ using namespace std;
  */
 
 int main(int argc, char** argv) {
-    Settings settings(argc, argv);
-    settings.solve();
+    try {
+        Settings settings(argc, argv);
+        settings.solve();
+    } catch (exception& ex) {
+        cout << "ERROR : " << ex.what();
+    }
 }
