@@ -6,7 +6,7 @@
 #include "SquarePolynomial.h"
 
 Polynom::Polynom() {
-    srand(time(NULL));
+    srand(time(nullptr));
     a = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 10;
     b = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 10;
     c = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 10;
@@ -20,11 +20,11 @@ Polynom::Polynom(const float &a_, const float &b_, const float &c_) {
 
 Polynom::Polynom(const string &s) {
     regex re("(([+-]?)\\s?([0-9]*\\.[0-9]+|[0-9]+)\\s?\\*?\\s?x\\^\\s?2\\s?)?"
-             "(([+-]?)\\s?([0-9]*\\.[0-9]+|[0-9]+)\\s?\\*?\\s?x\\s)?"
+             "(([+-]?)\\s?([0-9]*\\.[0-9]+|[0-9]+)\\s?\\*?\\s?x\\s?)?"
              "(([+-]?)\\s?([0-9]*\\.[0-9]+|[0-9]+))?");
     smatch match;
     if (regex_search(s, match, re) && match.size() > 6) {
-        if (match.str(1).size()) {
+        if (!match.str(1).empty()) {
             a = stof(match.str(3));
             if (match.str(2) == "-") {
                 a *= -1;
@@ -32,7 +32,7 @@ Polynom::Polynom(const string &s) {
         } else {
             a = 0;
         }
-        if (match.str(4).size()) {
+        if (!match.str(4).empty()) {
             b = stof(match.str(6));
             if (match.str(5) == "-") {
                 b *= -1;
@@ -40,7 +40,7 @@ Polynom::Polynom(const string &s) {
         } else {
             b = 0;
         }
-        if (match.str(7).size()) {
+        if (!match.str(7).empty()) {
             c = stof(match.str(9));
             if (match.str(8) == "-") {
                 c *= -1;
@@ -76,7 +76,11 @@ vector<float> Polynom::solve() {
         float D = sqrt(b * b - a * c);
         float x1 = (-b - D) / 2 / a;
         float x2 = (-b + D) / 2 / a;
-        return {x1, x2};
+        if (fabs(x1 - x2) < 0.000001) {
+            return {fabs(x1)};
+        } else {
+            return {x1, x2};
+        }
     } else if (fabs(b) > 0.000001) {
         return {-c / b};
     } else {
@@ -85,10 +89,20 @@ vector<float> Polynom::solve() {
 }
 
 int Polynom::solveCount() {
-    float D = b * b - a * c;
-    if (D < -0.000001) return 0;
-    else if (D > 0.000001) return 2;
-    else return 1;
+    if (fabs(a) > 0.000001) {
+        float D = b * b - a * c;
+        if (D < -0.000001) return 0;
+        else if (D > 0.000001) return 2;
+        else return 1;
+    } else if (fabs(b) > 0.000001) {
+        return 1;
+    } else {
+        if (fabs(c) > 0.000001) {
+            return 0;
+        } else {
+            return INT_MAX;
+        }
+    }
 }
 
 float Polynom::findMax() {
@@ -114,7 +128,7 @@ float Polynom::findMin() {
         if (a > 0) {
             return solve(temp);
         } else {
-            return MAXFLOAT;
+            return -MAXFLOAT;
         }
     } else if (fabs(b) > 0.000001) {
         return -MAXFLOAT;

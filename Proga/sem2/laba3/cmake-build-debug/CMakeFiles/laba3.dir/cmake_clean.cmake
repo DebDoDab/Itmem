@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/laba3.dir/Array.cpp.o"
   "CMakeFiles/laba3.dir/Matrix.cpp.o"
+  "CMakeFiles/laba3.dir/Square.cpp.o"
   "CMakeFiles/laba3.dir/main.cpp.o"
   "laba3"
   "laba3.pdb"

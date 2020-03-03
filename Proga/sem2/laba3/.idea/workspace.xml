@@ -30,6 +30,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -57,6 +58,9 @@
       <option name="presentableId" value="Default" />
       <updated>1580910310364</updated>
       <workItem from="1580910311688" duration="6736000" />
+      <workItem from="1581118487729" duration="188000" />
+      <workItem from="1581119857118" duration="84000" />
+      <workItem from="1583266926122" duration="4901000" />
     </task>
     <servers />
   </component>
@@ -64,22 +68,30 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1804" height="278" key="GridCell.Tab.0.bottom" timestamp="1580988467897">
+    <state x="728" y="302" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583272784241">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1580988467897" />
-    <state width="1804" height="278" key="GridCell.Tab.0.center" timestamp="1580988467893">
+    <state x="728" y="302" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1583272784241" />
+    <state x="778" y="311" width="424" height="484" key="FileChooserDialogImpl" timestamp="1581119916364">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1580988467893" />
-    <state width="1804" height="278" key="GridCell.Tab.0.left" timestamp="1580988467892">
+    <state x="778" y="311" width="424" height="484" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1581119916364" />
+    <state width="1804" height="278" key="GridCell.Tab.0.bottom" timestamp="1583272827859">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1580988467892" />
-    <state width="1804" height="278" key="GridCell.Tab.0.right" timestamp="1580988467894">
+    <state width="1804" height="278" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1583272827859" />
+    <state width="1804" height="278" key="GridCell.Tab.0.center" timestamp="1583272827857">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1580988467894" />
+    <state width="1804" height="278" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1583272827857" />
+    <state width="1804" height="278" key="GridCell.Tab.0.left" timestamp="1583272827857">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="278" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1583272827857" />
+    <state width="1804" height="278" key="GridCell.Tab.0.right" timestamp="1583272827858">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="278" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1583272827858" />
     <state x="659" y="254" key="run.anything.popup" timestamp="1580917361611">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>

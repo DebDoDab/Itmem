@@ -30,6 +30,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laba3" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -56,7 +57,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580886500410</updated>
-      <workItem from="1580886501743" duration="5472000" />
+      <workItem from="1580886501743" duration="7321000" />
+      <workItem from="1581112863002" duration="646000" />
+      <workItem from="1583265379002" duration="1414000" />
     </task>
     <servers />
   </component>
@@ -64,21 +67,25 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1804" height="278" key="GridCell.Tab.0.bottom" timestamp="1580890120059">
+    <state x="778" y="311" width="424" height="484" key="FileChooserDialogImpl" timestamp="1583266922358">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1580890120059" />
-    <state width="1804" height="278" key="GridCell.Tab.0.center" timestamp="1580890120058">
+    <state x="778" y="311" width="424" height="484" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1583266922358" />
+    <state width="1804" height="343" key="GridCell.Tab.0.bottom" timestamp="1580910310226">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1580890120058" />
-    <state width="1804" height="278" key="GridCell.Tab.0.left" timestamp="1580890120058">
+    <state width="1804" height="343" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1580910310226" />
+    <state width="1804" height="343" key="GridCell.Tab.0.center" timestamp="1580910310225">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1580890120058" />
-    <state width="1804" height="278" key="GridCell.Tab.0.right" timestamp="1580890120059">
+    <state width="1804" height="343" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1580910310225" />
+    <state width="1804" height="343" key="GridCell.Tab.0.left" timestamp="1580910310223">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="278" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1580890120059" />
+    <state width="1804" height="343" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1580910310223" />
+    <state width="1804" height="343" key="GridCell.Tab.0.right" timestamp="1580910310226">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="1804" height="343" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1580910310226" />
   </component>
 </project>

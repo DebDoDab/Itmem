@@ -3,8 +3,25 @@
 using namespace std;
 
 int main() {
-    Polynom x = Polynom("123.124679234*x^2 -3* x");
-    x.print();
-    Polynom y = Polynom("123");
-    y.print();
+    for (int i = 0; i < 5; i++) {
+        cout << "Enter polynom\n";
+        string s;
+        getline(cin, s);
+        Polynom x = Polynom(s);
+        x.print();
+        float solveCoordinate = 2;
+        cout << "x = " << solveCoordinate << ", y = " << x.solve(solveCoordinate) << "\n";
+
+        cout << "Roots quantity = " << x.solveCount() << "\n";
+
+        auto p = x.solve();
+        cout << "Roots: ";
+        for (auto &ans : p) {
+            cout << ans << ", ";
+        }
+        cout << "\n";
+
+        cout << "min = " << x.findMin() << "\n" << "max = " << x.findMax() << "\n";
+    }
+
 }

@@ -84,10 +84,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/vadim/CLionProjects/laba3/Array.cpp">
+			<Option target="laba3"/>
+		</Unit>
+		<Unit filename="/home/vadim/CLionProjects/laba3/Array.h">
+			<Option target="laba3"/>
+		</Unit>
 		<Unit filename="/home/vadim/CLionProjects/laba3/Matrix.cpp">
 			<Option target="laba3"/>
 		</Unit>
 		<Unit filename="/home/vadim/CLionProjects/laba3/Matrix.h">
+			<Option target="laba3"/>
+		</Unit>
+		<Unit filename="/home/vadim/CLionProjects/laba3/Square.cpp">
+			<Option target="laba3"/>
+		</Unit>
+		<Unit filename="/home/vadim/CLionProjects/laba3/Square.h">
 			<Option target="laba3"/>
 		</Unit>
 		<Unit filename="/home/vadim/CLionProjects/laba3/main.cpp">

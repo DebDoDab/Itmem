@@ -3,4 +3,4 @@ project(laba3)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(laba3 main.cpp Matrix.cpp Matrix.h)
+add_executable(laba3 main.cpp Square.cpp Square.h Array.cpp Array.h)

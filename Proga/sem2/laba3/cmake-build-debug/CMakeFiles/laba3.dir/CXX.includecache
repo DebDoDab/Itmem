@@ -6,11 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/vadim/CLionProjects/laba3/Matrix.cpp
-Matrix.h
-/home/vadim/CLionProjects/laba3/Matrix.h
+/home/vadim/CLionProjects/laba3/Array.h
+bits/stdc++.h
+-
 
 /home/vadim/CLionProjects/laba3/Matrix.h
+bits/stdc++.h
+-
+
+/home/vadim/CLionProjects/laba3/Square.h
 bits/stdc++.h
 -
 
@@ -19,4 +23,8 @@ iostream
 -
 Matrix.h
 /home/vadim/CLionProjects/laba3/Matrix.h
+Square.h
+/home/vadim/CLionProjects/laba3/Square.h
+Array.h
+/home/vadim/CLionProjects/laba3/Array.h
 

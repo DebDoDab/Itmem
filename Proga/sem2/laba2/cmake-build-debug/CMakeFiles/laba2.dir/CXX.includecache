@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
+/home/vadim/CLionProjects/laba2/SquarePolynomial.cpp
+bits/stdc++.h
+-
+SquarePolynomial.h
+/home/vadim/CLionProjects/laba2/SquarePolynomial.h
+
 /home/vadim/CLionProjects/laba2/SquarePolynomial.h
 bits/stdc++.h
 -
 string
 -
-
-/home/vadim/CLionProjects/laba2/main.cpp
-iostream
--
-SquarePolynomial.h
-/home/vadim/CLionProjects/laba2/SquarePolynomial.h
 

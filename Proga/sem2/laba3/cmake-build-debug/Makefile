@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/100/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/103/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/100/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/103/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vadim/CLionProjects/laba3/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/100/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/103/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/100/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/103/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,6 +123,33 @@ laba3/fast:
 	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/build
 .PHONY : laba3/fast
 
+Array.o: Array.cpp.o
+
+.PHONY : Array.o
+
+# target to build an object file
+Array.cpp.o:
+	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Array.cpp.o
+.PHONY : Array.cpp.o
+
+Array.i: Array.cpp.i
+
+.PHONY : Array.i
+
+# target to preprocess a source file
+Array.cpp.i:
+	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Array.cpp.i
+.PHONY : Array.cpp.i
+
+Array.s: Array.cpp.s
+
+.PHONY : Array.s
+
+# target to generate assembly for a file
+Array.cpp.s:
+	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Array.cpp.s
+.PHONY : Array.cpp.s
+
 Matrix.o: Matrix.cpp.o
 
 .PHONY : Matrix.o
@@ -149,6 +176,33 @@ Matrix.s: Matrix.cpp.s
 Matrix.cpp.s:
 	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Matrix.cpp.s
 .PHONY : Matrix.cpp.s
+
+Square.o: Square.cpp.o
+
+.PHONY : Square.o
+
+# target to build an object file
+Square.cpp.o:
+	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Square.cpp.o
+.PHONY : Square.cpp.o
+
+Square.i: Square.cpp.i
+
+.PHONY : Square.i
+
+# target to preprocess a source file
+Square.cpp.i:
+	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Square.cpp.i
+.PHONY : Square.cpp.i
+
+Square.s: Square.cpp.s
+
+.PHONY : Square.s
+
+# target to generate assembly for a file
+Square.cpp.s:
+	$(MAKE) -f CMakeFiles/laba3.dir/build.make CMakeFiles/laba3.dir/Square.cpp.s
+.PHONY : Square.cpp.s
 
 main.o: main.cpp.o
 
@@ -186,9 +240,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... laba3"
 	@echo "... edit_cache"
+	@echo "... Array.o"
+	@echo "... Array.i"
+	@echo "... Array.s"
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"
+	@echo "... Square.o"
+	@echo "... Square.i"
+	@echo "... Square.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

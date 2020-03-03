@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/vadim/CLionProjects/laba3/Array.cpp" "/home/vadim/CLionProjects/laba3/cmake-build-debug/CMakeFiles/laba3.dir/Array.cpp.o"
   "/home/vadim/CLionProjects/laba3/Matrix.cpp" "/home/vadim/CLionProjects/laba3/cmake-build-debug/CMakeFiles/laba3.dir/Matrix.cpp.o"
+  "/home/vadim/CLionProjects/laba3/Square.cpp" "/home/vadim/CLionProjects/laba3/cmake-build-debug/CMakeFiles/laba3.dir/Square.cpp.o"
   "/home/vadim/CLionProjects/laba3/main.cpp" "/home/vadim/CLionProjects/laba3/cmake-build-debug/CMakeFiles/laba3.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

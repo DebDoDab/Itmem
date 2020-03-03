@@ -15,15 +15,15 @@ private:
 public:
     Polynom();
 
-    Polynom(const float &a_, const float &b_, const float &c_);
+    Polynom(const float &, const float &, const float &);
 
-    Polynom(const string &s);
+    Polynom(const string &);
 
-    Polynom(const Polynom &x);
+    Polynom(const Polynom &);
 
     void print();
 
-    float solve(const float &x);
+    float solve(const float &);
 
     vector<float> solve();
 
