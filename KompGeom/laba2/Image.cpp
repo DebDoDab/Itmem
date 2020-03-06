@@ -72,11 +72,11 @@ void Image::drawLine(Point begin, Point end, double thickness, int color, double
         swap(begin.y, end.y);
     }
 
-    auto plot = [&] (int x, int y, double brightness) {
+    auto plot = [&](int x, int y, double brightness) {
         if (steep) {
             swap(x, y);
         }
-        if (x < 0 || x > width || y < 0 || y > height) {
+        if (x < 0 || x > width || y < 0 || y > height || brightness < 0) {
             return;
         }
         pixels[y][x] = pow((1 - brightness) * (unsigned char)pixels[y][x] / maxValue +
@@ -84,11 +84,36 @@ void Image::drawLine(Point begin, Point end, double thickness, int color, double
     };
 
     double gradient = (end.y - begin.y) / (end.x - begin.x);
-    double y = begin.y + gradient * (round(begin.x) - begin.x);
+    double y;
+
+    auto dist = [](int x, int y, int x1, int y1) {
+        return sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1));
+    };
+
+    auto findY = [=](int x) {
+        return begin.y + gradient * (x - begin.x);
+    };
+
+    for (int plotX = round(begin.x) - thickness / 2; plotX < round(begin.x); plotX++, y += gradient) {
+        y = findY(plotX);
+        Point point(round(begin.x), findY(round(begin.x)));
+        for (int plotY = int(y - (thickness - 1) / 2.); plotY <= int(y - (thickness - 1) / 2. + thickness); plotY++) {
+            plot(plotX, plotY, min(1., (thickness + 1.) / 2. - dist(plotX, plotY, point.x, point.y)));
+        }
+    }
 
     for (int plotX = round(begin.x); plotX <= round(end.x); plotX++, y += gradient) {
+        y = findY(plotX);
         for (int plotY = int(y - (thickness - 1) / 2.); plotY <= int(y - (thickness - 1) / 2. + thickness); plotY++) {
             plot(plotX, plotY, min(1., (thickness + 1.) / 2. - fabs(y - plotY)));
+        }
+    }
+
+    for (int plotX = round(end.x) + 1; plotX <= round(end.x) + thickness / 2; plotX++, y += gradient) {
+        y = findY(plotX);
+        Point point(round(end.x), findY(round(end.x)));
+        for (int plotY = int(y - (thickness - 1) / 2.); plotY <= int(y - (thickness - 1) / 2. + thickness); plotY++) {
+            plot(plotX, plotY, min(1., (thickness + 1.) / 2. - dist(plotX, plotY, point.x, point.y)));
         }
     }
 }
