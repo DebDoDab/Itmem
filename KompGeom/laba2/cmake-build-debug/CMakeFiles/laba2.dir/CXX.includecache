@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/Desktop/MoeGovno/KompGeom/laba2/Exceptions.h
+bits/stdc++.h
+-
+
+/home/vadim/Desktop/MoeGovno/KompGeom/laba2/Image.cpp
+Image.h
+/home/vadim/Desktop/MoeGovno/KompGeom/laba2/Image.h
+
+/home/vadim/Desktop/MoeGovno/KompGeom/laba2/Image.h
+bits/stdc++.h
+-
+Exceptions.h
+/home/vadim/Desktop/MoeGovno/KompGeom/laba2/Exceptions.h
+
