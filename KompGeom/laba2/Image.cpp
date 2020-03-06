@@ -79,7 +79,8 @@ void Image::drawLine(Point begin, Point end, double thickness, int color, double
         if (x < 0 || x > width || y < 0 || y > height) {
             return;
         }
-        pixels[y][x] = (1 - brightness) * (unsigned char)pixels[y][x] + color * brightness;
+        pixels[y][x] = pow((1 - brightness) * (unsigned char)pixels[y][x] / maxValue +
+                brightness * color / 255., gamma) * maxValue;
     };
 
     double gradient = (end.y - begin.y) / (end.x - begin.x);
