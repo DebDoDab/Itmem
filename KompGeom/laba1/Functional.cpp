@@ -26,7 +26,7 @@ void ImageColored::inverseColors() {
 void ImageGrayscale::inverseColors() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            pixels[i][j] = 255 - pixels[i][j];
+            pixels[i][j] = maxValue - pixels[i][j];
         }
     }
 }
@@ -104,40 +104,36 @@ void ImageGrayscale::counterclockwizeTurn() {
 }
 
 void ImageColored::read() {
-    ifstream cin(inputFile);
-    cin >> header; ///P6
-    cin >> width >> height;
-    cin >> maxValue;
-    cin.ignore();
+    ifstream fin(inputFile);
+    fin >> header; ///P6
+    fin >> width >> height;
+    fin >> maxValue;
+    fin.ignore();
 
     pixels.assign(height, vector<t3>(width, {0, 0, 0}));
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            if (cin.eof()) {
+            if (fin.eof()) {
                 throw WrongSize();
             }
 
-            cin.read(&g0(pixels[i][j]), 1);
-            if (cin.eof()) {
+            fin.read(&g0(pixels[i][j]), 1);
+            if (fin.eof()) {
                 throw WrongSize();
             }
 
-            cin.read(&g1(pixels[i][j]), 1);
-            if (cin.eof()) {
+            fin.read(&g1(pixels[i][j]), 1);
+            if (fin.eof()) {
                 throw WrongSize();
             }
 
-            cin.read(&g2(pixels[i][j]), 1);
+            fin.read(&g2(pixels[i][j]), 1);
         }
     }
 
-    char x;
-    while (!cin.eof()) {
-        cin >> x;
-//        cout << x;
-    }
+    fin.get();
 
-    if (!cin.eof()) {
+    if (!fin.eof()) {
         throw WrongSize();
     }
 }
@@ -158,6 +154,8 @@ void ImageGrayscale::read() {
             cin.read(&pixels[i][j], 1);
         }
     }
+
+    cin.get();
 
     if (!cin.eof()) {
         throw WrongSize();

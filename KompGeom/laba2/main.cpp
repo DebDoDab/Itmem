@@ -4,5 +4,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    Settings settings(argc, argv);
+    try {
+        Settings settings(argc, argv);
+    } catch(exception& ex) {
+        cout << "ERROR" << ex.what() << endl;
+    }
 }

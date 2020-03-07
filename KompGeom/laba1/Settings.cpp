@@ -13,7 +13,7 @@ Settings::Settings(int argc, char **argv) {
         output = input;
     }
 
-    cmd = static_cast<Command>(int(argv[3][0]));
+    cmd = static_cast<Command>(int(argv[3][0]) - '0');
     cout << cmd << endl;
 
     ifstream fin(input);

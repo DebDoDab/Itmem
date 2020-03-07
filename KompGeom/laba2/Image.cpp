@@ -79,12 +79,14 @@ void Image::drawLine(Point begin, Point end, double thickness, int color, double
         if (x < 0 || x >= width || y < 0 || y >= height || brightness < 0) {
             return;
         }
-        cout << endl << y << " " << x << endl;
-        cout << double((unsigned char)pixels[y][x]) / maxValue << " " << brightness << endl;
-        cout << (1. - brightness) * (unsigned char)pixels[y][x] / maxValue << " : " << brightness * color / 255. << endl;
-        cout << (gamma - 1) * brightness + 1 << " : " << pow((1 - brightness) * (unsigned char)pixels[y][x] / maxValue + brightness * color / 255., (gamma - 1) * brightness + 1) * maxValue << endl;
 
-        pixels[y][x] = pow((1. - brightness) * (unsigned char)pixels[y][x] / maxValue + brightness * color / 255., (gamma - 1) * brightness + 1) * maxValue;
+        double oldValue = double((unsigned char)pixels[y][x]) / maxValue;
+        oldValue = (oldValue < 0.04045 ? oldValue / 12.92 : pow((oldValue + 0.055) / 1.055, 2.4));
+        oldValue *= (1. - brightness);
+        oldValue += brightness * color / 255.;
+        oldValue = (oldValue <= 0.0031308 ? oldValue * 12.92 : pow(1.055 * oldValue,  0.416) - 0.055);
+        pixels[y][x] = oldValue * maxValue;
+
     };
 
     double gradient = (end.y - begin.y) / (end.x - begin.x);
