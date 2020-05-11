@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/vadim/CLionProjects/laba5/classes.cpp" "/home/vadim/CLionProjects/laba5/cmake-build-debug/CMakeFiles/laba5.dir/classes.cpp.o"
   "/home/vadim/CLionProjects/laba5/main.cpp" "/home/vadim/CLionProjects/laba5/cmake-build-debug/CMakeFiles/laba5.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

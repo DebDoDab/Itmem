@@ -15,20 +15,18 @@ private:
 
 public:
     Matrix();
-    Matrix(int n_, int m_);
-    Matrix(Matrix& x_);
-    Matrix(vector<vector<T>>& x_);
+    Matrix(int, int);
+    Matrix(Matrix&);
+    Matrix(vector<vector<T>>&);
 
     pair<int, int> getSize();
-    T get(int i, int j);
-    void editField(int i, int j, T a);
+    T get(int, int);
+    void editField(int, int, T);
 };
 
 class OutOfRangeException : public exception {
 public:
-    const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW override {
-        return "Out of range\n";
-    }
+    const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW override;
 };
 
 #include "classes.tpp"

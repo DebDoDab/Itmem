@@ -15,17 +15,15 @@ class Vector2D {
 public:
     double x, y;
 
-    Vector2D() {
-        x = y = 0;
-    }
+    Vector2D();
 };
 
 class IPhysObject {
 public:
     virtual double getMass() const = 0;
     virtual Vector2D getPosition() const = 0;
-    virtual bool operator==(const IPhysObject& x) const = 0;
-    virtual bool operator<(const IPhysObject& x) const = 0;
+    virtual bool operator==(const IPhysObject&) const = 0;
+    virtual bool operator<(const IPhysObject&) const = 0;
 };
 
 class IPrintable {
@@ -63,9 +61,9 @@ private:
 
 public:
 
-    bool operator==(const IPhysObject& x) const override;
+    bool operator==(const IPhysObject&) const override;
 
-    bool operator<(const IPhysObject& x) const override;
+    bool operator<(const IPhysObject&) const override;
 
     double getSquare() const override;
 
@@ -85,10 +83,10 @@ public:
 
     Rectangle();
 
-    Rectangle(const double& a_, const double& b_,
-            const double& mass_, const Vector2D& position_);
+    Rectangle(const double&, const double&,
+            const double&, const Vector2D&);
 
-    Rectangle(const Rectangle& x);
+    Rectangle(const Rectangle&);
 };
 
 class Parallelogram : public IFigure {
@@ -100,9 +98,9 @@ private:
 
 public:
 
-    bool operator==(const IPhysObject& x) const override;
+    bool operator==(const IPhysObject&) const override;
 
-    bool operator<(const IPhysObject& x) const override;
+    bool operator<(const IPhysObject&) const override;
 
     double getSquare() const override;
 
@@ -122,8 +120,8 @@ public:
 
     Parallelogram();
 
-    Parallelogram(const double& a_, const double& b_, const double& alpha_,
-            const double& mass_, const Vector2D& position_);
+    Parallelogram(const double&, const double&, const double&,
+            const double&, const Vector2D&);
 
-    Parallelogram(const Parallelogram& x);
+    Parallelogram(const Parallelogram&);
 };

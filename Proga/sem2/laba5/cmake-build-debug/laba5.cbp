@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/vadim/CLionProjects/laba5/classes.cpp">
+			<Option target="laba5"/>
+		</Unit>
 		<Unit filename="/home/vadim/CLionProjects/laba5/classes.h">
 			<Option target="laba5"/>
 		</Unit>

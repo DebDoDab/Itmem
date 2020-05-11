@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/laba5.dir/classes.cpp.o"
   "CMakeFiles/laba5.dir/main.cpp.o"
   "laba5"
   "laba5.pdb"

@@ -141,3 +141,7 @@ Parallelogram::Parallelogram(const Parallelogram& x) {
     mass = x.mass;
     position = x.position;
 }
+
+Vector2D::Vector2D() {
+    x = y = 0;
+}

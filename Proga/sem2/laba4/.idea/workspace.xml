@@ -30,7 +30,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laba1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -39,6 +39,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
     <configuration name="laba4" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="laba4" TARGET_NAME="laba4" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="laba4" RUN_TARGET_NAME="laba4">
@@ -59,6 +60,10 @@
       <updated>1580988468068</updated>
       <workItem from="1580988469377" duration="4653000" />
       <workItem from="1581002272724" duration="7204000" />
+      <workItem from="1581091482912" duration="709000" />
+      <workItem from="1581203182552" duration="40000" />
+      <workItem from="1581203260212" duration="15000" />
+      <workItem from="1584509485062" duration="2121000" />
     </task>
     <servers />
   </component>
@@ -70,22 +75,26 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="778" y="311" width="424" height="484" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1581002499927" />
-    <state width="1804" height="368" key="GridCell.Tab.0.bottom" timestamp="1581029658986">
+    <state width="1804" height="368" key="GridCell.Tab.0.bottom" timestamp="1584510464053">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="368" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1581029658986" />
-    <state width="1804" height="368" key="GridCell.Tab.0.center" timestamp="1581029658985">
+    <state width="1804" height="368" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1584510464053" />
+    <state width="1804" height="368" key="GridCell.Tab.0.center" timestamp="1584510464050">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="368" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1581029658985" />
-    <state width="1804" height="368" key="GridCell.Tab.0.left" timestamp="1581029658983">
+    <state width="1804" height="368" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1584510464050" />
+    <state width="1804" height="368" key="GridCell.Tab.0.left" timestamp="1584510464048">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="368" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1581029658983" />
-    <state width="1804" height="368" key="GridCell.Tab.0.right" timestamp="1581029658985">
+    <state width="1804" height="368" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1584510464048" />
+    <state width="1804" height="368" key="GridCell.Tab.0.right" timestamp="1584510464052">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1804" height="368" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1581029658985" />
+    <state width="1804" height="368" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1584510464052" />
+    <state x="484" y="188" key="SettingsEditor" timestamp="1584511281549">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="484" y="188" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1584511281549" />
     <state x="658" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1581028062037">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>

@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/100/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/103/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/100/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/103/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vadim/CLionProjects/laba5/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/100/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/103/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/100/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/103/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,6 +123,33 @@ laba5/fast:
 	$(MAKE) -f CMakeFiles/laba5.dir/build.make CMakeFiles/laba5.dir/build
 .PHONY : laba5/fast
 
+classes.o: classes.cpp.o
+
+.PHONY : classes.o
+
+# target to build an object file
+classes.cpp.o:
+	$(MAKE) -f CMakeFiles/laba5.dir/build.make CMakeFiles/laba5.dir/classes.cpp.o
+.PHONY : classes.cpp.o
+
+classes.i: classes.cpp.i
+
+.PHONY : classes.i
+
+# target to preprocess a source file
+classes.cpp.i:
+	$(MAKE) -f CMakeFiles/laba5.dir/build.make CMakeFiles/laba5.dir/classes.cpp.i
+.PHONY : classes.cpp.i
+
+classes.s: classes.cpp.s
+
+.PHONY : classes.s
+
+# target to generate assembly for a file
+classes.cpp.s:
+	$(MAKE) -f CMakeFiles/laba5.dir/build.make CMakeFiles/laba5.dir/classes.cpp.s
+.PHONY : classes.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... laba5"
 	@echo "... edit_cache"
+	@echo "... classes.o"
+	@echo "... classes.i"
+	@echo "... classes.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

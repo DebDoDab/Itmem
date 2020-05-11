@@ -1,5 +1,8 @@
-template <typename container>
-bool allOf(const container& c, bool (&f)(int)) {
+//
+// Created by vadim on 7.02.20.
+//
+template <typename container, class object>
+bool allOf(const container& c, bool (&f)(object)) {
     for (auto& x : c) {
         if (!f(x)) {
             return false;
@@ -8,8 +11,8 @@ bool allOf(const container& c, bool (&f)(int)) {
     return true;
 }
 
-template <typename container>
-bool anyOf(const container& c, bool (&f)(int)) {
+template <typename container, class object>
+bool anyOf(const container& c, bool (&f)(object)) {
     for (auto& x : c) {
         if (f(x)) {
             return true;
@@ -18,8 +21,8 @@ bool anyOf(const container& c, bool (&f)(int)) {
     return false;
 }
 
-template <typename container>
-bool noneOf(const container& c, bool (&f)(int)) {
+template <typename container, class object>
+bool noneOf(const container& c, bool (&f)(object)) {
     for (auto& x : c) {
         if (f(x)) {
             return false;
@@ -28,8 +31,8 @@ bool noneOf(const container& c, bool (&f)(int)) {
     return true;
 }
 
-template <typename container>
-bool oneOf(const container& c, bool (&f)(int)) {
+template <typename container, class object>
+bool oneOf(const container& c, bool (&f)(object)) {
     bool was = false;
     for (auto& x : c) {
         if (f(x) && !was) {
@@ -41,21 +44,22 @@ bool oneOf(const container& c, bool (&f)(int)) {
     return was;
 }
 
-template <typename container>
-bool isSorted(const container& c, bool (&f)(int)) {
-    bool was = false;
-    for (auto& x : c) {
-        if (f(x)) {
-            was = true;
-        } else if (was) {
+template <class InputIterator, class object>
+bool isSorted(const InputIterator& begin, const InputIterator& end, bool (&f)(object, object)) {
+    if (begin == end) {
+        return true;
+    }
+
+    for (auto it1 = begin, it2 = next(begin); it2 != end; it1 = next(it1), it2 = next(it2)) {
+        if (!f(*it1, *it2)) {
             return false;
         }
     }
     return true;
 }
 
-template <typename container>
-bool isPartitioned(const container& c, bool (&f)(int)) {
+template <typename container, class object>
+bool isPartitioned(const container& c, bool (&f)(object)) {
     int was = -1;
     for (auto& x : c) {
         if (f(x) && was == -1) {
@@ -72,7 +76,7 @@ bool isPartitioned(const container& c, bool (&f)(int)) {
 }
 
 template <class InputIterator, class object>
-object findNot(const InputIterator begin, const InputIterator end, object value) {
+object findNot(const InputIterator& begin, const InputIterator& end, object value) {
     for (auto it = begin; it != end; it = next(it)) {
         if (*it != value) {
             return *it;
@@ -82,17 +86,20 @@ object findNot(const InputIterator begin, const InputIterator end, object value)
 }
 
 template <class InputIterator, class object>
-object findBackward(InputIterator begin, InputIterator end, object value) {
-    for (auto it = prev(end); it != begin; it = prev(it)) {
+object findBackward(const InputIterator& begin, const InputIterator& end, object value) {
+    for (auto it = prev(end); it != end; it = prev(it)) {
         if (*it == value) {
             return *it;
+        }
+        if (it == begin) {
+            break;
         }
     }
     return object();
 }
 
-template <typename container>
-bool isPalindrom(const container& c, bool (&f)(int)) {
+template <typename container, class object>
+bool isPalindrome(const container& c, bool (&f)(object)) {
     for (auto it1 = c.begin(), it2 = prev(c.end()); it1 != c.end(); it1 = next(it1), it2 = prev(it2)) {
         if (f(*it1) ^ f(*it2)) {
             return false;

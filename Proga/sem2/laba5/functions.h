@@ -5,6 +5,6 @@
 #pragma once
 
 template <typename T>
-T pow_(const T& x, int n);
+T pow_(const T&, int);
 
 #include "functions.tpp"

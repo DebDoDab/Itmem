@@ -7,31 +7,31 @@ using namespace std;
 
 #pragma once
 
-template <typename container>
-bool allOf(const container& c, bool (&f)(int));
+template <typename container, class object>
+bool allOf(const container& c, bool (&f)(object));
 
-template <typename container>
-bool anyOf(const container& c, bool (&f)(int));
+template <typename container, class object>
+bool anyOf(const container& c, bool (&f)(object));
 
-template <typename container>
-bool noneOf(const container& c, bool (&f)(int));
+template <typename container, class object>
+bool noneOf(const container& c, bool (&f)(object));
 
-template <typename container>
-bool oneOf(const container& c, bool (&f)(int));
-
-template <typename container>
-bool isSorted(const container& c, bool (&f)(int));
-
-template <typename container>
-bool isPartitioned(const container& c, bool (&f)(int));
+template <typename container, class object>
+bool oneOf(const container& c, bool (&f)(object));
 
 template <class InputIterator, class object>
-object findNot(InputIterator begin, InputIterator end, object value);
+bool isSorted(const InputIterator& begin, const InputIterator& end, bool (&f)(object, object));
+
+template <typename container, class object>
+bool isPartitioned(const container& c, bool (&f)(object));
 
 template <class InputIterator, class object>
-object findBackward(InputIterator begin, InputIterator end, object value);
+object findNot(const InputIterator& begin, const InputIterator& end, object value);
 
-template <typename container>
-bool isPalindrom(const container& c, bool (&f)(int));
+template <class InputIterator, class object>
+object findBackward(const InputIterator& begin, const InputIterator& end, object value);
+
+template <typename container, class object>
+bool isPalindrome(const container& c, bool (&f)(object));
 
 #include "functions.tpp"
