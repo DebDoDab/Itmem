@@ -1,4 +1,4 @@
-/snap/clion/111/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vadim/Desktop/MoeGovno/Proga/sem2/laba7
+/snap/clion/112/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vadim/Desktop/MoeGovno/KompGeom/laba7
 -- The C compiler identification is GNU 9.2.1
 -- The CXX compiler identification is GNU 9.2.1
 -- Check for working C compiler: /usr/bin/cc
@@ -15,4 +15,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/vadim/Desktop/MoeGovno/Proga/sem2/laba7/cmake-build-debug
+-- Build files have been written to: /home/vadim/Desktop/MoeGovno/KompGeom/laba7/cmake-build-debug

@@ -1,4 +1,4 @@
-# Install script for directory: /home/vadim/Desktop/MoeGovno/Proga/sem2/laba7
+# Install script for directory: /home/vadim/Desktop/MoeGovno/KompGeom/laba7
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/vadim/Desktop/MoeGovno/Proga/sem2/laba7/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vadim/Desktop/MoeGovno/KompGeom/laba7/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

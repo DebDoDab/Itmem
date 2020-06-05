@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/laba8.dir/CubeGL.cpp.o CMakeFiles/laba8.dir/cube.cpp.o CMakeFiles/laba8.dir/smallcube.cpp.o  -o laba8  -lglut -lGL -lGLU 
