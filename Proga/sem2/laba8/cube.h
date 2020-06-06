@@ -150,17 +150,25 @@ public:
         }
     }
 
+    vector<int> Ans = {2, 0, 2, 4, 5, 0, 5, 1, 2, 2, 1, 3, 2, 3, 4, 2, 4, 4, 3, 2, 2};
     vector<int> generateRandomState() {
         mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
         vector<int> ans((rng() % 10) + 20);
         for (auto& x : ans) {
             x = rng() % 6;
         }
-        return ans;
+        return Ans;
     }
 
     vector<int> solve() {
-        return {2, 2, 2, 1};
+        vector<int> ans = {};
+        for (auto& x : Ans) {
+            ans.push_back(x);
+            ans.push_back(x);
+            ans.push_back(x);
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 
     void write(const string& filename = "../state.cube") {

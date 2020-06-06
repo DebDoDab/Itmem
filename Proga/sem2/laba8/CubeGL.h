@@ -180,12 +180,6 @@ public:
         }
     }
 
-    void compile(const vector<int>& command) {
-//        for (auto& side : command) {
-//            Rotate(side);
-//        }
-    }
-
 public:
     void rot90(int idx, int sign) {
         int i, j, k;

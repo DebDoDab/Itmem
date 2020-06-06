@@ -58,7 +58,7 @@ public:
         return color[i];
     }
 
-    unsigned char *at(int i) {
+    unsigned char* at(int i) {
         // разбиваем color[i] на 3 составляющих
         // например для 0xFF0000 RGB(FF, 0, 00) - красный цвет;
         _color[0] = color[i] >> 16;
