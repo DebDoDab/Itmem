@@ -1,0 +1,44 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.angle {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.constantf {
+	font-size: 30pt;
+	position: absolute;
+	left: 30vw;
+	top: 25vh;
+}
+#constantf {
+	height: 40px;
+	font-size: 20pt;
+}
+
+.constantphi {
+	font-size: 30pt;
+	position: absolute;
+	left: 30vw;
+	top: 45vh;
+}
+#constantphi {
+	height: 40px;
+	font-size: 20pt;
+}
+
+.constantm {
+	font-size: 30pt;
+	position: absolute;
+	left: 30vw;
+	top: 65vh;
+}
+#constantm {
+	height: 40px;
+	font-size: 20pt;
+}
