@@ -78,7 +78,7 @@ class Img:
 
     def save(self, fileName: str) -> None:
         self.image.show()
-        self.image.convert('RGB').save(fileName + '.png')
+        self.image.convert('RGB').save(fileName)
 
     def setPixel(self, x: int, y: int, value: float) -> None:
         for i in range(5):
@@ -91,9 +91,9 @@ class Data:
         self.points = None
         self.tf = None
         self.img = None
-        self.getValues('data/' + fileName)
+        self.getValues('data/' + fileName + '.txt')
         self.createImage()
-        self.saveImage('imgs/' + fileName)
+        self.saveImage('imgs/' + fileName + '.png')
 
     def getValues(self, fileName: str) -> None:
         self.points = []
