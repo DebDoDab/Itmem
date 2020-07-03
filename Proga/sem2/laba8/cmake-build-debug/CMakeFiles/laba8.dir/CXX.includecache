@@ -6,20 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp
-CubeGL.h
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.h
-cube.h
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.h
-bits/stdc++.h
--
-GL/gl.h
--
-GL/glu.h
--
-GL/glut.h
--
-
 /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.h
 smallcube.h
 /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/smallcube.h
@@ -31,10 +17,6 @@ GL/glu.h
 -
 GL/glut.h
 -
-
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.cpp
-cube.h
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.h
 
 /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.h
 bits/stdc++.h
@@ -45,6 +27,28 @@ smallcube.h
 /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/smallcube.h
 chrono
 -
+
+/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.h
+bits/stdc++.h
+-
+cube.h
+/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.h
+
+/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/main.cpp
+CubeGL.h
+/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.h
+cube.h
+/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.h
+bits/stdc++.h
+-
+GL/gl.h
+-
+GL/glu.h
+-
+GL/glut.h
+-
+cube_sweep.h
+/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.h
 
 /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/smallcube.h
 bits/stdc++.h

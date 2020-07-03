@@ -3,13 +3,24 @@
 
 CMakeFiles/laba8.dir/CubeGL.cpp.o: ../CubeGL.cpp
 CMakeFiles/laba8.dir/CubeGL.cpp.o: ../CubeGL.h
-CMakeFiles/laba8.dir/CubeGL.cpp.o: ../cube.h
 CMakeFiles/laba8.dir/CubeGL.cpp.o: ../smallcube.h
 
 CMakeFiles/laba8.dir/cube.cpp.o: ../CubeGL.h
 CMakeFiles/laba8.dir/cube.cpp.o: ../cube.cpp
 CMakeFiles/laba8.dir/cube.cpp.o: ../cube.h
 CMakeFiles/laba8.dir/cube.cpp.o: ../smallcube.h
+
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: ../CubeGL.h
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: ../cube.h
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: ../cube_sweep.cpp
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: ../cube_sweep.h
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: ../smallcube.h
+
+CMakeFiles/laba8.dir/main.cpp.o: ../CubeGL.h
+CMakeFiles/laba8.dir/main.cpp.o: ../cube.h
+CMakeFiles/laba8.dir/main.cpp.o: ../cube_sweep.h
+CMakeFiles/laba8.dir/main.cpp.o: ../main.cpp
+CMakeFiles/laba8.dir/main.cpp.o: ../smallcube.h
 
 CMakeFiles/laba8.dir/smallcube.cpp.o: ../smallcube.cpp
 CMakeFiles/laba8.dir/smallcube.cpp.o: ../smallcube.h

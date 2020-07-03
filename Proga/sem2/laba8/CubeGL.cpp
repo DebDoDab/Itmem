@@ -1,210 +1,242 @@
 #include "CubeGL.h"
-#include "cube.h"
-#include <bits/stdc++.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
 
-using namespace std;
 
-#define CUBE_SIZE 13
-#define TIMER 30
-// обозначаем цвета:
-//                    (верх,      низ,   впереди,   сзади,    лево,      право)
-unsigned int c[6] = {0xFFFFFF, 0xFFFF00, 0x0000FF, 0x00FF00, 0xFF0000, 	0xCD853F};
+vector<vector<vector<Small_Cube>>>& CubeGL::getCube() {
+    return a;
+}
 
-// координаты источника света
-GLfloat lightPos[] = {0, 100, 200, 0};
-// проекции угла поворота на оси
-int xRot = 24, yRot = 34, zRot = 0;
-// отдаление
-double translateZ = -35.0;
-// кубик-рубик
-CubeGL cube;
-Cube algoCube;
-// флаг того, крутится куб сам, или нет (будет переключаться правой кнопкой мыши)
-// 0 - nothing, 1 - solving, 2 - random
-int solving = 0;
+CubeGL::CubeGL() {
+    a.assign(3, vector<vector<Small_Cube>>(3, vector<Small_Cube>(3)));
+}
 
-void display() {
+CubeGL::CubeGL(double size, unsigned int* color) {
+    a.assign(3, vector<vector<Small_Cube>>(3, vector<Small_Cube>(3)));
+    clear(size, color);
+}
+
+int CubeGL::getcurrent() {
+    return current;
+}
+
+int CubeGL::getclockwise() {
+    return clockwise;
+}
+
+void CubeGL::clear(double size, unsigned int* color) {
+    memset(rotate, 0, sizeof(rotate));
+    this->size = size;
+    current = -1;
+    currentSolve.clear();
+
+    for(int i = 0; i < 6; i++)
+        this->color[i] = color[i];
+
+    // верх
+    for(int i = 0; i < 3; i++)
+        for(int j = 0; j < 3; j++)
+            a[i][j][2].setColor(0, color[0]);
+
+    // низ
+    for(int i = 0; i < 3; i++)
+        for(int j = 0; j < 3; j++)
+            a[i][j][0].setColor(1, color[1]);
+
+    // спереди
+    for(int k = 0; k < 3; k++)
+        for(int j = 0; j < 3; j++)
+            a[j][0][k].setColor(2, color[2]);
+
+    // сзади
+    for(int k = 0; k < 3; k++)
+        for(int j = 0; j < 3; j++)
+            a[j][2][k].setColor(3, color[3]);
+
+    // слева
+    for(int i = 0; i < 3; i++)
+        for(int k = 0; k < 3; k++)
+            a[0][k][i].setColor(4, color[4]);
+
+    // справа
+    for(int i = 0; i < 3; i++)
+        for(int k = 0; k < 3; k++)
+            a[2][k][i].setColor(5, color[5]);
+
+    // устанавливаем размеры мелких деталей
+    // это будет треть всего размера, умноженная на коэффициент немного меньший еденицы
+    // (чтобы детали не были слишком плотно)
+    for(int i = 0; i < 3; i++)
+        for(int j = 0; j < 3; j++)
+            for(int k = 0; k < 3; k++)
+                a[i][j][k].setsize((size / 3.0) * 0.98);
+}
+
+void CubeGL::draw() {
+    const double K = 0.65;
+    // рисуем корпус - это просто куб черного цвета, размер которого равен K*size
     glPushMatrix();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColor3f(1, 0, 0);
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-    glTranslatef(0, 0, translateZ);
-    glRotatef(xRot, 1, 0, 0);
-    glRotatef(yRot, 0, 1, 0);
-    glTranslatef(CUBE_SIZE / -2.0, CUBE_SIZE / -2.0, CUBE_SIZE / -2.0);
-    cube.draw();
+    glColor3f(0, 0, 0);
+    glTranslatef(((1.0 - K)/2)*size + K*size/2, ((1.0 - K)/2)*size + K*size/2, ((1.0 - K)/2)*size + K*size/2);
+    glutSolidCube(size * K);
     glPopMatrix();
-    glutSwapBuffers();
-}
 
-void reshape(int w, int h) {
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    GLfloat fAspect = (GLfloat)w/(GLfloat)h;
-    GLfloat zNear = 1;
-    GLfloat zFar = 1000.0;
-    GLfloat aspect = fAspect;
-    GLfloat fH = tan( float(60 / 360.0f * 3.14159f) ) * zNear;
-    GLfloat fW = fH * aspect;
-    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
+    // ok[i][j][k] показывает, находится ли в состоянии покоя деталь с координатами (i, j, k)
+    memset(ok, true, sizeof(ok));
+    if (current != -1) {
+        glPushMatrix();
+        int i, j, k;
 
-void init() {
-    glClearColor(1.0, 1.0, 1.0, 0.0);
-    // инициализируем случайные числа
-    srand(time(0));
-
-    // освещение
-    float mat_specular[] = {0.3, 0.3, 0.3, 0};
-    float diffuseLight[] = {0.2, 0.2, 0.2, 1};
-    float ambientLight[] = {0.9, 0.9, 0.9, 1.0};
-    glShadeModel(GL_SMOOTH);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-    glMateriali(GL_FRONT, GL_SHININESS, 128);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_COLOR_MATERIAL);
-    glColorMaterial(GL_FRONT, GL_AMBIENT);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHTING);
-
-    // инициализируем куб
-    cube.clear(CUBE_SIZE, c);
-}
-
-void specialKeys(int key, int, int) {
-    // клавиши влево/вправо вращают по Y
-    // клавиши вверх/вниз вращают по X
-    // F1 - возвращает в начальное положение
-    if (key == GLUT_KEY_DOWN) {
-        xRot += 3;
-        if (xRot >= 360) {
-            xRot -= 360;
-        }
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_UP) {
-        xRot -= 3;
-        if (xRot < 0) {
-            xRot += 360;
-        }
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_RIGHT) {
-        yRot += 3;
-        if (yRot >= 360) {
-            yRot -= 360;
-        }
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_LEFT) {
-        yRot -= 3;
-        if (yRot < 0) {
-            yRot += 360;
-        }
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_HOME) {
-        translateZ += 5;
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_END) {
-        translateZ -= 5;
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_F1) {
-        cube.clear(CUBE_SIZE, c);
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_PAGE_UP) {
-        algoCube = cube;
-        algoCube.write();
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_PAGE_DOWN) {
-        algoCube.read();
-        algoCube.setCube(cube);
-        glutPostRedisplay();
-    }
-
-    if (key == GLUT_KEY_F11) {
-        if (solving != 1) {
-            algoCube = cube;
-            cube.currentSolve = algoCube.solve();
-            solving = 1;
-        } else {
-            solving = 0;
-        }
-    }
-
-    if (key == GLUT_KEY_F12) {
-        if (solving != 2) {
-            algoCube = cube;
-            cube.currentSolve = algoCube.generateRandomState();
-            solving = 2;
-        } else {
-            solving = 0;
-        }
-    }
-}
-
-void keys(unsigned char key, int, int) {
-    // если нажали клавишу от 0 до 5 - начинаем поворот на 3 градуса
-    if (cube.getcurrent() == -1 && key >= '0' && key < '6') {
-        cube.Rotate(key - '0', 3);
-        display();
-    }
-}
-
-void timer(int) {
-    glutTimerFunc(TIMER, timer, 0);
-    if (solving != 0) {
-        if (cube.getcurrent() == -1) {
-            if (cube.currentSolve.empty()) {
-                solving = 0;
-            } else {
-//                keys(cube.currentSolve.back() + '0', 0, 0);
-                cube.Rotate(cube.currentSolve.back(), 9);
-                cube.currentSolve.pop_back();
+        if (current == 0 || current == 1) {
+            // 0 <= current <= 1 показывает, что сейчас крутится грань на плоскости X0Y
+            // current = 0 - нижняя часть
+            // current = 1 - верхняя часть
+            k = (current & 1) * 2;
+            // следовательно ok слоя  k  устанавливаем в false
+            for(i = 0; i < 3; i++) {
+                for(j = 0; j < 3; j++) {
+                    ok[i][j][k] = false;
+                }
             }
-        } else {
-            cube.Rotate(cube.getcurrent(), 9);
+
+            // теперь нужно покрутить грань под номером current на угол rotate[current]
+            // относительно центра этой грани
+            // для этого сдвинемся к центру, покрутим, сдвинемся обратно
+            glTranslated(size / 2, size / 2, 0);   // сдвигаемся к центру
+            glRotatef(rotate[current], 0, 0, 1);   // крутим
+            glTranslated(-size / 2, -size / 2, 0); // сдвигаемся обратно
+            // рисуем
+            for(i = 0; i < 3; i++) {
+                for(j = 0; j < 3; j++) {
+                    a[i][j][k].draw(size / 3 * i, size / 3 * j, size / 3 * k);
+                }
+            }
+        } else if (current == 2 || current == 3) {
+            j = (current & 1) * 2;
+            for(i = 0; i < 3; i++) {
+                for(k = 0; k < 3; k++) {
+                    ok[i][j][k] = false;
+                }
+            }
+
+            glTranslated(size / 2, 0, size / 2);
+            glRotatef(rotate[current], 0, 1, 0);
+            glTranslated(-size / 2, 0, -size / 2);
+            for(i = 0; i < 3; i++) {
+                for(k = 0; k < 3; k++) {
+                    a[i][j][k].draw(size / 3 * i, size / 3 * j, size / 3 * k);
+                }
+            }
+        } else if (current == 4 || current == 5) {
+            i = (current & 1) * 2;
+            for(j = 0; j < 3; j++) {
+                for(k = 0; k < 3; k++) {
+                    ok[i][j][k] = false;
+                }
+            }
+
+            glTranslated(0, size / 2, size / 2);
+            glRotatef(rotate[current], 1, 0, 0);
+            glTranslated(0, -size / 2, -size / 2);
+            for(j = 0; j < 3; j++) {
+                for(k = 0; k < 3; k++) {
+                    a[i][j][k].draw(size / 3 * i, size / 3 * j, size / 3 * k);
+                }
+            }
         }
-    } else {
-        if (cube.getcurrent() != -1) {
-            cube.Rotate(cube.getcurrent(), 3);
+        glPopMatrix();
+    }
+
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            for(int k = 0; k < 3; k++) {
+                if (ok[i][j][k]) {
+                    // теперь рисуем те детали, которые не поварачивались выше,
+                    // они отмечены ok[i][j][k] = true
+                    a[i][j][k].draw(size / 3 * i, size / 3 * j, size / 3 * k);
+                }
+            }
         }
     }
-    display();
 }
 
-int main(int argc, char **argv) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(800, 700);
-    glutInitWindowPosition(1, 1);
-    glutCreateWindow("Cube");
-    init();
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keys);
-    glutTimerFunc(TIMER, timer, 0);
-    glutSpecialFunc(specialKeys);
-    glutMainLoop();
-    return 0;
+void CubeGL::rot90(int idx, int sign) {
+    int i, j, k;
+    // sign задаётся в зависимости он направления
+    // sign = -1, sign = 1
+    // если sign = -1, значит крутим 3 раза
+    if (sign == -1) {
+        sign = 3;
+    }
+    while(sign--) {
+        if (idx == 0 || idx == 1) {
+            // низ/верх
+            k = (idx & 1) * 2;
+            // копируем повёрнутую на 90 градусов верхнюю/нижнюю грань
+            // в массив tmp, затем грани присваиваем tmp
+            // и не забываем повернуть каждую деталь этой грани
+            for(i = 0; i < 3; i++) {
+                for(j = 0; j < 3; j++) {
+                    tmp[j][2 - i] = a[i][j][k];
+                }
+            }
+            for(i = 0; i < 3; i++) {
+                for(j = 0; j < 3; j++) {
+                    tmp[i][j].rotateZ(), a[i][j][k] = tmp[i][j];
+                }
+            }
+        } else if (idx == 2 || idx == 3) {
+            // лево/право
+            j = (idx & 1) * 2;
+            for(i = 0; i < 3; i++) {
+                for(k = 0; k < 3; k++) {
+                    tmp[k][2 - i] = a[i][j][k];
+                }
+            }
+            for(i = 0; i < 3; i++) {
+                for(k = 0; k < 3; k++) {
+                    tmp[i][k].rotateX(), a[i][j][k] = tmp[i][k];
+                }
+            }
+        } else if (idx == 4 || idx == 5) {
+            // впереди/сзади
+            i = (idx & 1) * 2;
+            for(j = 0; j < 3; j++) {
+                for(k = 0; k < 3; k++) {
+                    tmp[k][2 - j] = a[i][j][k];
+                }
+            }
+            for(j = 0; j < 3; j++) {
+                for(k = 0; k < 3; k++) {
+                    tmp[j][k].rotateY(), a[i][j][k] = tmp[j][k];
+                }
+            }
+        }
+    }
+}
+
+// крутит грань под номером idx на угол angle (в градусах)
+void CubeGL::Rotate(int idx, int angle) {
+    // мы пытаемся покрутить грань с номером idx
+    // значит нужно проверить что другая грань уже не крутится
+    int sign = idx > 5 ? -1 : 1;
+    idx %= 6;
+    if (current == -1 || (current == idx && clockwise == sign)) {
+        // обновляем поворот
+        rotate[idx] += angle * sign;
+        cerr << rotate[idx] << endl;
+
+        if (rotate[idx] % 90 != 0) {
+            current = idx;
+            clockwise = sign;
+        } else {
+            // если угол стал кратным 90, то поварачиваем на массиве
+            if ((rotate[idx] < 0) ^ (current == 2 || current == 3)) {
+                rot90(idx, 1);
+            } else {
+                rot90(idx, -1);
+            }
+            rotate[idx] = 0;
+            current = -1;
+            clockwise = 1;
+        }
+    }
 }

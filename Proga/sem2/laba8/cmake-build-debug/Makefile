@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/112/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/114/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/112/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/114/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-deb
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/112/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/114/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -70,7 +70,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/112/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/114/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -177,6 +177,60 @@ cube.cpp.s:
 	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/cube.cpp.s
 .PHONY : cube.cpp.s
 
+cube_sweep.o: cube_sweep.cpp.o
+
+.PHONY : cube_sweep.o
+
+# target to build an object file
+cube_sweep.cpp.o:
+	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/cube_sweep.cpp.o
+.PHONY : cube_sweep.cpp.o
+
+cube_sweep.i: cube_sweep.cpp.i
+
+.PHONY : cube_sweep.i
+
+# target to preprocess a source file
+cube_sweep.cpp.i:
+	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/cube_sweep.cpp.i
+.PHONY : cube_sweep.cpp.i
+
+cube_sweep.s: cube_sweep.cpp.s
+
+.PHONY : cube_sweep.s
+
+# target to generate assembly for a file
+cube_sweep.cpp.s:
+	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/cube_sweep.cpp.s
+.PHONY : cube_sweep.cpp.s
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/laba8.dir/build.make CMakeFiles/laba8.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 smallcube.o: smallcube.cpp.o
 
 .PHONY : smallcube.o
@@ -219,6 +273,12 @@ help:
 	@echo "... cube.o"
 	@echo "... cube.i"
 	@echo "... cube.s"
+	@echo "... cube_sweep.o"
+	@echo "... cube_sweep.i"
+	@echo "... cube_sweep.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... smallcube.o"
 	@echo "... smallcube.i"
 	@echo "... smallcube.s"

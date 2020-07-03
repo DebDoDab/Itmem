@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/112/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/114/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/112/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/114/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -57,18 +57,18 @@ include CMakeFiles/laba8.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/laba8.dir/flags.make
 
-CMakeFiles/laba8.dir/CubeGL.cpp.o: CMakeFiles/laba8.dir/flags.make
-CMakeFiles/laba8.dir/CubeGL.cpp.o: ../CubeGL.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/laba8.dir/CubeGL.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/laba8.dir/CubeGL.cpp.o -c /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp
+CMakeFiles/laba8.dir/main.cpp.o: CMakeFiles/laba8.dir/flags.make
+CMakeFiles/laba8.dir/main.cpp.o: ../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/laba8.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/laba8.dir/main.cpp.o -c /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/main.cpp
 
-CMakeFiles/laba8.dir/CubeGL.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laba8.dir/CubeGL.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp > CMakeFiles/laba8.dir/CubeGL.cpp.i
+CMakeFiles/laba8.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laba8.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/main.cpp > CMakeFiles/laba8.dir/main.cpp.i
 
-CMakeFiles/laba8.dir/CubeGL.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba8.dir/CubeGL.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp -o CMakeFiles/laba8.dir/CubeGL.cpp.s
+CMakeFiles/laba8.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba8.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/main.cpp -o CMakeFiles/laba8.dir/main.cpp.s
 
 CMakeFiles/laba8.dir/cube.cpp.o: CMakeFiles/laba8.dir/flags.make
 CMakeFiles/laba8.dir/cube.cpp.o: ../cube.cpp
@@ -96,21 +96,51 @@ CMakeFiles/laba8.dir/smallcube.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba8.dir/smallcube.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/smallcube.cpp -o CMakeFiles/laba8.dir/smallcube.cpp.s
 
+CMakeFiles/laba8.dir/CubeGL.cpp.o: CMakeFiles/laba8.dir/flags.make
+CMakeFiles/laba8.dir/CubeGL.cpp.o: ../CubeGL.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/laba8.dir/CubeGL.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/laba8.dir/CubeGL.cpp.o -c /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp
+
+CMakeFiles/laba8.dir/CubeGL.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laba8.dir/CubeGL.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp > CMakeFiles/laba8.dir/CubeGL.cpp.i
+
+CMakeFiles/laba8.dir/CubeGL.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba8.dir/CubeGL.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/CubeGL.cpp -o CMakeFiles/laba8.dir/CubeGL.cpp.s
+
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: CMakeFiles/laba8.dir/flags.make
+CMakeFiles/laba8.dir/cube_sweep.cpp.o: ../cube_sweep.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/laba8.dir/cube_sweep.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/laba8.dir/cube_sweep.cpp.o -c /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.cpp
+
+CMakeFiles/laba8.dir/cube_sweep.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laba8.dir/cube_sweep.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.cpp > CMakeFiles/laba8.dir/cube_sweep.cpp.i
+
+CMakeFiles/laba8.dir/cube_sweep.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba8.dir/cube_sweep.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.cpp -o CMakeFiles/laba8.dir/cube_sweep.cpp.s
+
 # Object files for target laba8
 laba8_OBJECTS = \
-"CMakeFiles/laba8.dir/CubeGL.cpp.o" \
+"CMakeFiles/laba8.dir/main.cpp.o" \
 "CMakeFiles/laba8.dir/cube.cpp.o" \
-"CMakeFiles/laba8.dir/smallcube.cpp.o"
+"CMakeFiles/laba8.dir/smallcube.cpp.o" \
+"CMakeFiles/laba8.dir/CubeGL.cpp.o" \
+"CMakeFiles/laba8.dir/cube_sweep.cpp.o"
 
 # External object files for target laba8
 laba8_EXTERNAL_OBJECTS =
 
-laba8: CMakeFiles/laba8.dir/CubeGL.cpp.o
+laba8: CMakeFiles/laba8.dir/main.cpp.o
 laba8: CMakeFiles/laba8.dir/cube.cpp.o
 laba8: CMakeFiles/laba8.dir/smallcube.cpp.o
+laba8: CMakeFiles/laba8.dir/CubeGL.cpp.o
+laba8: CMakeFiles/laba8.dir/cube_sweep.cpp.o
 laba8: CMakeFiles/laba8.dir/build.make
 laba8: CMakeFiles/laba8.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable laba8"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable laba8"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/laba8.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

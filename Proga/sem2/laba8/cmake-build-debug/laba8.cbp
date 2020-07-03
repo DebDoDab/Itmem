@@ -94,6 +94,15 @@
 		<Unit filename="/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube.h">
 			<Option target="laba8"/>
 		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.cpp">
+			<Option target="laba8"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/cube_sweep.h">
+			<Option target="laba8"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/main.cpp">
+			<Option target="laba8"/>
+		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8/smallcube.cpp">
 			<Option target="laba8"/>
 		</Unit>
