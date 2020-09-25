@@ -13,38 +13,45 @@ fi
 case "$1" in
     calc)
         require "$FILEPATH/modules/calc.sh"
-        calc ${@:2}
+        [[ "$#" -ne 4 ]] && print_error 1 "args count != 3"
+        calc "$2" "$3" "$4"
         ;;
     search)
         require "$FILEPATH/modules/search.sh"
-        search ${@:2}
+        [[ "$#" -ne 3 ]] && print_error 1 "args count != 2"
+        search "$2" "$3"
         ;;
     reverse)
         require "$FILEPATH/modules/reverse.sh"
-        reverse ${@:2}
+        [[ "$#" -ne 3 ]] && print_error 1 "args count != 2"
+        reverse "$2" "$3"
         ;;
     strlen)
         require "$FILEPATH/modules/strlen.sh"
-        strlen ${@:2}
+        [[ "$#" -ne 2 ]] && print_error 1 "args count != 1"
+        strlen "$2"
         ;;
     log)
         require "$FILEPATH/modules/log.sh"
-        log ${@:2}
+        [[ "$#" -ne 1 ]] && print_error 1 "args count != 0"
+        log
         ;;
     exit)
         require "$FILEPATH/modules/exit.sh"
-        exit_ ${@:2}
+        [[ "$#" -gt 2 ]] && print_error 1 "args count > 1"
+        exit_ ${1:-0}
         ;;
     help)
         require "$FILEPATH/modules/help.sh"
-        help ${@:2}
+        help
         ;;
     interactive)
         require "$FILEPATH/modules/interactive.sh"
-        interactive ${@:2}
+        [[ "$#" -ne 1 ]] && print_error 1 "args count != 0"
+        interactive
         ;;
     *)
         require "$FILEPATH/modules/help.sh"
-        help ${@:2}
+        help
         ;;
 esac
