@@ -1,7 +1,7 @@
 #!/bin/bash
 
 log() {
-    require core.sh
+    require "$FILEPATH/core.sh"
     [[ "$#" -ne 0 ]] && print_error 1 "args count != 0"
     
     file="/var/log/anaconda/X.log"

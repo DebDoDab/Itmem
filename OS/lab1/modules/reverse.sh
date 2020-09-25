@@ -1,7 +1,7 @@
 #!/bin/bash
 
 reverse() {
-    require core.sh
+    require "$FILEPATH/core.sh"
     [[ "$#" -ne 2 ]] && print_error 1 "args count != 2"
 
     [[ -f "$1" ]] || print_error 3 "file $1 does not exists"

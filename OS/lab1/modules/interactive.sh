@@ -2,8 +2,8 @@
 
 interactive_calc() {
     # Enter 3 args
-    require modules/calc.sh
-    require core.sh
+    require "$FILEPATH/modules/calc.sh"
+    require "$FILEPATH/core.sh"
 
     operation=""
     possible_operations=("sum" "sub" "mul" "div")
@@ -36,7 +36,7 @@ interactive_calc() {
 
 interactive_search() {
     # Enter 2 args
-    require modules/search.sh
+    require "$FILEPATH/modules/search.sh"
 
     dir=""
     while [[ -z "$dir" ]] || [[ ! -d "$dir" ]]; do
@@ -56,7 +56,7 @@ interactive_search() {
 
 interactive_reverse() {
     # Enter 2 args
-    require modules/reverse.sh
+    require "$FILEPATH/modules/reverse.sh"
 
     file1=""
     while [[ -z "$file1" ]] || [[ ! -e "$file1" ]]; do
@@ -78,7 +78,7 @@ interactive_reverse() {
 
 interactive_strlen() {
     # Enter 1 arg
-    require modules/strlen.sh
+    require "$FILEPATH/modules/strlen.sh"
 
     str=""
     while [[ -z "$str" ]]; do
@@ -90,14 +90,14 @@ interactive_strlen() {
 
 interactive_log() {
     # Enter 0 args
-    require modules/log.sh
+    require "$FILEPATH/modules/log.sh"
 
     log
 }
 
 interactive_exit() {
     # Enter 1 positional arg
-    require modules/exit.sh
+    require "$FILEPATH/modules/exit.sh"
 
     exitcode=""
     read -p "Enter exit code or leave it empty: " exitcode
@@ -107,14 +107,12 @@ interactive_exit() {
 
 interactive_help() {
     # Enter 0 args
-    require modules/help.sh
+    require "$FILEPATH/modules/help.sh"
 
     help
 }
 
-interactive() {
-    require lab1.sh
-    
+interactive() {    
     while [[ 1 -ne 2 ]]; do
         possible_actions=("calc" "search" "reverse" "strlen" "log" "exit" "help")
         

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 calc() {
-    require core.sh
+    require "$FILEPATH/core.sh"
 
     # exits with code 1 if args count is not equal to 3
     [[ "$#" -ne 3 ]] && print_error 1 "args count != 3"

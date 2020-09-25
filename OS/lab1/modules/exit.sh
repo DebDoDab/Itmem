@@ -1,7 +1,7 @@
 #!/bin/bash
 
 exit_() {
-    require core.sh
+    require "$FILEPATH/core.sh"
     [[ "$#" -gt 1 ]] && print_error 1 "args count > 1"
 
     

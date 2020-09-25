@@ -1,8 +1,10 @@
 #!/bin/bash
 
-if [[ ! -f "core.sh" ]] || ! source "core.sh"; then
+FILEPATH="$(dirname -- "$(realpath "$0")")"
+
+if [[ ! -f "$FILEPATH/core.sh" ]] || ! source "$FILEPATH/core.sh"; then
     echo "core.sh is dead :("
-    exit 6
+    exit 6  
 fi
 
 # Main part
@@ -10,39 +12,39 @@ fi
 
 case "$1" in
     calc)
-        require modules/calc.sh
+        require "$FILEPATH/modules/calc.sh"
         calc ${@:2}
         ;;
     search)
-        require modules/search.sh
+        require "$FILEPATH/modules/search.sh"
         search ${@:2}
         ;;
     reverse)
-        require modules/reverse.sh
+        require "$FILEPATH/modules/reverse.sh"
         reverse ${@:2}
         ;;
     strlen)
-        require modules/strlen.sh
+        require "$FILEPATH/modules/strlen.sh"
         strlen ${@:2}
         ;;
     log)
-        require modules/log.sh
+        require "$FILEPATH/modules/log.sh"
         log ${@:2}
         ;;
     exit)
-        require modules/exit.sh
+        require "$FILEPATH/modules/exit.sh"
         exit_ ${@:2}
         ;;
     help)
-        require modules/help.sh
+        require "$FILEPATH/modules/help.sh"
         help ${@:2}
         ;;
     interactive)
-        require modules/interactive.sh
+        require "$FILEPATH/modules/interactive.sh"
         interactive ${@:2}
         ;;
     *)
-        require modules/help.sh
+        require "$FILEPATH/modules/help.sh"
         help ${@:2}
         ;;
 esac
