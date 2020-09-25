@@ -6,8 +6,8 @@ calc() {
     # exits with code 1 if args count is not equal to 3
     [[ "$#" -ne 3 ]] && print_error 1 "args count != 3"
     
-    ! is_int "$2" && print_error 2 "$1 is not an int"
-    ! is_int "$3" && print_error 2 "$2 is not an int"
+    ! is_int "$2" && print_error 2 "$2 is not an int"
+    ! is_int "$3" && print_error 2 "$3 is not an int"
 
     case $1 in 
         sum)

@@ -39,7 +39,11 @@ case "$1" in
     exit)
         require "$FILEPATH/modules/exit.sh"
         [[ "$#" -gt 2 ]] && print_error 1 "args count > 1"
-        exit_ ${1:-0}
+        if [[ "$#" -eq 0 ]]; then
+            exit_
+        else
+            exit_ $2
+        fi
         ;;
     help)
         require "$FILEPATH/modules/help.sh"
