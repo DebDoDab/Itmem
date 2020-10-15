@@ -47,9 +47,9 @@ setInterval(function () {
   y = calcy();
   let side = Math.min(canv.height / 4, canv.width / 4)
 
-	///update track
   let coeff = side / 5
-  track.push([x * coeff, -y * coeff])
+	///update track
+  track.push([x, y])
 
 
 	///draw screen
@@ -85,16 +85,16 @@ setInterval(function () {
 	///draw track
 	ctx.strokeStyle = "#0f0";
 	ctx.beginPath();
-	ctx.moveTo(track[0][0], track[0][1]);
+	ctx.moveTo(track[0][0] * coeff, -track[0][1] * coeff);
 	for (var i = 1; i < track.length; i++) {
-		ctx.lineTo(track[i][0], track[i][1]);
+		ctx.lineTo(track[i][0] * coeff,- track[i][1] * coeff);
 	}
 	ctx.stroke();
 
   //red dot as current position
   ctx.beginPath();
   ctx.strokeStyle = "#f00";
-  ctx.arc(track[track.length - 1][0], track[track.length - 1][1], 5, 0, 2 * Math.PI);
+  ctx.arc(track[track.length - 1][0] * coeff, -track[track.length - 1][1] * coeff, 5, 0, 2 * Math.PI);
   ctx.stroke();
 
 
