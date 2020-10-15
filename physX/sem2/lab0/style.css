@@ -1,0 +1,66 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.angle {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.constanty0 {
+	font-size: 30pt;
+	position: absolute;
+	left: 10vw;
+	top: 80vh;
+}
+#constanty0 {
+	height: 40px;
+	font-size: 20pt;
+}
+
+.constantwy {
+	font-size: 30pt;
+	position: absolute;
+	left: 30vw;
+	top: 80vh;
+}
+#constantwy {
+	height: 40px;
+	font-size: 20pt;
+}
+
+.constantdeltay {
+	font-size: 30pt;
+	position: absolute;
+	left: 50vw;
+	top: 80vh;
+}
+#constantdeltay {
+	height: 40px;
+	font-size: 20pt;
+}
+
+.constantx0 {
+	font-size: 30pt;
+	position: absolute;
+	left: 70vw;
+	top: 80vh;
+}
+#constantx0 {
+	height: 40px;
+	font-size: 20pt;
+}
+
+.constantwx {
+	font-size: 30pt;
+	position: absolute;
+	left: 90vw;
+	top: 80vh;
+}
+#constantwx {
+	height: 40px;
+	font-size: 20pt;
+}
