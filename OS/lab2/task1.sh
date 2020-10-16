@@ -1,5 +1,7 @@
 #!/bin/bash
-tmp=$(ps -Ao "%u %p:%c" | grep -E "^$USER.*" | awk '{print $2}')
+commands=$(ps -Ao "%u %p:%c")
+commands=$(echo "$commands" | head -n -1)
+tmp=$(echo "$commands" | grep -E "user.*" | awk '{print $2}')
 
 if [[ -z "$tmp" ]]
 then
