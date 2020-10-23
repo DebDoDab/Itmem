@@ -26,11 +26,25 @@
 #include <sys/user.h>
 #include <sys/poll.h>
 #include <pthread.h>
+#include "logger_wrapper.h"
 
 class Observer {
 public:
-
+    Observer();
+    void setObserver(Log& logger, int fulenum);
+    void setObserver(int PID, Log& logger, int filenum);
+    ~Observer();
+private:
+    struct Arg {
+        Log* logger;
+        int lognum;
+        int PID;
+    };
+    static void *watch(void* arg);
+    std::vector<pthread_t> threads;
 };
+
+bool need_watch;
 
 
 #endif //LAB2_SVYAT_OBSERVER_H

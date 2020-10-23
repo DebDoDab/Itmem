@@ -22,4 +22,5 @@ int main() {
     logger.write_message("Other Testing log number 2 again\n", 2);
     logger.write_message("Other Testing log number 3 again\n", 3);
     logger.write_message("Other Testing log number 4 again\n", 4);
+    sleep(1000);
 }
