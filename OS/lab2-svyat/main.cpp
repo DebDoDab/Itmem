@@ -42,15 +42,10 @@ void m_signal_handler(int a) {
     ctrlC = 1;
 }
 
-Log log;
-
-void setup() {
-    vector<string> logfiles = {"logs/main.log"};
-    log = Log(logfiles);
-}
-
 
 int main(int argc, const char * argv[]) {
+    vector<string> logfiles = {"logs/main.log"};
+    auto log = Log(logfiles);
     list<DynamicResource *> dynamicResources;
     list<Connection> connections;
     list<Connection>::iterator conIt;
