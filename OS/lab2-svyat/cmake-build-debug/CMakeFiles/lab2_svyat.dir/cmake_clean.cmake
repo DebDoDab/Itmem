@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/lab2_svyat.dir/dynamic_resource.cpp.o"
   "CMakeFiles/lab2_svyat.dir/hqsp.c.o"
   "CMakeFiles/lab2_svyat.dir/main.cpp.o"
+  "CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.o"
+  "CMakeFiles/lab2_svyat.dir/processes/test.cpp.o"
   "CMakeFiles/lab2_svyat.dir/tcp_connection.cpp.o"
   "lab2_svyat"
   "lab2_svyat.pdb"

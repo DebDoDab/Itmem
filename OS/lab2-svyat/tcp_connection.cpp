@@ -140,7 +140,7 @@ NbTcpConnection * NbTcpServer::serve() {
     //check
     if (this->sock < 0) {
         cout << "Failed to serve on closed connection!" << endl;
-        return NULL;
+        return nullptr;
     }
 
     //test for incomming connections
@@ -151,7 +151,7 @@ NbTcpConnection * NbTcpServer::serve() {
         //return connection instance
         return new NbTcpConnection(connection, &address);
     }
-    return NULL;
+    return nullptr;
 }
 
 

@@ -52,7 +52,7 @@ int main(int argc, const char * argv[]) {
         htmlBasePath = argv[1];
         port = (uint16_t) atoi(argv[2]);
     } else {
-        cout << "Usage: apoll [HTML-base-path] [TCP-port-number]" << endl;
+        cout << "Usage: lab2_svyat [HTML-base-path] [TCP-port-number]" << endl;
         htmlBasePath = "."; //"this" directory
         port = 8083; //default port
     }
@@ -61,7 +61,7 @@ int main(int argc, const char * argv[]) {
     //create default resources
     code200 = new DynamicResource("/200", "200 OK");
     code200->setContent("OK");
-    code404 = new DynamicResource("/200", "404 Not Found");
+    code404 = new DynamicResource("/404", "404 Not Found");
     code404->setContent("Not Found");
 
     //create dynamic resources, as specified in "dynres.txt"
@@ -102,11 +102,12 @@ int main(int argc, const char * argv[]) {
 
         //push new tcp connections to "connection list"
         con.connection = tcpServer->serve();
-        if (con.connection) {
+        while (con.connection) {
             //add to this connection to the list of active connections
-            con.resource = NULL;
+            con.resource = nullptr;
             con.hash = 0;
             connections.push_back(con);
+            con.connection = tcpServer->serve();
         }
 
 

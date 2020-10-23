@@ -100,6 +100,15 @@
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/main.cpp">
 			<Option target="lab2_svyat"/>
 		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/test.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.cpp">
 			<Option target="lab2_svyat"/>
 		</Unit>
