@@ -1,4 +1,3 @@
-/* -- Includes ------------------------------------------------------------ */
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -14,44 +13,33 @@
 #include "dynamic_resource.h"
 #include "hqsp.h"
 
-
-
-/* -- Defines ------------------------------------------------------------- */
 using namespace std;
 
 
-/* -- Types --------------------------------------------------------------- */
-typedef struct
-{
+typedef struct {
     NbTcpConnection * connection;
     DynamicResource * resource;
     uint32_t hash;
 } Connection;
 
 
-
-/* -- (Module) Global Variables ------------------------------------------- */
 static int ctrlC;
 static DynamicResource * code200;
 static DynamicResource * code404;
 static string htmlBasePath;
 
-/* -- Module Global Function Prototypes ----------------------------------- */
 static int m_serve_requests(Connection& connection, list<DynamicResource *>& dynamicResources);
 static int m_reply_dynamic_content(Connection& connection);
 static int m_reply_static_content(Connection& connection, const string& uri);
 static string m_get_content_type_by_uri(const string& uri, const string& fallback);
 
 
-/* -- Implementation ------------------------------------------------------ */
-void m_signal_handler(int a)
-{
+void m_signal_handler(int a) {
     ctrlC = 1;
 }
 
 
-int main(int argc, const char * argv[])
-{
+int main(int argc, const char * argv[]) {
     list<DynamicResource *> dynamicResources;
     list<Connection> connections;
     list<Connection>::iterator conIt;
@@ -59,13 +47,11 @@ int main(int argc, const char * argv[])
     int status;
 
     //process command line arguments
-    if (argc == 3)
-    {
+    //otherwise: use defaults
+    if (argc == 3) {
         htmlBasePath = argv[1];
-        port = (uint16_t)atoi(argv[2]);
-    }
-    else //otherwise: use defaults
-    {
+        port = (uint16_t) atoi(argv[2]);
+    } else {
         cout << "Usage: apoll [HTML-base-path] [TCP-port-number]" << endl;
         htmlBasePath = "."; //"this" directory
         port = 8083; //default port
@@ -81,14 +67,12 @@ int main(int argc, const char * argv[])
     //create dynamic resources, as specified in "dynres.txt"
     const string filePath = htmlBasePath + "/dynres.txt";
     ifstream file(filePath, ios::in);
-    if (file.is_open())
-    {
+    if (file.is_open()) {
         string uri;
         //read out file, line by line
-        while (getline(file, uri))
-        {
-            if (uri[0] == '/') //only those lines, that starts with a '/'
-            {
+        while (getline(file, uri)) {
+            //only those lines, that starts with a '/'
+            if (uri[0] == '/') {
                 //add to list of dynamic resources
                 dynamicResources.push_back(new DynamicResource(uri));
             }
@@ -100,8 +84,7 @@ int main(int argc, const char * argv[])
     //create server
     NbTcpServer * tcpServer = new NbTcpServer();
     status = tcpServer->open(port);
-    if (status < 0)
-    {
+    if (status < 0) {
         cout << "Failed to open server on port " << port << endl;
         return -1;
     }
@@ -114,14 +97,12 @@ int main(int argc, const char * argv[])
     signal(SIGINT, &m_signal_handler);
 
     //enter super-loop
-    while (!ctrlC)
-    {
+    while (!ctrlC) {
         Connection con;
 
         //push new tcp connections to "connection list"
         con.connection = tcpServer->serve();
-        if (con.connection)
-        {
+        if (con.connection) {
             //add to this connection to the list of active connections
             con.resource = NULL;
             con.hash = 0;
@@ -132,11 +113,10 @@ int main(int argc, const char * argv[])
         //for each connection ...
         //receive HTTP requests
         conIt = connections.begin();
-        while (conIt != connections.end())
-        {
+        while (conIt != connections.end()) {
             status = m_serve_requests(*conIt, dynamicResources);
-            if (status != 0) //close connection
-            {
+            //close connection
+            if (status != 0) {
                 //close that connection
                 conIt->connection->close();
                 delete conIt->connection;
@@ -151,11 +131,10 @@ int main(int argc, const char * argv[])
         //for each connection ...
         //reply dynamic content
         conIt = connections.begin();
-        while (conIt != connections.end())
-        {
+        while (conIt != connections.end()) {
             status = m_reply_dynamic_content(*conIt);
-            if (status != 0) //close connection
-            {
+            //close connection
+            if (status != 0) {
                 //close that connection
                 conIt->connection->close();
                 delete conIt->connection;
@@ -177,8 +156,7 @@ int main(int argc, const char * argv[])
 
     //delete still open connections
     conIt = connections.begin();
-    while (conIt != connections.end())
-    {
+    while (conIt != connections.end()) {
         conIt->connection->close();
         delete conIt->connection;
         conIt++;
@@ -187,8 +165,8 @@ int main(int argc, const char * argv[])
 
     //delete dynamic resources
     list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-    while (resIt != dynamicResources.end()) //find requested resource
-    {
+    //find requested resource
+    while (resIt != dynamicResources.end()) {
         DynamicResource * res = *resIt++;
         delete res;
     }
@@ -200,12 +178,10 @@ int main(int argc, const char * argv[])
 }
 
 
-
 //return 0 when connection stays open
 //return -1 when connection was closed remotely
 //return 1 when connection shall be closed
-static int m_serve_requests(Connection& connection, list<DynamicResource *>& dynamicResources)
-{
+static int m_serve_requests(Connection& connection, list<DynamicResource *>& dynamicResources) {
     uint8_t buffer[4096];
     int status;
 
@@ -213,15 +189,13 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
     status = connection.connection->recv(buffer, sizeof(buffer) - 1);
 
     //connection closed ?
-    if (status < 0)
-    {
+    if (status < 0) {
         //connection was closed remotely
         return -1;
     }
 
     //nothing received
-    if (status == 0)
-    {
+    if (status == 0) {
         return 0;
     }
 
@@ -245,23 +219,21 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
     //GET
     isGET = hqsp_is_method_get((const char *)buffer);
-    if (isGET)
-    {
+    if (isGET) {
         //check if the requested resource is static content
         status = m_reply_static_content(connection, uri);
-        if (status != 0) //yes it is ...
-        {
+        //yes it is ...
+        if (status != 0) {
             return status; //instruct caller to close connection
         }
 
         //otherwise
         //check if the requested resource is dynamic content
         list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-        while (resIt != dynamicResources.end()) //find requested resource
-        {
+        //find requested resource
+        while (resIt != dynamicResources.end()) {
             DynamicResource * res = *resIt++;
-            if (res->uri == uri)
-            {
+            if (res->uri == uri) {
                 uint32_t contentHash = 0;
                 const char * header;
                 int headerLen;
@@ -286,16 +258,13 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
     //POST
     isPOST = hqsp_is_method_post((const char *)buffer);
-    if (isPOST)
-    {
+    if (isPOST) {
         //POST can only deal with dynamic content
         //find requested res
         list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-        while (resIt != dynamicResources.end())
-        {
+        while (resIt != dynamicResources.end()) {
             DynamicResource * res = *resIt++;
-            if (res->uri == uri)
-            {
+            if (res->uri == uri) {
                 const char * header;
                 int headerLen;
                 const char * postContent;
@@ -303,8 +272,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
                 //get content type from HTML header -> set
                 headerLen = hqsp_get_header_value((const char *)buffer, "Content-Type", &header);
-                if (headerLen > 0)
-                {
+                if (headerLen > 0) {
                     string contentType(header, headerLen);
                     res->contentType = contentType;
                 }
@@ -331,17 +299,14 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 }
 
 
-
 //return 0 when connection stays open
 //return 1 when connection shall be closed
 static int m_reply_dynamic_content(Connection& connection)
 {
     DynamicResource * resource = connection.resource;
-    if (resource != NULL)
-    {
+    if (resource != NULL) {
         //check if client needs to informed about modified content
-        if (resource->hash != connection.hash)
-        {
+        if (resource->hash != connection.hash) {
             const string& content = resource->content;
             string header;
 
@@ -370,13 +335,11 @@ static int m_reply_dynamic_content(Connection& connection)
 
 //return 0 when connection stays open
 //return 1 when connection shall be closed
-static int m_reply_static_content(Connection& connection, const string& uri)
-{
+static int m_reply_static_content(Connection& connection, const string& uri) {
     const string contentType = m_get_content_type_by_uri(uri, "application/octet-stream"); //default: binary data
     const string filePath = htmlBasePath + uri;
     ifstream file(filePath, ios::in | ios::binary);
-    if (file.is_open())
-    {
+    if (file.is_open()) {
         //get size of file
         file.seekg(0, ios::end);
         int fileSize = file.tellg();
@@ -406,48 +369,31 @@ static int m_reply_static_content(Connection& connection, const string& uri)
 }
 
 
-static string m_get_content_type_by_uri(const string& uri, const string& fallback)
-{
+static string m_get_content_type_by_uri(const string& uri, const string& fallback) {
     //get file extension
     string fileExtension = uri.substr(uri.find_last_of(".") + 1);
 
     //text files
-    if (fileExtension == "txt")
-    {
+    if (fileExtension == "txt") {
         return "text/plain";
-    }
-    if ((fileExtension == "htm") || (fileExtension == "html"))
-    {
+    } else if ((fileExtension == "htm") || (fileExtension == "html")) {
         return "text/html";
-    }
-    if (fileExtension == "css")
-    {
+    } else if (fileExtension == "css") {
         return "text/css";
-    }
-    if (fileExtension == "js")
-    {
+    } else if (fileExtension == "js") {
         return "text/javascript";
     }
 
     //image files
-    if (fileExtension == "gif")
-    {
+    if (fileExtension == "gif") {
         return "image/gif";
-    }
-    if (fileExtension == "png")
-    {
+    } else if (fileExtension == "png") {
         return "image/png";
-    }
-    if ((fileExtension == "jpg") || (fileExtension == "jpeg"))
-    {
+    } if ((fileExtension == "jpg") || (fileExtension == "jpeg")) {
         return "image/jpeg";
-    }
-    if (fileExtension == "bmp")
-    {
+    } if (fileExtension == "bmp") {
         return "image/bmp";
-    }
-    if (fileExtension == "ico")
-    {
+    } if (fileExtension == "ico") {
         return "image/x-icon";
     }
 

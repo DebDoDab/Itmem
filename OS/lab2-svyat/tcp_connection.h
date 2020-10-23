@@ -6,17 +6,11 @@
 #define LAB2_SVYAT_TCP_CONNECTION_H
 
 
-/* -- Includes ------------------------------------------------------------ */
 #include <stdint.h>
 #include <netinet/in.h>
 
 
-
-/* -- Defines ------------------------------------------------------------- */
-
-/* -- Types --------------------------------------------------------------- */
-class NbTcpConnection
-{
+class NbTcpConnection {
 public:
     NbTcpConnection();
     NbTcpConnection(int sock, const struct sockaddr_in * address);
@@ -37,9 +31,7 @@ protected:
 };
 
 
-
-class NbTcpServer : public NbTcpConnection
-{
+class NbTcpServer : public NbTcpConnection {
 public:
     NbTcpServer();
 
@@ -50,36 +42,15 @@ public:
     //call this function cyclically to accept incomming connections
     //returns pointer to accepted connection; NULL otherwise
     NbTcpConnection * serve();
-
-private:
 };
 
 
-
-class NbTcpClient : public NbTcpConnection
-{
+class NbTcpClient : public NbTcpConnection {
     NbTcpClient();
 
     //open a non blocking tcp client connection
     //returns positive number when connection is establised; -1 in case of errors
     int open(const char * ip, const uint16_t port);
-
-private:
 };
-
-
-
-
-
-
-
-/* -- Global Variables ---------------------------------------------------- */
-
-/* -- Function Prototypes ------------------------------------------------- */
-
-/* -- Implementation ------------------------------------------------------ */
-
-
-
 
 #endif //LAB2_SVYAT_TCP_CONNECTION_H
