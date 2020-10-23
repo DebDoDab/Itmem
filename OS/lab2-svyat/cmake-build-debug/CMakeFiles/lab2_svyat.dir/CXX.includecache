@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.cpp
+iostream
+-
+string.h
+-
+stdint.h
+-
+unistd.h
+-
+errno.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+netdb.h
+-
+netdb.h
+-
+fcntl.h
+-
+tcp_connection.h
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.h
+
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.h
+stdint.h
+-
+netinet/in.h
+-
+
