@@ -12,6 +12,9 @@
 #include "tcp_connection.h"
 #include "dynamic_resource.h"
 #include "hqsp.h"
+#include "processes/logger_wrapper.h"
+#include "processes/create_process.h"
+#include "processes/system_info.h"
 
 using namespace std;
 
@@ -31,11 +34,19 @@ static string htmlBasePath;
 static int m_serve_requests(Connection& connection, list<DynamicResource *>& dynamicResources);
 static int m_reply_dynamic_content(Connection& connection);
 static int m_reply_static_content(Connection& connection, const string& uri);
+static int m_reply(Connection& connection, const string&);
 static string m_get_content_type_by_uri(const string& uri, const string& fallback);
 
 
 void m_signal_handler(int a) {
     ctrlC = 1;
+}
+
+Log log;
+
+void setup() {
+    vector<string> logfiles = {"logs/main.log"};
+    log = Log(logfiles);
 }
 
 
@@ -131,20 +142,20 @@ int main(int argc, const char * argv[]) {
 
         //for each connection ...
         //reply dynamic content
-        conIt = connections.begin();
-        while (conIt != connections.end()) {
-            status = m_reply_dynamic_content(*conIt);
-            //close connection
-            if (status != 0) {
-                //close that connection
-                conIt->connection->close();
-                delete conIt->connection;
-                //remove from list of active connections
-                conIt = connections.erase(conIt);
-                continue;
-            }
-            conIt++;
-        }
+//        conIt = connections.begin();
+//        while (conIt != connections.end()) {
+//            status = m_reply_dynamic_content(*conIt);
+//            //close connection
+//            if (status != 0) {
+//                //close that connection
+//                conIt->connection->close();
+//                delete conIt->connection;
+//                //remove from list of active connections
+//                conIt = connections.erase(conIt);
+//                continue;
+//            }
+//            conIt++;
+//        }
 
         //
         usleep(50000); //50ms
@@ -208,51 +219,33 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
     bool isPOST;
 
     //invalidate earlier requests
-    connection.resource = NULL;
+    connection.resource = nullptr;
     connection.hash = 0;
 
     //parse http request
     buffer[requestLen] = 0; //add termination, just to be safe
     resourceLen = hqsp_get_resource((const char *)buffer, &resource);
-    string uri(resource, resourceLen); //uri: resoure as std::stirng
+    string uri(resource, resourceLen); //uri: resource as std::string
     if (uri == "/") uri = "/index.html"; //redirect to default page
 
 
     //GET
     isGET = hqsp_is_method_get((const char *)buffer);
     if (isGET) {
-        //check if the requested resource is static content
-        status = m_reply_static_content(connection, uri);
-        //yes it is ...
-        if (status != 0) {
-            return status; //instruct caller to close connection
-        }
-
-        //otherwise
-        //check if the requested resource is dynamic content
-        list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-        //find requested resource
-        while (resIt != dynamicResources.end()) {
-            DynamicResource * res = *resIt++;
-            if (res->uri == uri) {
-                uint32_t contentHash = 0;
-                const char * header;
-                int headerLen;
-
-                //clients may use long polling to get content
-                //for the purpose of long polling, they may send a hash value for the already known content of a resource
-                //by means of that hash value the server can decides weather new data must be sent to the server immediatly or on change
-                headerLen = hqsp_get_header_value((const char *)buffer, "Content-Hash", &header);
-                if (headerLen > 0)
-                {
-                    contentHash = (uint32_t)strtoul(header, NULL, 10);
-                }
-
-                //link resource request to connection
-                connection.resource = res;
-                connection.hash = contentHash;
-                return 0;
+        printf("GET\nURI: %s\n", uri.c_str());
+        if (uri == "/system_info" || uri == "/system_info/") {
+            auto * system_info = new System_info();
+            int fd;
+            system_info->run(&fd);
+            char buffer_out[100] = {};
+            string out, buff;
+            while (read(fd, buffer_out, 100) != 0)
+            {
+                buff = buffer_out;
+                out += buff;
             }
+            printf("/system_info\nSTDOUT: %s\n", out.c_str());
+            return m_reply(connection, out);
         }
     }
 
@@ -301,6 +294,26 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
 
 //return 0 when connection stays open
+//return 1 when connection shall be closed
+static int m_reply(Connection& connection, const string& answer) {
+    string header;
+    //update client ...
+    //send header
+    header  = "HTTP/1.1 200\r\n";
+    header += "Content-Type: text/plain\r\n";
+    header += "Content-Length: " + string(reinterpret_cast<const char *>(answer.size())) + "\r\n";
+    header += "\r\n";
+    connection.connection->send((const uint8_t *)header.c_str(), header.length(), true);
+    //send content
+    connection.connection->send((const uint8_t *)answer.c_str(), answer.length());
+
+    //invalidate request
+    connection.resource = nullptr;
+    connection.hash = 0;
+    return 1; //instruct to close connection
+}
+
+
 //return 1 when connection shall be closed
 static int m_reply_dynamic_content(Connection& connection)
 {

@@ -139,7 +139,7 @@
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.h">
 			<Option target="lab2_svyat"/>
 		</Unit>
-		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/test.cpp">
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/server.cpp">
 			<Option target="lab2_svyat"/>
 		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.cpp">

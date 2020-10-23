@@ -28,3 +28,18 @@ string System_info::get_system_info() {
     result += "Memory page size: " + std::to_string(buffer_num) + " bytes\n";
     return result;
 }
+
+int System_info::run(int *stdout_fd) {
+    int pipe_fd[2];
+    pipe(pipe_fd);
+    int child_pid = fork();
+    if (child_pid == 0) {
+        string system_info = get_system_info();
+        char* sys_info;
+        strcpy(sys_info, &system_info[0]);
+        write(pipe_fd[1], sys_info, system_info.size());
+        exit(0);
+    }
+    close(pipe_fd[1]);
+    *stdout_fd = pipe_fd[0];
+}

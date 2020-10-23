@@ -155,22 +155,9 @@ CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.cpp -o CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.s
 
-CMakeFiles/lab2_svyat.dir/processes/test.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
-CMakeFiles/lab2_svyat.dir/processes/test.cpp.o: ../processes/test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/test.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/test.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/test.cpp
-
-CMakeFiles/lab2_svyat.dir/processes/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lab2_svyat.dir/processes/test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/test.cpp > CMakeFiles/lab2_svyat.dir/processes/test.cpp.i
-
-CMakeFiles/lab2_svyat.dir/processes/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab2_svyat.dir/processes/test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/test.cpp -o CMakeFiles/lab2_svyat.dir/processes/test.cpp.s
-
 CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
 CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o: ../processes/ps.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/ps.cpp
 
 CMakeFiles/lab2_svyat.dir/processes/ps.cpp.i: cmake_force
@@ -183,7 +170,7 @@ CMakeFiles/lab2_svyat.dir/processes/ps.cpp.s: cmake_force
 
 CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
 CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o: ../processes/observer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/observer.cpp
 
 CMakeFiles/lab2_svyat.dir/processes/observer.cpp.i: cmake_force
@@ -196,7 +183,7 @@ CMakeFiles/lab2_svyat.dir/processes/observer.cpp.s: cmake_force
 
 CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
 CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o: ../processes/logger_wrapper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger_wrapper.cpp
 
 CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.i: cmake_force
@@ -209,7 +196,7 @@ CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.s: cmake_force
 
 CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
 CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o: ../processes/logger.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger.cpp
 
 CMakeFiles/lab2_svyat.dir/processes/logger.cpp.i: cmake_force
@@ -222,7 +209,7 @@ CMakeFiles/lab2_svyat.dir/processes/logger.cpp.s: cmake_force
 
 CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
 CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o: ../processes/send_signal.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/send_signal.cpp
 
 CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.i: cmake_force
@@ -235,7 +222,7 @@ CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.s: cmake_force
 
 CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
 CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o: ../processes/create_process.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/create_process.cpp
 
 CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.i: cmake_force
@@ -246,6 +233,19 @@ CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/create_process.cpp -o CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.s
 
+CMakeFiles/lab2_svyat.dir/server.cpp.o: CMakeFiles/lab2_svyat.dir/flags.make
+CMakeFiles/lab2_svyat.dir/server.cpp.o: ../server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/lab2_svyat.dir/server.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lab2_svyat.dir/server.cpp.o -c /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/server.cpp
+
+CMakeFiles/lab2_svyat.dir/server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lab2_svyat.dir/server.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/server.cpp > CMakeFiles/lab2_svyat.dir/server.cpp.i
+
+CMakeFiles/lab2_svyat.dir/server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lab2_svyat.dir/server.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/server.cpp -o CMakeFiles/lab2_svyat.dir/server.cpp.s
+
 # Object files for target lab2_svyat
 lab2_svyat_OBJECTS = \
 "CMakeFiles/lab2_svyat.dir/main.cpp.o" \
@@ -254,13 +254,13 @@ lab2_svyat_OBJECTS = \
 "CMakeFiles/lab2_svyat.dir/dynamic_resource.cpp.o" \
 "CMakeFiles/lab2_svyat.dir/hqsp.c.o" \
 "CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.o" \
-"CMakeFiles/lab2_svyat.dir/processes/test.cpp.o" \
 "CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o" \
 "CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o" \
 "CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o" \
 "CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o" \
 "CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o" \
-"CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o"
+"CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o" \
+"CMakeFiles/lab2_svyat.dir/server.cpp.o"
 
 # External object files for target lab2_svyat
 lab2_svyat_EXTERNAL_OBJECTS =
@@ -271,13 +271,13 @@ lab2_svyat: CMakeFiles/lab2_svyat.dir/tcp_connection.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/dynamic_resource.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/hqsp.c.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.o
-lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/test.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o
+lab2_svyat: CMakeFiles/lab2_svyat.dir/server.cpp.o
 lab2_svyat: CMakeFiles/lab2_svyat.dir/build.make
 lab2_svyat: CMakeFiles/lab2_svyat.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable lab2_svyat"

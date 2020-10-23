@@ -440,32 +440,32 @@ processes/system_info.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.s
 .PHONY : processes/system_info.cpp.s
 
-processes/test.o: processes/test.cpp.o
+server.o: server.cpp.o
 
-.PHONY : processes/test.o
+.PHONY : server.o
 
 # target to build an object file
-processes/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/test.cpp.o
-.PHONY : processes/test.cpp.o
+server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/server.cpp.o
+.PHONY : server.cpp.o
 
-processes/test.i: processes/test.cpp.i
+server.i: server.cpp.i
 
-.PHONY : processes/test.i
+.PHONY : server.i
 
 # target to preprocess a source file
-processes/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/test.cpp.i
-.PHONY : processes/test.cpp.i
+server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/server.cpp.i
+.PHONY : server.cpp.i
 
-processes/test.s: processes/test.cpp.s
+server.s: server.cpp.s
 
-.PHONY : processes/test.s
+.PHONY : server.s
 
 # target to generate assembly for a file
-processes/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/test.cpp.s
-.PHONY : processes/test.cpp.s
+server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/server.cpp.s
+.PHONY : server.cpp.s
 
 tcp_connection.o: tcp_connection.cpp.o
 
@@ -536,9 +536,9 @@ help:
 	@echo "... processes/system_info.o"
 	@echo "... processes/system_info.i"
 	@echo "... processes/system_info.s"
-	@echo "... processes/test.o"
-	@echo "... processes/test.i"
-	@echo "... processes/test.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 	@echo "... tcp_connection.o"
 	@echo "... tcp_connection.i"
 	@echo "... tcp_connection.s"

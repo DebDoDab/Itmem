@@ -10,7 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o"
   "CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o"
   "CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.o"
-  "CMakeFiles/lab2_svyat.dir/processes/test.cpp.o"
+  "CMakeFiles/lab2_svyat.dir/server.cpp.o"
   "CMakeFiles/lab2_svyat.dir/tcp_connection.cpp.o"
   "lab2_svyat"
   "lab2_svyat.pdb"

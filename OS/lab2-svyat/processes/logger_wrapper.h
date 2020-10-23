@@ -29,6 +29,7 @@
 
 class Log{
 public:
+    Log() = default;
     Log(const std::vector<std::string>& filenames);
     int write_message(const std::string& message, int log_num);
 
@@ -36,10 +37,10 @@ public:
 
 private:
     void die();
-    int* last_ptr;
+    int* last_ptr{};
     std::vector<void*> pointers;
-    int logger_pid;
-    bool good;
+    int logger_pid{};
+    bool good{};
 };
 
 
