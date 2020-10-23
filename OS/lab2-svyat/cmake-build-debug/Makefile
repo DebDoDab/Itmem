@@ -251,6 +251,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+processes/create_process.o: processes/create_process.cpp.o
+
+.PHONY : processes/create_process.o
+
+# target to build an object file
+processes/create_process.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o
+.PHONY : processes/create_process.cpp.o
+
+processes/create_process.i: processes/create_process.cpp.i
+
+.PHONY : processes/create_process.i
+
+# target to preprocess a source file
+processes/create_process.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.i
+.PHONY : processes/create_process.cpp.i
+
+processes/create_process.s: processes/create_process.cpp.s
+
+.PHONY : processes/create_process.s
+
+# target to generate assembly for a file
+processes/create_process.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.s
+.PHONY : processes/create_process.cpp.s
+
 processes/logger.o: processes/logger.cpp.o
 
 .PHONY : processes/logger.o
@@ -359,6 +386,33 @@ processes/ps.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/ps.cpp.s
 .PHONY : processes/ps.cpp.s
 
+processes/send_signal.o: processes/send_signal.cpp.o
+
+.PHONY : processes/send_signal.o
+
+# target to build an object file
+processes/send_signal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o
+.PHONY : processes/send_signal.cpp.o
+
+processes/send_signal.i: processes/send_signal.cpp.i
+
+.PHONY : processes/send_signal.i
+
+# target to preprocess a source file
+processes/send_signal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.i
+.PHONY : processes/send_signal.cpp.i
+
+processes/send_signal.s: processes/send_signal.cpp.s
+
+.PHONY : processes/send_signal.s
+
+# target to generate assembly for a file
+processes/send_signal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.s
+.PHONY : processes/send_signal.cpp.s
+
 processes/system_info.o: processes/system_info.cpp.o
 
 .PHONY : processes/system_info.o
@@ -461,6 +515,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... processes/create_process.o"
+	@echo "... processes/create_process.i"
+	@echo "... processes/create_process.s"
 	@echo "... processes/logger.o"
 	@echo "... processes/logger.i"
 	@echo "... processes/logger.s"
@@ -473,6 +530,9 @@ help:
 	@echo "... processes/ps.o"
 	@echo "... processes/ps.i"
 	@echo "... processes/ps.s"
+	@echo "... processes/send_signal.o"
+	@echo "... processes/send_signal.i"
+	@echo "... processes/send_signal.s"
 	@echo "... processes/system_info.o"
 	@echo "... processes/system_info.i"
 	@echo "... processes/system_info.s"

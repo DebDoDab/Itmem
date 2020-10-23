@@ -16,10 +16,12 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/dynamic_resource.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/dynamic_resource.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/main.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/main.cpp.o"
+  "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/create_process.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger_wrapper.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/observer.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/ps.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o"
+  "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/send_signal.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/send_signal.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/system_info.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/test.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/processes/test.cpp.o"
   "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.cpp" "/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir/tcp_connection.cpp.o"
