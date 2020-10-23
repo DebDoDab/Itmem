@@ -278,33 +278,6 @@ processes/create_process.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.s
 .PHONY : processes/create_process.cpp.s
 
-processes/logger.o: processes/logger.cpp.o
-
-.PHONY : processes/logger.o
-
-# target to build an object file
-processes/logger.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o
-.PHONY : processes/logger.cpp.o
-
-processes/logger.i: processes/logger.cpp.i
-
-.PHONY : processes/logger.i
-
-# target to preprocess a source file
-processes/logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/logger.cpp.i
-.PHONY : processes/logger.cpp.i
-
-processes/logger.s: processes/logger.cpp.s
-
-.PHONY : processes/logger.s
-
-# target to generate assembly for a file
-processes/logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/logger.cpp.s
-.PHONY : processes/logger.cpp.s
-
 processes/logger_wrapper.o: processes/logger_wrapper.cpp.o
 
 .PHONY : processes/logger_wrapper.o
@@ -518,9 +491,6 @@ help:
 	@echo "... processes/create_process.o"
 	@echo "... processes/create_process.i"
 	@echo "... processes/create_process.s"
-	@echo "... processes/logger.o"
-	@echo "... processes/logger.i"
-	@echo "... processes/logger.s"
 	@echo "... processes/logger_wrapper.o"
 	@echo "... processes/logger_wrapper.i"
 	@echo "... processes/logger_wrapper.s"

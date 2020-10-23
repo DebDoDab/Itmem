@@ -2,10 +2,10 @@
 // Created by vadim on 23.10.20.
 //
 
-#include "observer.h"
 #include <dirent.h>
 #include <set>
 #include <sys/event.h>
+#include "observer.h"
 
 Observer::Observer() {
     int res = fork();

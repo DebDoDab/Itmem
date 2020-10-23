@@ -9,7 +9,7 @@ C_DEFINES =
 
 C_INCLUDES = 
 
-CXX_FLAGS = -g   -std=gnu++14
+CXX_FLAGS =  -pthread -g   -std=gnu++14
 
 CXX_DEFINES = 
 

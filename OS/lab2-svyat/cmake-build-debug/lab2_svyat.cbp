@@ -106,9 +106,6 @@
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/create_process.h">
 			<Option target="lab2_svyat"/>
 		</Unit>
-		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger.cpp">
-			<Option target="lab2_svyat"/>
-		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger_wrapper.cpp">
 			<Option target="lab2_svyat"/>
 		</Unit>

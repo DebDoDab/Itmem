@@ -4,7 +4,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/lab2_svyat.dir/hqsp.c.o"
   "CMakeFiles/lab2_svyat.dir/main.cpp.o"
   "CMakeFiles/lab2_svyat.dir/processes/create_process.cpp.o"
-  "CMakeFiles/lab2_svyat.dir/processes/logger.cpp.o"
   "CMakeFiles/lab2_svyat.dir/processes/logger_wrapper.cpp.o"
   "CMakeFiles/lab2_svyat.dir/processes/observer.cpp.o"
   "CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o"
