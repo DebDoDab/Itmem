@@ -3,10 +3,11 @@
 //
 
 #include "system_info.h"
+#include "ps.h"
 #include <iostream>
 
 
 int main() {
-    auto * system_info = new System_info();
-    std::cout << system_info->get_system_info() << "\n";
+    auto * ps = new Ps();
+    cout << ps->get_ps() << endl;
 }

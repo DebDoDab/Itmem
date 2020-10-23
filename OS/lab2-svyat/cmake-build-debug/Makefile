@@ -251,6 +251,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+processes/ps.o: processes/ps.cpp.o
+
+.PHONY : processes/ps.o
+
+# target to build an object file
+processes/ps.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/ps.cpp.o
+.PHONY : processes/ps.cpp.o
+
+processes/ps.i: processes/ps.cpp.i
+
+.PHONY : processes/ps.i
+
+# target to preprocess a source file
+processes/ps.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/ps.cpp.i
+.PHONY : processes/ps.cpp.i
+
+processes/ps.s: processes/ps.cpp.s
+
+.PHONY : processes/ps.s
+
+# target to generate assembly for a file
+processes/ps.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab2_svyat.dir/build.make CMakeFiles/lab2_svyat.dir/processes/ps.cpp.s
+.PHONY : processes/ps.cpp.s
+
 processes/system_info.o: processes/system_info.cpp.o
 
 .PHONY : processes/system_info.o
@@ -353,6 +380,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... processes/ps.o"
+	@echo "... processes/ps.i"
+	@echo "... processes/ps.s"
 	@echo "... processes/system_info.o"
 	@echo "... processes/system_info.i"
 	@echo "... processes/system_info.s"
