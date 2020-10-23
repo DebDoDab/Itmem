@@ -246,38 +246,38 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
 
     //POST
-    isPOST = hqsp_is_method_post((const char *)buffer);
-    if (isPOST) {
-        //POST can only deal with dynamic content
-        //find requested res
-        list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-        while (resIt != dynamicResources.end()) {
-            DynamicResource * res = *resIt++;
-            if (res->uri == uri) {
-                const char * header;
-                int headerLen;
-                const char * postContent;
-                int postContentLen;
-
-                //get content type from HTML header -> set
-                headerLen = hqsp_get_header_value((const char *)buffer, "Content-Type", &header);
-                if (headerLen > 0) {
-                    string contentType(header, headerLen);
-                    res->contentType = contentType;
-                }
-
-                //get content that is sent via POST -> set
-                postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
-                string content(postContent, postContentLen);
-                res->setContent(content);
-
-                //link resource "200 OK" to that connection in order to "acknowledge" the POST request
-                connection.resource = code200;
-                connection.hash = 0;
-                return 0;
-            }
-        }
-    }
+//    isPOST = hqsp_is_method_post((const char *)buffer);
+//    if (isPOST) {
+//        //POST can only deal with dynamic content
+//        //find requested res
+//        list<DynamicResource *>::iterator resIt = dynamicResources.begin();
+//        while (resIt != dynamicResources.end()) {
+//            DynamicResource * res = *resIt++;
+//            if (res->uri == uri) {
+//                const char * header;
+//                int headerLen;
+//                const char * postContent;
+//                int postContentLen;
+//
+//                //get content type from HTML header -> set
+//                headerLen = hqsp_get_header_value((const char *)buffer, "Content-Type", &header);
+//                if (headerLen > 0) {
+//                    string contentType(header, headerLen);
+//                    res->contentType = contentType;
+//                }
+//
+//                //get content that is sent via POST -> set
+//                postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
+//                string content(postContent, postContentLen);
+//                res->setContent(content);
+//
+//                //link resource "200 OK" to that connection in order to "acknowledge" the POST request
+//                connection.resource = code200;
+//                connection.hash = 0;
+//                return 0;
+//            }
+//        }
+//    }
 
 
     //when we come to that point, we havn't found the requested resource. Therfore...
@@ -296,7 +296,7 @@ static int m_reply(Connection& connection, const string& answer) {
     //send header
     header  = "HTTP/1.1 200\r\n";
     header += "Content-Type: text/plain\r\n";
-    header += "Content-Length: " + string(reinterpret_cast<const char *>(answer.size())) + "\r\n";
+    header += "Content-Length: " + answer + "\r\n";
     header += "\r\n";
     connection.connection->send((const uint8_t *)header.c_str(), header.length(), true);
     //send content

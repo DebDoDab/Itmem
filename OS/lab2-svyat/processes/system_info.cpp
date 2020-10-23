@@ -31,15 +31,25 @@ string System_info::get_system_info() {
 
 int System_info::run(int *stdout_fd) {
     int pipe_fd[2];
+    printf("!");
     pipe(pipe_fd);
+    printf("!");
     int child_pid = fork();
+    printf("!");
     if (child_pid == 0) {
+        printf("!");
         string system_info = get_system_info();
+        printf("!");
         char* sys_info;
         strcpy(sys_info, &system_info[0]);
+        printf("!");
         write(pipe_fd[1], sys_info, system_info.size());
+        printf("!");
         exit(0);
+        printf("!");
     }
     close(pipe_fd[1]);
+    printf("!");
     *stdout_fd = pipe_fd[0];
+    printf("!");
 }
