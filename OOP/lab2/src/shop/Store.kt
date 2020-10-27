@@ -5,24 +5,24 @@ import shop.Product
 import kotlin.math.floor
 
 class Store(val name: String, val address: String) {
-    val id: Int = ++last_shop_id
+    private val id: Int = ++last_store_id
 
     class ProductStock {
         var count: Int = 0
         var price: Float = 0F
     }
 
-    var products = mutableMapOf<Product, ProductStock>()
+    private var products = mutableMapOf<Product, ProductStock>()
 
     companion object {
-        var last_shop_id: Int = 0
+        private var last_store_id: Int = 0
 
-        var shops = mutableListOf<Store>()
+        private var stores = mutableListOf<Store>()
 
         fun findCheapestProduct(product: Product): Store? {
             var storeWithLowestPrice: Store? = null
             var leastProductPrice: Float = 0F
-            for (shop in shops) {
+            for (shop in stores) {
                 val price = shop.getProductPrice(product)
                 if (price != null && (storeWithLowestPrice == null || price < leastProductPrice)) {
                     storeWithLowestPrice = shop
@@ -34,7 +34,7 @@ class Store(val name: String, val address: String) {
         fun findCheapestProducts(receipt: ShopReceipt): Store? {
             var storeWithLowestPrice: Store? = null
             var lowestCost: Float = 0F
-            for (shop in shops) {
+            for (shop in stores) {
                 val cost = shop.buy(receipt)
                 if (cost != null &&(storeWithLowestPrice == null || lowestCost > cost)) {
                     storeWithLowestPrice = shop
@@ -46,7 +46,7 @@ class Store(val name: String, val address: String) {
     }
 
     init {
-        shops.add(this)
+        stores.add(this)
     }
 
     fun getProductPrice(product: Product): Float? {
@@ -95,6 +95,4 @@ class Store(val name: String, val address: String) {
         }
         return cost
     }
-
-
 }
