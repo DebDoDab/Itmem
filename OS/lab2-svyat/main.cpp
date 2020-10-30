@@ -228,17 +228,10 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
     isGET = hqsp_is_method_get((const char *)buffer);
     if (isGET) {
         printf("GET\nURI: %s\n", uri.c_str());
-        for (auto ch : uri) {
-            printf("%c\n", ch);
-        }
         if (uri == "/system_info" || uri == "/system_info/") {
-            printf("?");
             auto * system_info = new System_info();
-            printf("?");
             int fd;
-            printf("?");
             system_info->run(&fd);
-            printf("?");
             char buffer_out[100] = {};
             string out, buff;
             while (read(fd, buffer_out, 100) != 0)
