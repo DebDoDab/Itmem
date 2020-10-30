@@ -38,9 +38,9 @@ int System_info::run(int *stdout_fd) {
         dup2(pipe_fd[1], 1);
         close(pipe_fd[1]);
         string system_info = get_system_info();
-        char* sys_info;
-        strcpy(sys_info, &system_info[0]);
-        write(pipe_fd[1], sys_info, system_info.size());
+        char *sys_info = new char[system_info.size() + 1];
+        strcpy(sys_info, system_info.c_str());
+        write(pipe_fd[1], sys_info, system_info.size() + 1);
         close(1);
         exit(0);
     }
