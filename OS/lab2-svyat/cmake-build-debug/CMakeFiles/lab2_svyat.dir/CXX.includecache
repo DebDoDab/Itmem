@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/vadim/Desktop/MoeGovno/OS/lab2-svyat/main.cpp
-string
--
-string.h
+bits/stdc++.h
 -
 

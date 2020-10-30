@@ -8,6 +8,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "hqsp.h"
 
 
@@ -165,30 +166,32 @@ int hqsp_get_post_content(const char * request, unsigned requestLen, const char 
 int hqsp_get_post_value(const char * request, unsigned requestLen, const char* parameter, const char ** x) {
     const char* body;
     int body_len = hqsp_get_post_content(request, requestLen, &body);
-    int len;
+    int len = 0;
 
     uint32_t shiftReg = 0;
+    printf("ASD");
     char* parameterStart = strstr(body, parameter);
-    parameterStart += strlen(parameter);
+    printf("%d", (parameterStart == NULL));
     if (parameterStart == NULL) {
         x = NULL;
         return -1;
     }
+    printf("%s\n", parameterStart);
+    parameterStart += strlen(parameter);
+    printf("%s\n", parameterStart);
 
-    char * divider = (char *) ':';
-    while (parameterStart != divider) {
+    while (*parameterStart != ':') {
         parameterStart++;
     }
     parameterStart++;
-    divider = (char *) '"';
-    while (parameterStart != divider) {
+    while (*parameterStart != '"') {
         parameterStart++;
     }
     parameterStart++;
 
     *x = parameterStart;
 
-    while (parameterStart != divider) {
+    while (*parameterStart != '"') {
         parameterStart++;
         len++;
     }

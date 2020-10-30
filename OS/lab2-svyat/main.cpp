@@ -383,3 +383,29 @@ static int m_reply(Connection& connection, const string& answer) {
     connection.hash = 0;
     return 1; //instruct to close connection
 }
+
+//#include <bits/stdc++.h>
+//using namespace std;
+//
+//int main() {
+//    const char* body = R"(asdasd "poop": "kaka" baba)";
+//    printf("%s\n", body);
+//    const char* poop = "poop";
+//    char* poopStart = const_cast<char *>(strstr(body, poop));
+//    printf("%s\n", poopStart);
+//
+//    while (*poopStart != ':') {
+//        printf("%s\n", poopStart);
+//        poopStart++;
+//    }
+//    poopStart++;
+//    while (*poopStart != '"') {
+//        poopStart++;
+//    }
+//    poopStart++;
+//
+//    while (*poopStart != '"') {
+//        poopStart++;
+//    }
+//    printf("%s\n", poopStart);
+//}
