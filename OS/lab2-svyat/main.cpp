@@ -271,7 +271,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
         int postContentLen;
 
         postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
-        printf("POST BODY\n%d %s", postContentLen, postContent);
+        printf("POST BODY\n%d\n %s\n", postContentLen, postContent);
 
         if (uri == "/create_process") {
             auto * create_process = new CreateProcess();
@@ -292,6 +292,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                     break;
                 }
             }
+            printf("!\n");
 
             string uidstr = "uid";
             char* uidStr = new char[uidstr.size() + 1];
@@ -306,6 +307,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                     uid += uidchr[i] - '0';
                 }
             }
+            printf("!\n");
 
             string commandstr = "command";
             char* commandStr = new char[commandstr.size() + 1];
@@ -316,6 +318,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             for (int i = 0; i < commandLen; i++) {
                 command.push_back(uidchr[i]);
             }
+            printf("!\n");
 
             string argsstr = "args";
             char* argsStr = new char[argsstr.size() + 1];
@@ -326,6 +329,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             for (int i = 0; i < argsLen; i++) {
                 args.push_back(argschr[i]);
             }
+            printf("!\n");
 
             printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
 
