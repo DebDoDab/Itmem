@@ -292,7 +292,6 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                     break;
                 }
             }
-            printf("!\n");
 
             string uidstr = "uid";
             char* uidStr = new char[uidstr.size() + 1];
@@ -307,7 +306,6 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                     uid += uidchr[i] - '0';
                 }
             }
-            printf("!\n");
 
             string commandstr = "command";
             char* commandStr = new char[commandstr.size() + 1];
@@ -318,7 +316,6 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             for (int i = 0; i < commandLen; i++) {
                 command.push_back(commandchr[i]);
             }
-            printf("!\n");
 
             string argsstr = "args";
             char* argsStr = new char[argsstr.size() + 1];
@@ -329,12 +326,14 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             for (int i = 0; i < argsLen; i++) {
                 args.push_back(argschr[i]);
             }
-            printf("!\n");
 
             printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
 
             int code = create_process->run(is_foreground, uid, command, args, fd, err_fd);
             string out;
+            if (!is_foreground) {
+                return 1;
+            }
 
             char buffer_out[100] = {};
             while (read(fd, buffer_out, 100) != 0)
