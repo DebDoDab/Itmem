@@ -4,6 +4,8 @@
 
 #include <sstream>
 #include "create_process.h"
+#include <string>
+#include <string.h>
 
 
 
@@ -31,12 +33,16 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
         if (grand_child_pid == 0) {
             setuid(UID);
             char* argv[10];
-            argv[0] = (char*)command.c_str();
+            argv[0] = new char[command.size() + 1];
+            strcpy(argv[0], command.c_str());
             stringstream argumentsStream(arguments);
             int i = 1;
             string arg;
             while (i < 10 && getline(argumentsStream, arg, ' ')) {
-                argv[i++] = (char *)arg.c_str();
+                printf("arg %d %s\n", i, arg.c_str());
+                argv[i] = new char[arg.size() + 1];
+                strcpy(argv[i], arg.c_str());
+                i++;
             }
             while (i < 10) {
                 argv[i++] = nullptr;
