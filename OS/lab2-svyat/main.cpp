@@ -333,7 +333,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
             printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
 
-            create_process->run(is_foreground, uid, command, args, fd, err_fd);
+            int code = create_process->run(is_foreground, uid, command, args, fd, err_fd);
             string out;
 
             char buffer_out[100] = {};
@@ -349,9 +349,14 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                 string buff = buffer_out;
                 out += buff;
             }
+            out += "\nCODE: " + to_string(code);
+
             printf("/create_process\nSTDOUT: %s\n", out.c_str());
             delete create_process;
-            return m_reply(connection, out);
+            printf("NOW SERVING\n");
+            code = m_reply(connection, out);
+            printf("SERVED, code = %d\n", code);
+            return code;
         }
     }
 
