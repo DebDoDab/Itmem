@@ -32,8 +32,10 @@ using namespace std;
 
 class Ps {
 public:
-    int mount_proc();
-    string get_ps();
+    Ps() = default;
+    static int mount_proc();
+    static string get_ps();
+    void run(int& stdout_fd);
 };
 
 

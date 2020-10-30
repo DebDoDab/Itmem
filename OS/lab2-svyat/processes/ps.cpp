@@ -52,3 +52,20 @@ int Ps::mount_proc() {
     }
     return 0;
 }
+
+void Ps::run(int &stdout_fd) {
+    int pipe_fd[2];
+    pipe(pipe_fd);
+    int child_pid = fork();
+    if (child_pid == 0) {
+        close(pipe_fd[0]);
+        string system_info = get_ps();
+        char *sys_info = new char[system_info.size() + 1];
+        strcpy(sys_info, system_info.c_str());
+        write(pipe_fd[1], sys_info, system_info.size() + 1);
+        close(pipe_fd[1]);
+        exit(0);
+    }
+    close(pipe_fd[1]);
+    stdout_fd = pipe_fd[0];
+}

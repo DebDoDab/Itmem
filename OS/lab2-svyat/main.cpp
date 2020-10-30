@@ -15,6 +15,7 @@
 #include "processes/logger_wrapper.h"
 #include "processes/create_process.h"
 #include "processes/system_info.h"
+#include "processes/ps.h"
 
 using namespace std;
 
@@ -222,13 +223,15 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
     resourceLen = hqsp_get_resource((const char *)buffer, &resource);
     string uri(resource, resourceLen); //uri: resource as std::string
     if (uri == "/") uri = "/index.html"; //redirect to default page
-
+    while (uri.back() == '/') {
+        uri.pop_back();
+    }
 
     //GET
     isGET = hqsp_is_method_get((const char *)buffer);
     if (isGET) {
         printf("GET\nURI: %s\n", uri.c_str());
-        if (uri == "/system_info" || uri == "/system_info/") {
+        if (uri == "/system_info") {
             auto * system_info = new System_info();
             int fd;
             system_info->run(fd);
@@ -240,6 +243,21 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                 out += buff;
             }
             printf("/system_info\nSTDOUT: %s\n", out.c_str());
+            delete system_info;
+            return m_reply(connection, out);
+        } else if (uri == "/ps") {
+            auto * ps = new Ps();
+            int fd;
+            ps->run(fd);
+            char buffer_out[100] = {};
+            string out, buff;
+            while (read(fd, buffer_out, 100) != 0)
+            {
+                buff = buffer_out;
+                out += buff;
+            }
+            printf("/ps\nSTDOUT: %s\n", out.c_str());
+            delete ps;
             return m_reply(connection, out);
         }
     }
