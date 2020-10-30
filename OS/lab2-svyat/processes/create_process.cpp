@@ -16,13 +16,14 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
     pipe(pipe_err);
     int child_pid = fork();
     if (child_pid == 0) {
+        close(0);
+        close(1);
+        close(2);
         close(pipe_fd[0]);
         close(pipe_return[0]);
         close(pipe_err[0]);
         dup2(pipe_fd[1], 1);
         dup2(pipe_err[1], 2);
-        close(pipe_fd[1]);
-        close(pipe_err[1]);
 
         write(2, " ", 1);
         int grand_child_pid = fork();
@@ -50,9 +51,6 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
             code = WEXITSTATUS(code);
             write(pipe_return[1], &code, 8);
         }
-        close(pipe_fd[1]);
-        close(pipe_return[1]);
-        close(pipe_err[1]);
         exit(0);
     }
     int code;

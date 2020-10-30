@@ -349,7 +349,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
                 string buff = buffer_out;
                 out += buff;
             }
-            out += "\nCODE: " + to_string(code);
+            out += "\nCODE: " + to_string(code) + "\n";
 
             printf("/create_process\nSTDOUT: %s\n", out.c_str());
             delete create_process;
@@ -359,7 +359,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
     }
 
 
-    //when we come to that point, we havn't found the requested resource. Therefore...
+    //when we come to that point, we haven't found the requested resource. Therefore...
     //link resource "404 Not Found" to that connection in order to "acknowledge" the request
     connection.resource = code404;
     connection.hash = 0;
