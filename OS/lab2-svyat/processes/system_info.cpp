@@ -29,21 +29,19 @@ string System_info::get_system_info() {
     return result;
 }
 
-int System_info::run(int *stdout_fd) {
+void System_info::run(int& stdout_fd) {
     int pipe_fd[2];
     pipe(pipe_fd);
     int child_pid = fork();
     if (child_pid == 0) {
-        close(1);
-        dup2(pipe_fd[1], 1);
-        close(pipe_fd[1]);
+        close(pipe_fd[0]);
         string system_info = get_system_info();
         char *sys_info = new char[system_info.size() + 1];
         strcpy(sys_info, system_info.c_str());
         write(pipe_fd[1], sys_info, system_info.size() + 1);
-        close(1);
+        close(pipe_fd[1]);
         exit(0);
     }
     close(pipe_fd[1]);
-    *stdout_fd = pipe_fd[0];
+    stdout_fd = pipe_fd[0];
 }

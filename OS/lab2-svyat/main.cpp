@@ -231,7 +231,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
         if (uri == "/system_info" || uri == "/system_info/") {
             auto * system_info = new System_info();
             int fd;
-            system_info->run(&fd);
+            system_info->run(fd);
             char buffer_out[100] = {};
             string out, buff;
             while (read(fd, buffer_out, 100) != 0)
@@ -296,7 +296,7 @@ static int m_reply(Connection& connection, const string& answer) {
     //send header
     header  = "HTTP/1.1 200\r\n";
     header += "Content-Type: text/plain\r\n";
-    header += "Content-Length: " + answer + "\r\n";
+    header += "Content-Length: " + to_string(answer.size()) + "\r\n";
     header += "\r\n";
     connection.connection->send((const uint8_t *)header.c_str(), header.length(), true);
     //send content
