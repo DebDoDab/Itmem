@@ -316,7 +316,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             int commandLen = hqsp_get_post_value((const char *)buffer, requestLen, commandStr, &commandchr);
             string command;
             for (int i = 0; i < commandLen; i++) {
-                command.push_back(uidchr[i]);
+                command.push_back(commandchr[i]);
             }
             printf("!\n");
 
