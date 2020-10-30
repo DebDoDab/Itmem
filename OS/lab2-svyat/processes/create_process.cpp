@@ -6,6 +6,7 @@
 #include "create_process.h"
 #include <string>
 #include <string.h>
+#include <libexplain/execvp.h>
 
 
 
@@ -43,7 +44,7 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
             }
             int result = execvp(command.c_str(), argv);
             if (result != 0) {
-                exit(-1);
+                fprintf(STDERR_FILENO, "%s\n", explain_execvp(command.c_str(), argv));
             }
         }
         int code;
