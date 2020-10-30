@@ -39,7 +39,9 @@ int hqsp_get_status_code(const char * response);
 //get "string-pointer" to requested resource
 //x will be set to the start of the string
 //returns length of string
-int hqsp_get_post_content(const char * request, const unsigned requestLen, const char ** x);
+int hqsp_get_post_content(const char * request, unsigned requestLen, const char ** x);
+
+int hqsp_get_post_value(const char * request, unsigned requestLen, const char* parameter, const char ** x);
 
 
 #ifdef __cplusplus

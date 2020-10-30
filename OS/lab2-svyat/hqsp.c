@@ -144,7 +144,7 @@ int hqsp_get_status_code(const char * response) {
 }
 
 
-int hqsp_get_post_content(const char * request, const unsigned requestLen, const char ** x) {
+int hqsp_get_post_content(const char * request, unsigned requestLen, const char ** x) {
     const char * start;
     unsigned len;
 
@@ -160,6 +160,40 @@ int hqsp_get_post_content(const char * request, const unsigned requestLen, const
     *x = start;
     //determin remaining length
     return (requestLen - len);
+}
+
+int hqsp_get_post_value(const char * request, unsigned requestLen, const char* parameter, const char ** x) {
+    const char* body;
+    int body_len = hqsp_get_post_content(request, requestLen, &body);
+    int len;
+
+    uint32_t shiftReg = 0;
+    char* parameterStart = strstr(body, parameter);
+    parameterStart += strlen(parameter);
+    if (parameterStart == NULL) {
+        x = NULL;
+        return -1;
+    }
+
+    char * divider = (char *) ':';
+    while (parameterStart != divider) {
+        parameterStart++;
+    }
+    parameterStart++;
+    divider = (char *) '"';
+    while (parameterStart != divider) {
+        parameterStart++;
+    }
+    parameterStart++;
+
+    *x = parameterStart;
+
+    while (parameterStart != divider) {
+        parameterStart++;
+        len++;
+    }
+
+    return len - 1;
 }
 
 

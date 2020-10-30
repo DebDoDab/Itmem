@@ -89,7 +89,7 @@ int main(int argc, const char * argv[]) {
 
 
     //create server
-    NbTcpServer * tcpServer = new NbTcpServer();
+    auto * tcpServer = new NbTcpServer();
     status = tcpServer->open(port);
     if (status < 0) {
         cout << "Failed to open server on port " << port << endl;
@@ -264,41 +264,95 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
 
     //POST
-//    isPOST = hqsp_is_method_post((const char *)buffer);
-//    if (isPOST) {
-//        //POST can only deal with dynamic content
-//        //find requested res
-//        list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-//        while (resIt != dynamicResources.end()) {
-//            DynamicResource * res = *resIt++;
-//            if (res->uri == uri) {
-//                const char * header;
-//                int headerLen;
-//                const char * postContent;
-//                int postContentLen;
-//
-//                //get content type from HTML header -> set
-//                headerLen = hqsp_get_header_value((const char *)buffer, "Content-Type", &header);
-//                if (headerLen > 0) {
-//                    string contentType(header, headerLen);
-//                    res->contentType = contentType;
-//                }
-//
-//                //get content that is sent via POST -> set
-//                postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
-//                string content(postContent, postContentLen);
-//                res->setContent(content);
-//
-//                //link resource "200 OK" to that connection in order to "acknowledge" the POST request
-//                connection.resource = code200;
-//                connection.hash = 0;
-//                return 0;
-//            }
-//        }
-//    }
+    isPOST = hqsp_is_method_post((const char *)buffer);
+    if (isPOST) {
+        printf("POST\nURI: %s\n", uri.c_str());
+        const char * postContent;
+        int postContentLen;
+
+        postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
+        printf("POST BODY\n%d %s", postContentLen, postContent);
+
+        if (uri == "/create_process") {
+            auto * create_process = new CreateProcess();
+            int fd, err_fd;
+            //command, args, uid, type
+
+            string typestr = "type";
+            char* typeStr = new char[typestr.size() + 1];
+            strcpy(typeStr, typestr.c_str());
+            const char* type;
+            int typeLen = hqsp_get_post_value((const char *)buffer, requestLen, typeStr, &type);
+            //todo : add check on parse
+            string foreground = "foreground";
+            bool is_foreground = true;
+            for (int i = 0; i < foreground.size(); i++) {
+                if (type[i] != foreground[i]) {
+                    is_foreground = false;
+                    break;
+                }
+            }
+
+            string uidstr = "uid";
+            char* uidStr = new char[uidstr.size() + 1];
+            strcpy(uidStr, uidstr.c_str());
+            const char* uidchr;
+            int uidLen = hqsp_get_post_value((const char *)buffer, requestLen, uidStr, &uidchr);
+            //todo add check on parse
+            int uid = 0;
+            for (int i = 0; i < uidLen; i++) {
+                uid *= 10;
+                if (uidchr[i] >= '0' && uidchr[i] <= '9') {
+                    uid += uidchr[i] - '0';
+                }
+            }
+
+            string commandstr = "command";
+            char* commandStr = new char[commandstr.size() + 1];
+            strcpy(commandStr, commandstr.c_str());
+            const char* commandchr;
+            int commandLen = hqsp_get_post_value((const char *)buffer, requestLen, commandStr, &commandchr);
+            string command;
+            for (int i = 0; i < commandLen; i++) {
+                command.push_back(uidchr[i]);
+            }
+
+            string argsstr = "args";
+            char* argsStr = new char[argsstr.size() + 1];
+            strcpy(argsStr, argsstr.c_str());
+            const char* argschr;
+            int argsLen = hqsp_get_post_value((const char *)buffer, requestLen, argsStr, &argschr);
+            string args;
+            for (int i = 0; i < argsLen; i++) {
+                args.push_back(argschr[i]);
+            }
+
+            printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
+
+            create_process->run(is_foreground, uid, command, args, fd, err_fd);
+            string out;
+
+            char buffer_out[100] = {};
+            while (read(fd, buffer_out, 100) != 0)
+            {
+                string buff = buffer_out;
+                out += buff;
+            }
+
+            char buffer_err[100] = {};
+            while (read(err_fd, buffer_err, 100) != 0)
+            {
+                string buff = buffer_out;
+                out += buff;
+            }
+            printf("/create_process\nSTDOUT: %s\n", out.c_str());
+            delete create_process;
+            return m_reply(connection, out);
+        }
+    }
 
 
-    //when we come to that point, we havn't found the requested resource. Therfore...
+    //when we come to that point, we havn't found the requested resource. Therefore...
     //link resource "404 Not Found" to that connection in order to "acknowledge" the request
     connection.resource = code404;
     connection.hash = 0;
@@ -324,106 +378,4 @@ static int m_reply(Connection& connection, const string& answer) {
     connection.resource = nullptr;
     connection.hash = 0;
     return 1; //instruct to close connection
-}
-
-
-//return 1 when connection shall be closed
-static int m_reply_dynamic_content(Connection& connection)
-{
-    DynamicResource * resource = connection.resource;
-    if (resource != NULL) {
-        //check if client needs to informed about modified content
-        if (resource->hash != connection.hash) {
-            const string& content = resource->content;
-            string header;
-
-            //update client ...
-            //send header
-            header  = "HTTP/1.1 " + resource->statusCode + "\r\n";
-            header += "Content-Type: " + resource->contentType + "\r\n";
-            header += "Content-Hash: " + to_string(resource->hash) + "\r\n";
-            header += "Content-Length: " + to_string(content.length()) + "\r\n";
-            header += "\r\n";
-            connection.connection->send((const uint8_t *)header.c_str(), header.length(), true);
-            //send content
-            connection.connection->send((const uint8_t *)content.c_str(), content.length());
-
-            //invalidate request
-            connection.resource = NULL;
-            connection.hash = 0;
-            return 1; //instruct to close connection
-        }
-    }
-
-    //leave connectin open
-    return 0;
-}
-
-
-//return 0 when connection stays open
-//return 1 when connection shall be closed
-static int m_reply_static_content(Connection& connection, const string& uri) {
-    const string contentType = m_get_content_type_by_uri(uri, "application/octet-stream"); //default: binary data
-    const string filePath = htmlBasePath + uri;
-    ifstream file(filePath, ios::in | ios::binary);
-    if (file.is_open()) {
-        //get size of file
-        file.seekg(0, ios::end);
-        int fileSize = file.tellg();
-
-        //read file content into tbuffer
-        uint8_t* buffer = new uint8_t[fileSize];
-        file.seekg(0, ios::beg);
-        file.read((char *)buffer, fileSize);
-
-        //close file
-        file.close();
-
-        //send header
-        string header = "HTTP/1.1 200 OK\r\n";
-        header += "Content-Type: " + contentType + "\r\n";
-        header += "Content-Length: " + to_string(fileSize) + "\r\n";
-        header += "\r\n";
-        connection.connection->send((const uint8_t *)header.c_str(), header.length(), true);
-        //send content
-        connection.connection->send(buffer, fileSize);
-
-        //free buffer
-        delete[] buffer;
-        return 1; //instruct to close connection
-    }
-    return 0; //not found
-}
-
-
-static string m_get_content_type_by_uri(const string& uri, const string& fallback) {
-    //get file extension
-    string fileExtension = uri.substr(uri.find_last_of(".") + 1);
-
-    //text files
-    if (fileExtension == "txt") {
-        return "text/plain";
-    } else if ((fileExtension == "htm") || (fileExtension == "html")) {
-        return "text/html";
-    } else if (fileExtension == "css") {
-        return "text/css";
-    } else if (fileExtension == "js") {
-        return "text/javascript";
-    }
-
-    //image files
-    if (fileExtension == "gif") {
-        return "image/gif";
-    } else if (fileExtension == "png") {
-        return "image/png";
-    } if ((fileExtension == "jpg") || (fileExtension == "jpeg")) {
-        return "image/jpeg";
-    } if (fileExtension == "bmp") {
-        return "image/bmp";
-    } if (fileExtension == "ico") {
-        return "image/x-icon";
-    }
-
-    //fallback
-    return fallback;
 }
