@@ -25,7 +25,8 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
         dup2(pipe_fd[1], 1);
         dup2(pipe_err[1], 2);
 
-        write(2, " ", 1);
+        write(1, "output\n", 7);
+        write(2, "error\n", 6);
         int grand_child_pid = fork();
         if (grand_child_pid == 0) {
             setuid(UID);
@@ -39,6 +40,10 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
             }
             while (i < 10) {
                 argv[i++] = nullptr;
+            }
+            printf("asdasdasdasd\n");
+            for (int i = 0; i < 10 && argv[i] != nullptr; i++) {
+                printf("arg %d = %s\n", i, argv[i]);
             }
             int result = execvp(command.c_str(), argv);
             if (result != 0) {

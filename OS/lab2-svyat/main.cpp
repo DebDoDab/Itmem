@@ -346,7 +346,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             char buffer_err[100] = {};
             while (read(err_fd, buffer_err, 100) != 0)
             {
-                string buff = buffer_out;
+                string buff = buffer_err;
                 out += buff;
             }
             out += "\nCODE: " + to_string(code) + "\n";
