@@ -5,7 +5,6 @@
 #include "ps.h"
 
 string Ps::get_ps() {
-    mount_proc();
     int dir = open("/proc", O_DIRECTORY);
     DIR* procdir = fdopendir(dir);
     set<string> processes_last;
@@ -25,7 +24,7 @@ string Ps::get_ps() {
     string parameters[] = {"Command name", "Process id",
                            "Parent process id", "Process group id", "Session id",
                            "TTY", "Flags", "Start time", "User time",
-                           "System time", "Wait channel", "Gpoup id",
+                           "System time", "Wait channel", "Group id",
                            "Jail"};
     for (const auto& parameter : parameters) {
         answer += parameter + "\t";
@@ -39,7 +38,6 @@ string Ps::get_ps() {
         char buffer[200];
         read(status, buffer, 200);
         answer += buffer;
-        answer += "\n";
     }
     return answer;
 }
@@ -68,4 +66,8 @@ void Ps::run(int &stdout_fd) {
     }
     close(pipe_fd[1]);
     stdout_fd = pipe_fd[0];
+}
+
+Ps::Ps() {
+    mount_proc();
 }
