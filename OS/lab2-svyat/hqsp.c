@@ -196,7 +196,7 @@ int hqsp_get_post_value(const char * request, unsigned requestLen, const char* p
         len++;
     }
 
-    return len - 1;
+    return len;
 }
 
 
