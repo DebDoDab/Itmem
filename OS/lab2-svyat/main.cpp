@@ -353,9 +353,7 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
 
             printf("/create_process\nSTDOUT: %s\n", out.c_str());
             delete create_process;
-            printf("NOW SERVING\n");
             code = m_reply(connection, out);
-            printf("SERVED, code = %d\n", code);
             return code;
         }
     }

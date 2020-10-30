@@ -19,8 +19,12 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
         close(pipe_fd[0]);
         close(pipe_return[0]);
         close(pipe_err[0]);
+        dup2(pipe_fd[1], 1);
+        dup2(pipe_err[1], 2);
+        close(pipe_fd[1]);
+        close(pipe_err[1]);
 
-        write(pipe_err[1], " ", 1);
+        write(2, " ", 1);
         int grand_child_pid = fork();
         if (grand_child_pid == 0) {
             setuid(UID);
