@@ -55,12 +55,12 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
     close(pipe_fd[1]);
     close(pipe_return[1]);
     close(pipe_err[1]);
-    if (need_wait) {
+    if (foreground) {
         read(pipe_return[0], &code, 8);
     }
     stdout_fd = pipe_fd[0];
     err_fd = pipe_err[0];
-    if (need_wait) {
+    if (foreground) {
         return code;
     } else {
         return 0;
