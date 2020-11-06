@@ -27,7 +27,7 @@
 #include <sys/user.h>
 #include <sys/wait.h>
 
-class Log{
+class Log {
 public:
     Log() = default;
     Log(const std::vector<std::string>& filenames);

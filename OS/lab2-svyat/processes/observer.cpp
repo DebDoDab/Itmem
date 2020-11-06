@@ -39,85 +39,76 @@ void Observer::setObserver(int PID, Log& logger, int filenum) {
 
 void *Observer::watch(void* arg) {
     Arg* arguments = (Arg*)arg;
-    if(arguments->PID == -1) {
+    if (arguments->PID == -1) {
         int dir = open("/proc", O_DIRECTORY);
+        std::set<std::string> processes_last, processes_new;
+        std::vector<std::string> created_processes, died_processes;
+
         DIR* procdir = fdopendir(dir);
-        std::set<std::string> processes_last, processes_new, processes_last_buffer, processes_new_buffer;
         if (procdir == nullptr) {
             exit(0);
         }
         dirent* direct = readdir(procdir);
-        while(direct != nullptr) {
+        while (direct != nullptr) {
             std::string name = direct->d_name;
-            if ((name != ".")&&(name != "..")&&(name != "curproc")) {
+            if (name != "." && name != ".." && name != "curproc") {
                 processes_last.insert(name);
             }
             direct = readdir(procdir);
         }
         closedir(procdir);
+
         dir = open("/proc", O_DIRECTORY);
         procdir = fdopendir(dir);
-        while(need_watch) {
+        while (need_watch) {
             direct = readdir(procdir);
-            while(direct != nullptr) {
+            while (direct != nullptr) {
                 std::string name = direct->d_name;
-                if ((name != ".")&&(name != "..")&&(name != "curproc")) {
+                if (name != "." && name != ".." && name != "curproc") {
                     processes_new.insert(name);
+                    if (processes_last.find(name) != processes_last.end()) {
+                        created_processes.emplace_back(name);
+                    }
                 }
                 direct = readdir(procdir);
             }
-            closedir(procdir);
-            dir = open("/proc", O_DIRECTORY);
-            procdir = fdopendir(dir);
-            processes_new_buffer = processes_new;
-            processes_last_buffer = processes_last;
             for (const auto& process : processes_last) {
                 if (processes_new.find(process) != processes_new.end()) {
-                    processes_new.erase(processes_new.find(process));
+                    died_processes.emplace_back(process);
                 }
             }
-            if (!processes_new.empty()) {
-                if (!processes_new.empty()) {
-                    std::string message = "\nNew process:\n";
-                    for (const auto& process : processes_new) {
-                        message+="\t";
-                        message+=process;
-                        message+="\n";
-                    }
-                    arguments->logger->write_message(message, arguments->lognum);
+
+
+            if (!created_processes.empty()) {
+                std::string message = "\nCreated process:\n";
+                for (const auto& process : created_processes) {
+                    message+="\t";
+                    message+=process;
+                    message+="\n";
                 }
+                arguments->logger->write_message(message, arguments->lognum);
             }
-            processes_new = processes_new_buffer;
-            processes_last = processes_last_buffer;
-            for (const auto& process : processes_new) {
-                if (processes_last.find(process) != processes_last.end()) {
-                    processes_last.erase(processes_last.find(process));
+
+            if (!died_processes.empty()) {
+                std::string message = "\nDied process:\n";
+                for (const auto& process : processes_last) {
+                    message+="\t";
+                    message+=process;
+                    message+="\n";
                 }
+                arguments->logger->write_message(message, arguments->lognum);
             }
-            if (!processes_last.empty()) {
-                if (!processes_last.empty()) {
-                    std::string message = "\nDied process:\n";
-                    for (const auto& process : processes_last) {
-                        message+="\t";
-                        message+=process;
-                        message+="\n";
-                    }
-                    arguments->logger->write_message(message, arguments->lognum);
-                }
-            }
-            processes_last = processes_new_buffer;
+            died_processes.clear();
+            created_processes.clear();
             processes_new.clear();
-            processes_new_buffer.clear();
-            processes_last_buffer.clear();
         }
     } else {
-        std::string path;
-        path = "/proc/" + std::to_string(arguments->PID) + "/status";
+        std::string path = "/proc/" + std::to_string(arguments->PID) + "/status";
         int status = open(path.c_str(), O_RDONLY);
         if (status == -1) {
             exit(-1);
         }
-        std::string last_val, new_val, last_val_buff, new_val_buff;
+        std::string last_val, new_val;
         char buffer[200];
         read(status, buffer, 200);
         last_val = buffer;
@@ -125,7 +116,7 @@ void *Observer::watch(void* arg) {
             std::string parameters[] = {"Command name", "Process id",
                                         "Parent process id", "Process group id", "Session id",
                                         "TTY", "Flags", "Start time", "User time",
-                                        "System time", "Wait channel", "Gpoup id",
+                                        "System time", "Wait channel", "Group id",
                                         "Jail"};
             int result = read(status, buffer, 200);
             new_val = buffer;
@@ -133,31 +124,32 @@ void *Observer::watch(void* arg) {
                 arguments->logger->write_message("PROCESS " + std::to_string(arguments->PID) + " TERMINATED\n", arguments->lognum);
                 exit(0);
             }
-            last_val_buff = last_val;
-            new_val_buff = new_val;
+
             if (new_val != last_val) {
                 int argnum = 0;
-                int min_len = std::min(new_val.size(), last_val.size());
-                for (int i = 0; i < min_len; i++) {
-                    if (new_val[0] == last_val[0]) {
-                        if (new_val[0] == ' ') {
+                int last_arg_start_index = 0;
+                for (int i = 0; i < new_val.size() && i < last_val.size(); i++) {
+                    if (new_val[i] == last_val[i]) {
+                        if (new_val[i] == ' ') {
                             argnum++;
+                            last_arg_start_index = i + 1;
                         }
-                        new_val.erase(0, 1);
-                        last_val.erase(0, 1);
                     } else {
                         break;
                     }
                 }
-                new_val = new_val.substr(0, new_val.find(' '));
-                arguments->logger->write_message( "Parameter \"" + parameters[argnum] + "\" new value is: " + new_val + "\n" , arguments->lognum);
+                int changed_arg_end_index = new_val.find(' ', last_arg_start_index);
+                if (changed_arg_end_index == -1) {
+                    changed_arg_end_index = new_val.size();
+                }
+                std::string new_arg_value = new_val.substr(last_arg_start_index, changed_arg_end_index - last_arg_start_index);
+                arguments->logger->write_message( "Parameter \"" + parameters[argnum] + "\" new value is: " + new_arg_value + "\n" , arguments->lognum);
             }
             lseek(status, 0, SEEK_SET);
-            last_val = new_val_buff;
+            last_val = new_val;
         }
     }
     exit(0);
-    return nullptr;
 }
 
 Observer::~Observer() {

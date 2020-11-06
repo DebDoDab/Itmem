@@ -18,6 +18,7 @@
 volatile bool newEvent = false;
 bool finish = false;
 int *last_shm_memory;
+
 void sighandler(int number) {
     newEvent = true;
 }
@@ -38,21 +39,22 @@ std::vector<LogObject> logs;
 int main(int argc, char** argv) {
     signal(SIGUSR1, sighandler);
     signal(SIGTERM, terminator);
+
     const int LAST_SIZE = 8;
     const int NAMES_SIZE = 1024;
     const char* namesMemory = "/LOG_NAMES";
     const char* lastMemory = "/LOG_LAST";
     const char* baseName = "/LOG_";
     char lineBuffer[1024];
-    int last_shm_fd, names_shm_fd;
     char *names_shm_memory;
     int self_log = open("self.log",O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
-    close(0);
-    close(2);
-    last_shm_fd = shm_open(lastMemory, O_CREAT | O_RDWR, 0666);
     write(self_log, "INIT ", 5);
+
+    int last_shm_fd, names_shm_fd;
+    last_shm_fd = shm_open(lastMemory, O_CREAT | O_RDWR, 0666);
     ftruncate(last_shm_fd, LAST_SIZE);
     last_shm_memory = (int*)mmap(0, LAST_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, last_shm_fd, 0);
+
     names_shm_fd = shm_open(namesMemory, O_CREAT | O_RDWR, 0666);
     ftruncate(names_shm_fd, NAMES_SIZE);
     names_shm_memory = (char*)mmap(0, NAMES_SIZE, PROT_READ, MAP_SHARED, names_shm_fd, 0);
@@ -61,23 +63,30 @@ int main(int argc, char** argv) {
     std::string names(strcpy(lineBuffer, names_shm_memory));
     std::vector<std::string> name;
     size_t position = 0;
+
     while (position != std::string::npos) {
         std::string buffer;
         write(self_log, "NAME_LOOP ", 10);
-        buffer = names.substr(position, names.find('\n', position) - position);
-        if (!buffer.empty())
+        int new_position = names.find('\n', position);
+        buffer = names.substr(position, new_position - position);
+        if (!buffer.empty()) {
             name.push_back(buffer);
-        position = names.find('\n', position) + 1;
-        if(position >= names.size())
+        }
+        position = new_position + 1;
+        if (position >= names.size()) {
             break;
+        }
     }
+
     shm_unlink(namesMemory);
     std::unordered_set<std::string> opened_files;
+
     for (int i = 0; i < name.size(); i++) {
         int fd = open(name[i].c_str(), O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
         LogObject buffer;
         buffer.file_name = name[i];
         buffer.fd = fd;
+
         void* memory;
         std::string shm_name(baseName);
         int shm_fd;
@@ -90,7 +99,8 @@ int main(int argc, char** argv) {
         logs.push_back(buffer);
     }
     write(self_log, "INITEND ", 8);
-    while (signal(SIGUSR1, sighandler)!= sighandler) {
+
+    while (signal(SIGUSR1, sighandler) != sighandler) {
 
     }
     int f_res = fork();

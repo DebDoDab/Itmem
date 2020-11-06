@@ -103,6 +103,12 @@ int main(int argc, const char * argv[]) {
     //register signal handler, to quit program usin CTRL+C
     signal(SIGINT, &m_signal_handler);
 
+    //forking it
+    int pid = fork();
+    if (pid != 0) {
+        exit(0);
+    }
+
     //enter super-loop
     while (!ctrlC) {
         Connection con;
