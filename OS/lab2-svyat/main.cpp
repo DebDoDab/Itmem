@@ -140,26 +140,6 @@ int main(int argc, const char * argv[]) {
             }
             conIt++;
         }
-
-
-        //for each connection ...
-        //reply dynamic content
-//        conIt = connections.begin();
-//        while (conIt != connections.end()) {
-//            status = m_reply_dynamic_content(*conIt);
-//            //close connection
-//            if (status != 0) {
-//                //close that connection
-//                conIt->connection->close();
-//                delete conIt->connection;
-//                //remove from list of active connections
-//                conIt = connections.erase(conIt);
-//                continue;
-//            }
-//            conIt++;
-//        }
-
-        //
         usleep(50000); //50ms
     }
 
@@ -360,6 +340,9 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
             delete create_process;
             code = m_reply(connection, out);
             return code;
+        } else if (uri == "/kill") {
+            m_reply(connection, "OK");
+            exit(0);
         }
     }
 
@@ -391,29 +374,3 @@ static int m_reply(Connection& connection, const string& answer) {
     connection.hash = 0;
     return 1; //instruct to close connection
 }
-
-//#include <bits/stdc++.h>
-//using namespace std;
-//
-//int main() {
-//    const char* body = R"(asdasd "poop": "kaka" baba)";
-//    printf("%s\n", body);
-//    const char* poop = "poop";
-//    char* poopStart = const_cast<char *>(strstr(body, poop));
-//    printf("%s\n", poopStart);
-//
-//    while (*poopStart != ':') {
-//        printf("%s\n", poopStart);
-//        poopStart++;
-//    }
-//    poopStart++;
-//    while (*poopStart != '"') {
-//        poopStart++;
-//    }
-//    poopStart++;
-//
-//    while (*poopStart != '"') {
-//        poopStart++;
-//    }
-//    printf("%s\n", poopStart);
-//}
