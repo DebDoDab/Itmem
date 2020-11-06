@@ -1,0 +1,3 @@
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/cmake-build-debug/CMakeFiles/lab2_svyat.dir

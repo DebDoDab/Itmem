@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/crc32.c
+stdio.h
+-
+
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/hqsp.c
+string.h
+-
+stdlib.h
+-
+hqsp.h
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/hqsp.h
+
+/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/hqsp.h
+stdint.h
+-
+

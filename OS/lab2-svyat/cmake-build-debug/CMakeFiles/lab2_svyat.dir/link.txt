@@ -1,0 +1,1 @@
+/usr/bin/c++   -pthread -g   CMakeFiles/lab2_svyat.dir/main.cpp.o  -o lab2_svyat 
