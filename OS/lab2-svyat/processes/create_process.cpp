@@ -43,7 +43,7 @@ int CreateProcess::run(bool foreground, int UID, const string& command, const st
             }
             int result = execvp(command.c_str(), argv);
             if (result != 0) {
-                fprintf(STDERR_FILENO, "%s\n", explain_execvp(command.c_str(), argv));
+                exit(-1);
             }
         }
         int code;
