@@ -82,7 +82,76 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/TcpConnection.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/TcpConnection.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/crc32.c">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/dynamic_resource.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/dynamic_resource.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/hqsp.c">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/hqsp.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/main.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/create_process.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/create_process.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger_wrapper.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/logger_wrapper.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/observer.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/observer.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/ps.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/ps.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/send_signal.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/send_signal.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/processes/system_info.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/server.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/server.h">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.cpp">
+			<Option target="lab2_svyat"/>
+		</Unit>
+		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/tcp_connection.h">
 			<Option target="lab2_svyat"/>
 		</Unit>
 		<Unit filename="/home/vadim/Desktop/MoeGovno/OS/lab2-svyat/CMakeLists.txt">
