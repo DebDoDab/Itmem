@@ -17,34 +17,35 @@
 using namespace std;
 
 
-NbTcpConnection::NbTcpConnection() {
+TcpConnection::TcpConnection() {
     this->sock = -1;
     memset(&this->address, 0, sizeof(this->address));
 }
 
 
-NbTcpConnection::NbTcpConnection(int sock, const struct sockaddr_in * address) {
+TcpConnection::TcpConnection(int sock, const sockaddr_in* address) {
     this->sock = sock;
     this->address = *address;
 }
 
 
-bool NbTcpConnection::isOpen() {
-    return (this->sock >= 0);
+bool TcpConnection::isOpen() {
+    return sock >= 0;
 }
 
 
-int NbTcpConnection::recv(uint8_t * buffer, size_t bufferLen) {
+int TcpConnection::recv(uint8_t* buffer, size_t bufferLen) {
     int status;
 
     //check
-    if (this->sock < 0) {
-        cout << "Failed to receive from closed connection!" << endl;
+    if (!isOpen()) {
+        cout << "Closed connection!" << endl;
         return -1;
     }
 
     //Receive a reply from the server
     status = ::recv(this->sock, buffer, bufferLen, 0);
+
     //noting received
     if ((status == -1) && (errno == EWOULDBLOCK)) {
         return 0;
@@ -62,13 +63,13 @@ int NbTcpConnection::recv(uint8_t * buffer, size_t bufferLen) {
 }
 
 
-int NbTcpConnection::send(const uint8_t * data, size_t dataLen, bool more) {
+int TcpConnection::send(const uint8_t* data, size_t dataLen, bool more) {
     int flags = 0;
     int status;
 
     //check
-    if (this->sock < 0) {
-        cout << "Failed to send to closed connection!" << endl;
+    if (!isOpen()) {
+        cout << "Closed connection!" << endl;
         return -1;
     }
 
@@ -82,8 +83,8 @@ int NbTcpConnection::send(const uint8_t * data, size_t dataLen, bool more) {
 }
 
 
-void NbTcpConnection::close() {
-    if (this->sock >= 0) {
+void TcpConnection::close() {
+    if (isOpen()) {
         ::shutdown(this->sock, SHUT_RD); //block until all queued bytes are sent!!!
         ::close(this->sock);
         this->sock = -1;
@@ -93,13 +94,13 @@ void NbTcpConnection::close() {
 
 
 
-NbTcpServer::NbTcpServer() {
+TcpServer::TcpServer() {
     //nothing special to do here
 }
 
 
-int NbTcpServer::open(const uint16_t port) {
-    struct sockaddr_in address = { 0 };
+int TcpServer::open(const uint16_t port) {
+    sockaddr_in address = { 0 };
     int status;
     int sock;
 
@@ -110,7 +111,7 @@ int NbTcpServer::open(const uint16_t port) {
         address.sin_family = AF_INET;
         address.sin_port = htons(port);
         address.sin_addr.s_addr = INADDR_ANY;
-        status = ::bind(sock, (struct sockaddr *)&address, sizeof(address));
+        status = ::bind(sock, (sockaddr *)&address, sizeof(address));
         if (status >= 0) {
             //start to listen
             status = ::listen(sock, 3); //backlog of 3
@@ -118,7 +119,6 @@ int NbTcpServer::open(const uint16_t port) {
                 //make socket non-blocking
                 fcntl(sock, F_SETFL, O_NONBLOCK);
 
-                //
                 this->sock = sock;
                 this->address = address;
                 return sock;
@@ -132,7 +132,7 @@ int NbTcpServer::open(const uint16_t port) {
 }
 
 
-NbTcpConnection * NbTcpServer::serve() {
+TcpConnection* TcpServer::serve() {
     struct sockaddr_in address = { 0 };
     socklen_t addressSize = sizeof(address);
     int connection;
@@ -149,43 +149,7 @@ NbTcpConnection * NbTcpServer::serve() {
         //make socket non-blocking
         fcntl(connection, F_SETFL, O_NONBLOCK);
         //return connection instance
-        return new NbTcpConnection(connection, &address);
+        return new TcpConnection(connection, &address);
     }
     return nullptr;
-}
-
-
-
-NbTcpClient::NbTcpClient() {
-    //nothing special to do here
-}
-
-
-int NbTcpClient::open(const char * ip, const uint16_t port) {
-    struct sockaddr_in address = { 0 };
-    int status;
-    int sock;
-
-    //create TCP socket
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock >= 0) {
-        //connect to remote host
-        address.sin_family = AF_INET;
-        address.sin_port = htons(port);
-        address.sin_addr.s_addr = inet_addr(ip);
-        status = ::connect(sock , (struct sockaddr *)&address , sizeof(address));
-        if (status >= 0) {
-            //make socket non-blocking
-            fcntl(sock, F_SETFL, O_NONBLOCK);
-
-            //
-            this->sock = sock;
-            this->address = address;
-            return sock;
-        }
-
-        //something went wrong ...
-        ::close(sock);
-    }
-    return -1;
 }

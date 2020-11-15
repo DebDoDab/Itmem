@@ -16,9 +16,11 @@ string System_info::get_system_info() {
     result = "Machine type: " + string_buffer + "\n";
     parameters[1] = HW_MODEL;
     sysctl(parameters, 2, buffer, &len, nullptr, 0);
+    string_buffer = buffer;
     result += "Machine model: " + string_buffer + "\n";
     parameters[1] = HW_MACHINE_ARCH;
     sysctl(parameters, 2, buffer, &len, nullptr, 0);
+    string_buffer = buffer;
     result += "Machine architecture: " + string_buffer + "\n";
     parameters[1] = HW_PHYSMEM;
     sysctl(parameters, 2, &buffer_num, &num_len, nullptr, 0);

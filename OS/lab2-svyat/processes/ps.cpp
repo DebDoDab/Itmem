@@ -3,42 +3,75 @@
 //
 
 #include "ps.h"
+#include <sstream>
+#include <string>
+#include <algorithm>
+#include <string.h>
 
 string Ps::get_ps() {
     int dir = open("/proc", O_DIRECTORY);
-    DIR* procdir = fdopendir(dir);
-    set<string> processes_last;
-    if (procdir == nullptr) {
+    DIR* proc_dir = fdopendir(dir);
+
+    if (proc_dir == nullptr) {
         exit(0);
     }
+
+    list<string> processes;
+
     dirent* direct = readdir(procdir);
     while (direct != nullptr) {
         string name = direct->d_name;
         if (name != "." && name != ".." && name != "curproc") {
-            processes_last.insert(name);
+            processes.push_back(name);
         }
         direct = readdir(procdir);
     }
     closedir(procdir);
-    string answer;
-    string parameters[] = {"Command name", "Process id",
-                           "Parent process id", "Process group id", "Session id",
-                           "TTY", "Flags", "Start time", "User time",
-                           "System time", "Wait channel", "Group id",
-                           "Jail"};
-    for (const auto& parameter : parameters) {
-        answer += parameter + "\t";
-    }
-    for (const auto& proc_id : processes_last) {
+
+    vector<vector<string>> processes_params;
+    vector<string> parameters = {"Command name", "Process id",
+                                 "Parent process id", "Process group id", "Session id",
+                                 "TTY", "Flags", "Start time", "User time",
+                                 "System time", "Wait channel", "Group id", "Jail"};
+    processes_params.push_back(parameters);
+
+    for (const auto& proc_id : processes) {
+        processes_params.push_back(vector<string>());
         string path = "/proc/" + proc_id + "/status";
         int status = open(path.c_str(), O_RDONLY);
         if (status == -1) {
             continue;
         }
+
         char buffer[200];
         read(status, buffer, 200);
-        answer += buffer;
+        stringstream parametersStream(buffer);
+        string param;
+        while (getline(parametersStream, param, ' ')) {
+            processes_params.back().push_back(param);
+        }
     }
+
+    //output as a table
+    string answer;
+    vector<int> max_lengths(parameters.size());
+    for (int column = 0; column < parameters.size(); column++) {
+        max_lengths[column] = 0;
+        for (auto& process_param: processes_params) {
+            max_lengths[column] = max(max_lengths[column], process_param[column]);
+        }
+    }
+
+    for (int column = 0; column < parameters.size(); column++) {
+        for (auto& row : processes_params) {
+            for (int spaces_count = max_lengths[column] - row[column]; spaces_count > 0; spaces_count--) {
+                answer += " ";
+            }
+            answer += row[column] + "|";
+        }
+        answer += "\n";
+    }
+
     return answer;
 }
 

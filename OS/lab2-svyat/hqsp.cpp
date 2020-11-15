@@ -14,7 +14,7 @@
 
 static int is_delimiter(char c);
 
-int hqsp_is_method_get(const char * request) {
+int hqsp_is_method_get(const char* request) {
     int isGet = 1;
     isGet &= (request[0] == 'G');
     isGet &= (request[1] == 'E');
@@ -23,7 +23,7 @@ int hqsp_is_method_get(const char * request) {
 }
 
 
-int hqsp_is_method_post(const char * request) {
+int hqsp_is_method_post(const char* request) {
     int isPost = 1;
     isPost &= (request[0] == 'P');
     isPost &= (request[1] == 'O');
@@ -33,7 +33,7 @@ int hqsp_is_method_post(const char * request) {
 }
 
 
-int hqsp_get_resource(const char * request, const char ** x) {
+int hqsp_get_resource(const char* request, const char** x) {
     const char * start;
     const char * end;
     int len;
@@ -62,9 +62,12 @@ int hqsp_get_header_value(const char * request, const char * header, const char 
     matchLen = 0;
     uint32_t shiftReg = 0;
     const uint32_t endOfHeader = ((uint32_t)'\r' << 24) | ((uint32_t)'\n' << 16) | ((uint32_t)'\r' << 8) | (uint32_t)'\n'; //end of header is indicated by two "\r\n"
+
     //until end of header ...
     for (iterator = request; shiftReg != endOfHeader; ++iterator) {
-        if (*iterator == 0) return 0;
+        if (*iterator == 0) {
+            return 0;
+        }
         shiftReg = (shiftReg  << 8) | (uint8_t)*iterator;
 
         //match?
@@ -74,10 +77,10 @@ int hqsp_get_header_value(const char * request, const char * header, const char 
                 //lock ahead if next two chars are ':' and ' '
                 //yes
                 if ((iterator[1] == ':') && (iterator[2] == ' ')) {
-                    start = &iterator[3]; //set start of value poitner
+                    start = &iterator[3]; //set start of value pointer
                     break; //stop searching
                 }
-                matchLen = 0; //otherwise: header not found -> restart comparison from begining
+                matchLen = 0; //otherwise: header not found -> restart comparison from beginning
             }
             continue;
         }
@@ -87,7 +90,7 @@ int hqsp_get_header_value(const char * request, const char * header, const char 
     //check if parameter was found
     if (start != NULL) {
         *x = start;
-        //determin length
+        //determine length
         for (end = start, len = 0; *end != '\r'; ++end, ++len); //until end of line (marked by "\r\n")
         //set results
         return len;

@@ -10,7 +10,6 @@
 #include <list>
 #include <vector>
 #include "tcp_connection.h"
-#include "dynamic_resource.h"
 #include "hqsp.h"
 #include "processes/logger_wrapper.h"
 #include "processes/create_process.h"
@@ -19,24 +18,10 @@
 
 using namespace std;
 
-
-typedef struct {
-    NbTcpConnection * connection;
-    DynamicResource * resource;
-    uint32_t hash;
-} Connection;
-
-
 static int ctrlC;
-static DynamicResource * code200;
-static DynamicResource * code404;
-static string htmlBasePath;
 
-static int m_serve_requests(Connection& connection, list<DynamicResource *>& dynamicResources);
-static int m_reply_dynamic_content(Connection& connection);
-static int m_reply_static_content(Connection& connection, const string& uri);
-static int m_reply(Connection& connection, const string&);
-static string m_get_content_type_by_uri(const string& uri, const string& fallback);
+static int serve_requests(TcpConnection& connection);
+static int reply(TcpConnection& connection, const string&);
 
 
 void m_signal_handler(int a) {
@@ -47,60 +32,33 @@ void m_signal_handler(int a) {
 int main(int argc, const char * argv[]) {
     vector<string> logfiles = {"logs/main.log"};
     auto log = Log(logfiles);
-    list<DynamicResource *> dynamicResources;
-    list<Connection> connections;
-    list<Connection>::iterator conIt;
+    list<TcpConnection> connections;
+    list<TcpConnection>::iterator conIt;
     uint16_t port;
     int status;
 
     //process command line arguments
     //otherwise: use defaults
-    if (argc == 3) {
-        htmlBasePath = argv[1];
-        port = (uint16_t) atoi(argv[2]);
+    if (argc == 2) {
+        port = (uint16_t) atoi(argv[1]);
     } else {
-        cout << "Usage: lab2_svyat [HTML-base-path] [TCP-port-number]" << endl;
-        htmlBasePath = "."; //"this" directory
+        cout << "Usage: lab2_svyat [TCP-port-number]" << endl;
         port = 8083; //default port
     }
 
 
-    //create default resources
-    code200 = new DynamicResource("/200", "200 OK");
-    code200->setContent("OK");
-    code404 = new DynamicResource("/200", "404 Not Found");
-    code404->setContent("Not Found");
-
-    //create dynamic resources, as specified in "dynres.txt"
-    const string filePath = htmlBasePath + "/dynres.txt";
-    ifstream file(filePath, ios::in);
-    if (file.is_open()) {
-        string uri;
-        //read out file, line by line
-        while (getline(file, uri)) {
-            //only those lines, that starts with a '/'
-            if (uri[0] == '/') {
-                //add to list of dynamic resources
-                dynamicResources.push_back(new DynamicResource(uri));
-            }
-        }
-        file.close();
-    }
-
-
     //create server
-    auto * tcpServer = new NbTcpServer();
+    auto * tcpServer = new TcpServer();
     status = tcpServer->open(port);
     if (status < 0) {
         cout << "Failed to open server on port " << port << endl;
         return -1;
     }
     cout << "Running webserver on port: " << port << endl;
-    cout << "HTML base path: " << htmlBasePath << endl;
     cout << "Use CTRL+C to quit!" << endl;
 
 
-    //register signal handler, to quit program usin CTRL+C
+    //register signal handler, to quit program using CTRL+C
     signal(SIGINT, &m_signal_handler);
 
     //forking it
@@ -111,29 +69,25 @@ int main(int argc, const char * argv[]) {
 
     //enter super-loop
     while (!ctrlC) {
-        Connection con;
+        TcpConnection con;
 
         //push new tcp connections to "connection list"
-        con.connection = tcpServer->serve();
-        while (con.connection) {
+        con = tcpServer->serve();
+        while (con) {
             //add to this connection to the list of active connections
-            con.resource = nullptr;
-            con.hash = 0;
             connections.push_back(con);
-            con.connection = tcpServer->serve();
+            con = tcpServer->serve();
         }
-
 
         //for each connection ...
         //receive HTTP requests
         conIt = connections.begin();
         while (conIt != connections.end()) {
-            status = m_serve_requests(*conIt, dynamicResources);
+            status = serve_requests(*conIt);
             //close connection
             if (status != 0) {
                 //close that connection
-                conIt->connection->close();
-                delete conIt->connection;
+                conIt->close();
                 //remove from list of active connections
                 conIt = connections.erase(conIt);
                 continue;
@@ -156,18 +110,6 @@ int main(int argc, const char * argv[]) {
         conIt++;
     }
 
-
-    //delete dynamic resources
-    list<DynamicResource *>::iterator resIt = dynamicResources.begin();
-    //find requested resource
-    while (resIt != dynamicResources.end()) {
-        DynamicResource * res = *resIt++;
-        delete res;
-    }
-    delete code404;
-    delete code200;
-
-
     return 0;
 }
 
@@ -175,12 +117,12 @@ int main(int argc, const char * argv[]) {
 //return 0 when connection stays open
 //return -1 when connection was closed remotely
 //return 1 when connection shall be closed
-static int m_serve_requests(Connection& connection, list<DynamicResource *>& dynamicResources) {
+static int serve_requests(TcpConnection& connection) {
     uint8_t buffer[4096];
     int status;
 
     //check for incomming data
-    status = connection.connection->recv(buffer, sizeof(buffer) - 1);
+    status = connection->recv(buffer, sizeof(buffer) - 1);
 
     //connection closed ?
     if (status < 0) {
@@ -199,10 +141,6 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
     int resourceLen;
     bool isGET;
     bool isPOST;
-
-    //invalidate earlier requests
-    connection.resource = nullptr;
-    connection.hash = 0;
 
     //parse http request
     buffer[requestLen] = 0; //add termination, just to be safe
@@ -346,18 +284,13 @@ static int m_serve_requests(Connection& connection, list<DynamicResource *>& dyn
         }
     }
 
-
-    //when we come to that point, we haven't found the requested resource. Therefore...
-    //link resource "404 Not Found" to that connection in order to "acknowledge" the request
-    connection.resource = code404;
-    connection.hash = 0;
     return 0;
 }
 
 
 //return 0 when connection stays open
 //return 1 when connection shall be closed
-static int m_reply(Connection& connection, const string& answer) {
+static int reply(NbTcpConnection& connection, const string& answer) {
     string header;
     //update client ...
     //send header
@@ -365,12 +298,9 @@ static int m_reply(Connection& connection, const string& answer) {
     header += "Content-Type: text/plain\r\n";
     header += "Content-Length: " + to_string(answer.size()) + "\r\n";
     header += "\r\n";
-    connection.connection->send((const uint8_t *)header.c_str(), header.length(), true);
+    connection->send((const uint8_t *)header.c_str(), header.length(), true);
     //send content
-    connection.connection->send((const uint8_t *)answer.c_str(), answer.length());
+    connection->send((const uint8_t *)answer.c_str(), answer.length());
 
-    //invalidate request
-    connection.resource = nullptr;
-    connection.hash = 0;
     return 1; //instruct to close connection
 }
