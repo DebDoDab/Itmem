@@ -65,7 +65,7 @@ fun case1() {
     println()
 
     val limit = RestorePointCountLimit(1)
-    backup.changeLimits(mutableListOf(limit), true)
+    backup.changeLimits(mutableListOf(limit), deleteAtAllLimits=true)
 
     println(backup)
 }
