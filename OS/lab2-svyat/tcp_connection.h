@@ -21,7 +21,7 @@ public:
     int recv(uint8_t* buffer, size_t bufferLen);
 
     //returns number of sent data bytes; -1 in case of connection errors
-    int send(const uint8_t* data, size_t dataLen, bool more=false);
+    int send(const uint8_t* data, size_t dataLen);
 
     void close();
 

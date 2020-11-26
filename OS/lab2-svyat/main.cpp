@@ -24,7 +24,7 @@ static int serve_requests(TcpConnection& connection);
 static int reply(TcpConnection& connection, const string&);
 
 
-void m_signal_handler(int a) {
+void m_signal_handler(int signal) {
     ctrlC = 1;
 }
 
@@ -32,23 +32,24 @@ void m_signal_handler(int a) {
 int main(int argc, const char * argv[]) {
     vector<string> logfiles = {"logs/main.log"};
     auto log = Log(logfiles);
+
     list<TcpConnection> connections;
     list<TcpConnection>::iterator conIt;
     uint16_t port;
     int status;
 
     //process command line arguments
-    //otherwise: use defaults
     if (argc == 2) {
         port = (uint16_t) atoi(argv[1]);
+    } else if (argc == 1) {
+        port = 8083;
     } else {
-        cout << "Usage: lab2_svyat [TCP-port-number]" << endl;
-        port = 8083; //default port
+        cout << "Usage: lab2_svyat [TCP-port-number] (default 8083)" << endl;
     }
 
 
     //create server
-    auto * tcpServer = new TcpServer();
+    auto* tcpServer = new TcpServer();
     status = tcpServer->open(port);
     if (status < 0) {
         cout << "Failed to open server on port " << port << endl;
@@ -67,7 +68,7 @@ int main(int argc, const char * argv[]) {
         exit(0);
     }
 
-    //enter super-loop
+    //enter program loop
     while (!ctrlC) {
         TcpConnection con;
 
@@ -121,10 +122,10 @@ static int serve_requests(TcpConnection& connection) {
     uint8_t buffer[4096];
     int status;
 
-    //check for incomming data
+    //check for incoming data
     status = connection->recv(buffer, sizeof(buffer) - 1);
 
-    //connection closed ?
+    //check if connection is closed
     if (status < 0) {
         //connection was closed remotely
         return -1;
@@ -137,10 +138,8 @@ static int serve_requests(TcpConnection& connection) {
 
     //otherwise - data received
     const unsigned requestLen = (unsigned)status;
-    const char * resource;
+    const char* resource;
     int resourceLen;
-    bool isGET;
-    bool isPOST;
 
     //parse http request
     buffer[requestLen] = 0; //add termination, just to be safe
@@ -152,11 +151,10 @@ static int serve_requests(TcpConnection& connection) {
     }
 
     //GET
-    isGET = hqsp_is_method_get((const char *)buffer);
-    if (isGET) {
+    if (hqsp_is_method_get((const char *)buffer)) {
         printf("GET\nURI: %s\n", uri.c_str());
         if (uri == "/system_info") {
-            auto * system_info = new System_info();
+            auto* system_info = new System_info();
             int fd;
             system_info->run(fd);
             char buffer_out[100] = {};
@@ -166,11 +164,11 @@ static int serve_requests(TcpConnection& connection) {
                 buff = buffer_out;
                 out += buff;
             }
-            printf("/system_info\nSTDOUT: %s\n", out.c_str());
+//            printf("/system_info\nSTDOUT: %s\n", out.c_str());
             delete system_info;
-            return m_reply(connection, out);
+            return reply(connection, out);
         } else if (uri == "/ps") {
-            auto * ps = new Ps();
+            auto* ps = new Ps();
             int fd;
             ps->run(fd);
             char buffer_out[100] = {};
@@ -180,16 +178,14 @@ static int serve_requests(TcpConnection& connection) {
                 buff = buffer_out;
                 out += buff;
             }
-            printf("/ps\nSTDOUT: %s\n", out.c_str());
+//            printf("/ps\nSTDOUT: %s\n", out.c_str());
             delete ps;
-            return m_reply(connection, out);
+            return reply(connection, out);
         }
     }
 
-
     //POST
-    isPOST = hqsp_is_method_post((const char *)buffer);
-    if (isPOST) {
+    if (hqsp_is_method_post((const char *)buffer)) {
         printf("POST\nURI: %s\n", uri.c_str());
         const char * postContent;
         int postContentLen;
@@ -198,7 +194,7 @@ static int serve_requests(TcpConnection& connection) {
         printf("POST BODY\n%d\n %s\n", postContentLen, postContent);
 
         if (uri == "/create_process") {
-            auto * create_process = new CreateProcess();
+            auto* create_process = new CreateProcess();
             int fd, err_fd;
             //command, args, uid, type
 
@@ -207,7 +203,7 @@ static int serve_requests(TcpConnection& connection) {
             strcpy(typeStr, typestr.c_str());
             const char* type;
             int typeLen = hqsp_get_post_value((const char *)buffer, requestLen, typeStr, &type);
-            //todo : add check on parse
+
             string foreground = "foreground";
             bool is_foreground = true;
             for (int i = 0; i < foreground.size(); i++) {
@@ -222,7 +218,7 @@ static int serve_requests(TcpConnection& connection) {
             strcpy(uidStr, uidstr.c_str());
             const char* uidchr;
             int uidLen = hqsp_get_post_value((const char *)buffer, requestLen, uidStr, &uidchr);
-            //todo add check on parse
+
             int uid = 0;
             for (int i = 0; i < uidLen; i++) {
                 uid *= 10;
@@ -251,7 +247,7 @@ static int serve_requests(TcpConnection& connection) {
                 args.push_back(argschr[i]);
             }
 
-            printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
+//            printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
 
             int code = create_process->run(is_foreground, uid, command, args, fd, err_fd);
             string out;
@@ -274,12 +270,12 @@ static int serve_requests(TcpConnection& connection) {
             }
             out += "\nCODE: " + to_string(code) + "\n";
 
-            printf("/create_process\nSTDOUT: %s\n", out.c_str());
+//            printf("/create_process\nSTDOUT: %s\n", out.c_str());
             delete create_process;
-            code = m_reply(connection, out);
+            code = reply(connection, out);
             return code;
         } else if (uri == "/kill") {
-            m_reply(connection, "OK");
+            reply(connection, "OK");
             exit(0);
         }
     }
@@ -298,7 +294,7 @@ static int reply(NbTcpConnection& connection, const string& answer) {
     header += "Content-Type: text/plain\r\n";
     header += "Content-Length: " + to_string(answer.size()) + "\r\n";
     header += "\r\n";
-    connection->send((const uint8_t *)header.c_str(), header.length(), true);
+    connection->send((const uint8_t *)header.c_str(), header.length());
     //send content
     connection->send((const uint8_t *)answer.c_str(), answer.length());
 

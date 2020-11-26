@@ -23,19 +23,6 @@ int hqsp_is_method_post(const char * request);
 //returns length of string
 int hqsp_get_resource(const char * request, const char ** x);
 
-//get "string-pointer" to value of the given header
-//x will be set to the start of the string
-//returns length of string; 0 if request doesn't contain the given header
-int hqsp_get_header_value(const char * request, const char * header, const char ** x);
-
-//get "string-pointer" to value of the given parameter
-//x will be set to the start of the string
-//returns length of string; 0 if request doesn't contain the given paramete
-int hqsp_get_parameter_value(const char * request, const char * parameter, const char ** x);
-
-//returns the http status code (e.g. 200, 404, etc)
-int hqsp_get_status_code(const char * response);
-
 //get "string-pointer" to requested resource
 //x will be set to the start of the string
 //returns length of string

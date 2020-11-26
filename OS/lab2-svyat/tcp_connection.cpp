@@ -63,7 +63,7 @@ int TcpConnection::recv(uint8_t* buffer, size_t bufferLen) {
 }
 
 
-int TcpConnection::send(const uint8_t* data, size_t dataLen, bool more) {
+int TcpConnection::send(const uint8_t* data, size_t dataLen) {
     int flags = 0;
     int status;
 
