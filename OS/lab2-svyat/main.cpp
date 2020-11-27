@@ -11,7 +11,6 @@
 #include <vector>
 #include "tcp_connection.h"
 #include "hqsp.h"
-#include "processes/logger_wrapper.h"
 #include "processes/create_process.h"
 #include "processes/system_info.h"
 #include "processes/ps.h"
@@ -30,9 +29,6 @@ void m_signal_handler(int signal) {
 
 
 int main(int argc, const char * argv[]) {
-    vector<string> logfiles = {"logs/main.log"};
-    auto log = Log(logfiles);
-
     list<TcpConnection> connections;
     list<TcpConnection>::iterator conIt;
     uint16_t port;
@@ -163,7 +159,7 @@ static int serve_requests(TcpConnection& connection) {
                 buff = buffer_out;
                 out += buff;
             }
-//            printf("/system_info\nSTDOUT: %s\n", out.c_str());
+//            printf("/system_info\nANSWER: %s\n", out.c_str());
             delete system_info;
             return reply(connection, out);
         } else if (uri == "/ps") {
@@ -177,7 +173,7 @@ static int serve_requests(TcpConnection& connection) {
                 buff = buffer_out;
                 out += buff;
             }
-//            printf("/ps\nSTDOUT: %s\n", out.c_str());
+//            printf("/ps\nANSWER: %s\n", out.c_str());
             delete ps;
             return reply(connection, out);
         }
@@ -190,7 +186,6 @@ static int serve_requests(TcpConnection& connection) {
         int postContentLen;
 
         postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
-        printf("POST BODY\n%d\n %s\n", postContentLen, postContent);
 
         if (uri == "/create_process") {
             auto* create_process = new CreateProcess();
@@ -246,8 +241,6 @@ static int serve_requests(TcpConnection& connection) {
                 args.push_back(argschr[i]);
             }
 
-//            printf("is_foreground: %d\nuid: %d\ncommand: %s\nargs: %s\n", is_foreground, uid, command.c_str(), args.c_str());
-
             int code = create_process->run(is_foreground, uid, command, args, fd, err_fd);
             string out;
             if (!is_foreground) {
@@ -269,7 +262,7 @@ static int serve_requests(TcpConnection& connection) {
             }
             out += "\nCODE: " + to_string(code) + "\n";
 
-//            printf("/create_process\nSTDOUT: %s\n", out.c_str());
+//            printf("/create_process\nANSWER: %s\n", out.c_str());
             delete create_process;
             code = reply(connection, out);
             return code;

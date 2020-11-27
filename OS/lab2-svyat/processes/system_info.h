@@ -29,7 +29,6 @@ using namespace std;
 
 class System_info {
 public:
-    System_info() = default;
     void run(int& stdout_fd);
     string get_system_info();
 };

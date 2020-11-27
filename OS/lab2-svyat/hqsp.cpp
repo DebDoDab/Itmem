@@ -43,7 +43,7 @@ int hqsp_get_resource(const char* request, const char** x) {
         if ((*start == 0) || (*start == '\n')) return 0;
     }
     *x = start;
-    //determin length
+    //determine length
     for (end = start, len = 0; !is_delimiter(*end); ++end, ++len);
     //set results
     return len;
@@ -64,7 +64,7 @@ int hqsp_get_post_content(const char * request, unsigned requestLen, const char 
         shiftReg = (shiftReg  << 8) | (uint8_t)*start;
     }
     *x = start;
-    //determin remaining length
+    //determine remaining length
     return (requestLen - len);
 }
 
@@ -75,16 +75,12 @@ int hqsp_get_post_value(const char* request, unsigned requestLen, const char* pa
     int len = 0;
 
     uint32_t shiftReg = 0;
-    printf("ASD");
     const char* parameterStart = strstr(body, parameter);
-//    printf("%d", (parameterStart == NULL));
     if (parameterStart == NULL) {
         x = NULL;
         return -1;
     }
-//    printf("%s\n", parameterStart);
     parameterStart += strlen(parameter);
-//    printf("%s\n", parameterStart);
 
     while (*parameterStart != ':') {
         parameterStart++;

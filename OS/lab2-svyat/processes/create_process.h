@@ -16,8 +16,6 @@ using namespace std;
 class CreateProcess {
 public:
     int run(bool foreground, int UID, const string& command, const string& arguments, int& stdout_fd, int& err_fd);
-private:
-
 };
 
 
