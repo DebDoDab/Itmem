@@ -63,12 +63,12 @@ string Ps::get_ps() {
         }
     }
 
-    for (int column = 0; column < parameters.size(); column++) {
-        for (auto& row : processes_params) {
-            for (int spaces_count = max_lengths[column] - row[column].size(); spaces_count > 0; spaces_count--) {
+    for (int row = 0; row < processes_params.size(); row++) {
+        for (int column = 0; column < parameters.size(); column++) {
+            for (int spaces_count = max_lengths[column] - processes_params[row][column].size(); spaces_count > 0; spaces_count--) {
                 answer += " ";
             }
-            answer += row[column] + "|";
+            answer += processes_params[row][column] + "|";
         }
         answer += "\n";
     }
