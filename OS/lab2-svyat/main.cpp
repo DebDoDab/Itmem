@@ -70,15 +70,15 @@ int main(int argc, const char * argv[]) {
 
     //enter program loop
     while (!ctrlC) {
-        TcpConnection con;
-
         //push new tcp connections to "connection list"
+        TcpConnection* con;
         con = tcpServer->serve();
-        while (con) {
+        while (con != nullptr) {
             //add to this connection to the list of active connections
-            connections.push_back(con);
+            connections.push_back(*con);
             con = tcpServer->serve();
         }
+        delete con;
 
         //for each connection ...
         //receive HTTP requests
@@ -106,8 +106,7 @@ int main(int argc, const char * argv[]) {
     //delete still open connections
     conIt = connections.begin();
     while (conIt != connections.end()) {
-        conIt->connection->close();
-        delete conIt->connection;
+        conIt->close();
         conIt++;
     }
 
@@ -123,7 +122,7 @@ static int serve_requests(TcpConnection& connection) {
     int status;
 
     //check for incoming data
-    status = connection->recv(buffer, sizeof(buffer) - 1);
+    status = connection.recv(buffer, sizeof(buffer) - 1);
 
     //check if connection is closed
     if (status < 0) {
@@ -187,7 +186,7 @@ static int serve_requests(TcpConnection& connection) {
     //POST
     if (hqsp_is_method_post((const char *)buffer)) {
         printf("POST\nURI: %s\n", uri.c_str());
-        const char * postContent;
+        const char* postContent;
         int postContentLen;
 
         postContentLen = hqsp_get_post_content((const char *)buffer, requestLen, &postContent);
@@ -286,7 +285,7 @@ static int serve_requests(TcpConnection& connection) {
 
 //return 0 when connection stays open
 //return 1 when connection shall be closed
-static int reply(NbTcpConnection& connection, const string& answer) {
+static int reply(TcpConnection& connection, const string& answer) {
     string header;
     //update client ...
     //send header
@@ -294,9 +293,9 @@ static int reply(NbTcpConnection& connection, const string& answer) {
     header += "Content-Type: text/plain\r\n";
     header += "Content-Length: " + to_string(answer.size()) + "\r\n";
     header += "\r\n";
-    connection->send((const uint8_t *)header.c_str(), header.length());
+    connection.send((const uint8_t *)header.c_str(), header.length());
     //send content
-    connection->send((const uint8_t *)answer.c_str(), answer.length());
+    connection.send((const uint8_t *)answer.c_str(), answer.length());
 
     return 1; //instruct to close connection
 }

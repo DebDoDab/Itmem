@@ -7,6 +7,7 @@
 #include <string>
 #include <algorithm>
 #include <string.h>
+#include <list>
 
 string Ps::get_ps() {
     int dir = open("/proc", O_DIRECTORY);
@@ -18,15 +19,15 @@ string Ps::get_ps() {
 
     list<string> processes;
 
-    dirent* direct = readdir(procdir);
+    dirent* direct = readdir(proc_dir);
     while (direct != nullptr) {
         string name = direct->d_name;
         if (name != "." && name != ".." && name != "curproc") {
             processes.push_back(name);
         }
-        direct = readdir(procdir);
+        direct = readdir(proc_dir);
     }
-    closedir(procdir);
+    closedir(proc_dir);
 
     vector<vector<string>> processes_params;
     vector<string> parameters = {"Command name", "Process id",
@@ -58,13 +59,13 @@ string Ps::get_ps() {
     for (int column = 0; column < parameters.size(); column++) {
         max_lengths[column] = 0;
         for (auto& process_param: processes_params) {
-            max_lengths[column] = max(max_lengths[column], process_param[column]);
+            max_lengths[column] = max(max_lengths[column], int(process_param[column].size()));
         }
     }
 
     for (int column = 0; column < parameters.size(); column++) {
         for (auto& row : processes_params) {
-            for (int spaces_count = max_lengths[column] - row[column]; spaces_count > 0; spaces_count--) {
+            for (int spaces_count = max_lengths[column] - row[column].size(); spaces_count > 0; spaces_count--) {
                 answer += " ";
             }
             answer += row[column] + "|";

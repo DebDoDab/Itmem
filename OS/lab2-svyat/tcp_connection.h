@@ -13,7 +13,7 @@
 class TcpConnection {
 public:
     TcpConnection();
-    bTcpConnection(int sock, const sockaddr_in* address);
+    TcpConnection(int sock, const sockaddr_in* address);
 
     bool isOpen();
 
