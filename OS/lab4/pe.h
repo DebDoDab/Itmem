@@ -1,8 +1,6 @@
 //
 // Created by vadim on 7.01.21.
 //
-/////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// ШО ЗА НАХУЙ !!!!!!ПОЧЕМУ ВСЁ КРАСНОЕ????????????????????????777777 БЛЯТЬ
 
 #ifndef LAB4_PE_H
 #define LAB4_PE_H
@@ -54,6 +52,30 @@ private:
     int baseRelocationTableSize = 0;
     int pointerToSymbolTable = 0;
     int sectionAlignment = 0;
+    int exportTableAddress = 0;
+    int exportTableSize = 0;
+    int importTableAddress = 0;
+    int importTableSize = 0;
+    int magicNumber = 0;
+
+    struct ExportTable {
+        uint32_t base = 0;
+        uint32_t addressTableCount = 0;
+        uint32_t namesCount = 0;
+        uint32_t addressTableRva = 0;
+        uint32_t namesRva = 0;
+        uint32_t ordinalTableRva = 0;
+    } exportTable;
+    vector<pair<string, int>> functions;
+
+    struct ImportTable {
+        int importLookupTableRva = 0;
+        uint32_t importAddressTableRva = 0;
+        int nameRva = 0;
+        ImportTable() = default;
+    };
+    vector<ImportTable> importTable;
+
     time_t time;
     pair<string, int> machineName;
     vector<RelocationPageInfo> relocationSections;
@@ -113,6 +135,12 @@ private:
     uint32_t getInt32(int size = 4) {
         uint32_t value = 0;
         fread(&value, size, 1, exe);
+        return value;
+    }
+
+    uint64_t getInt64() {
+        uint64_t value = 0;
+        fread(&value, 8, 1, exe);
         return value;
     }
 
@@ -375,6 +403,14 @@ private:
         }
     }
 
+    int getStringLength() {
+        int length = 0;
+        while (getInt8() != 0x00) {
+            length++;
+        }
+        return length;
+    }
+
     bool checkExecutable() {
         fseek(exe, 0, SEEK_SET);
         int e_magic = getInt16();
@@ -405,10 +441,10 @@ private:
         }
     }
 
-    int defineSection(int rva, int sectionAlignment) {
+    int defineSection(int rva) {
         for (int i = 0; i < this->sections.size(); i++) {
             int start = this->sections[i].virtualAddress;
-            int end = start + alignUp(this->sections[i].virtualSize, sectionAlignment);
+            int end = start + alignUp(this->sections[i].virtualSize, this->sectionAlignment);
             if (rva >= start && rva < end) {
                 return i;
             }
@@ -416,17 +452,17 @@ private:
         return -1;
     }
 
-    int rvaToOffset(int rva, int sectionAlignment) {
-        int sectionIndex = defineSection(rva, sectionAlignment);
+    int rvaToOffset(int rva) {
+        int sectionIndex = defineSection(rva);
         if (sectionIndex == -1) {
             return 0;
         }
         return rva - this->sections[sectionIndex].virtualAddress + this->sections[sectionIndex].pointerToRawData;
     }
 
-    void readOptionalHeaderRelocationsInfo() {
+    void readOptionalHeader() {
         fseek(exe, this->pointerToPETable + 24, SEEK_SET);
-        int magicNumber = getInt16();
+        magicNumber = getInt16();
         if(magicNumber == 0x10b) {
             fseek(exe, 134, SEEK_CUR);
         }
@@ -438,6 +474,28 @@ private:
         this->baseRelocationTableSize = getInt32();
         fseek(exe, this->pointerToPETable + 24 + 32, SEEK_SET);
         this->sectionAlignment = getInt32();
+
+        fseek(exe, this->pointerToPETable + 24, SEEK_SET);
+        if(magicNumber == 0x10b) {
+            fseek(exe, 96, SEEK_CUR);
+        }
+        else if (magicNumber == 0x20b)
+        {
+            fseek(exe, 112, SEEK_CUR);
+        }
+        this->exportTableAddress = getInt32();
+        this->exportTableSize = getInt32();
+
+        fseek(exe, this->pointerToPETable + 24, SEEK_SET);
+        if(magicNumber == 0x10b) {
+            fseek(exe, 104, SEEK_CUR);
+        }
+        else if (magicNumber == 0x20b)
+        {
+            fseek(exe, 120, SEEK_CUR);
+        }
+        this->importTableAddress = getInt32();
+        this->importTableSize = getInt32();
     }
 
     void readSectionsTable() {
@@ -465,12 +523,16 @@ private:
         this->pointerToPETable = getInt32();
         readPEHeader();
         readSectionsTable();
-        readOptionalHeaderRelocationsInfo();
+        readOptionalHeader();
         countRelocations();
+        readExportTable();
+        getExportTable();
+        readImportTable();
+        getImportTable();
     }
 
     void countRelocations() {
-        int address = rvaToOffset(this->baseRelocationTableVirtualAddress, this->sectionAlignment);
+        int address = rvaToOffset(this->baseRelocationTableVirtualAddress);
         fseek(exe, address, SEEK_SET);
         int curSize = 0;
         for (int i = 0; i < this->baseRelocationTableSize; i += curSize) {
@@ -487,6 +549,153 @@ private:
                 int type = (relocationSectionInfo & 0xf000) >> 12;
                 int offset = relocationSectionInfo & 0x0fff;
                 this->relocationSections.back().relocationPageCount[type]++;
+            }
+        }
+    }
+
+    void readExportTable() {
+        int address = rvaToOffset(this->exportTableAddress);
+        fseek(exe, address + 16, SEEK_SET);
+        this->exportTable.base = getInt32();
+        this->exportTable.addressTableCount = getInt32();
+        this->exportTable.namesCount = getInt32();
+        this->exportTable.addressTableRva = getInt32();
+        this->exportTable.namesRva = getInt32();
+        this->exportTable.ordinalTableRva = getInt32();
+    }
+
+    void readImportTable() {
+        int offset = rvaToOffset(this->importTableAddress);
+        fseek(exe, offset, SEEK_SET);
+        while (true) {
+            ImportTable x;
+            x.importLookupTableRva = getInt32();
+            fseek(exe, 4, SEEK_CUR);
+            uint32_t forwarderChain = getInt32();
+            x.nameRva = getInt32();
+            x.importAddressTableRva = getInt32();
+            if (x.importLookupTableRva == 0 && x.importAddressTableRva == 0 && forwarderChain == 0 && x.nameRva == 0) {
+                break;
+            }
+            this->importTable.push_back(x);
+        }
+    }
+
+    void getExportTable() {
+        int addressTableAddress = rvaToOffset(this->exportTable.addressTableRva);
+        int namesAddress = rvaToOffset(this->exportTable.namesRva);
+        int ordinalTableAddress = rvaToOffset(this->exportTable.ordinalTableRva);
+
+        fseek(exe, addressTableAddress, SEEK_SET);
+
+        for (int i = 0; i < this->exportTable.addressTableCount; i++) {
+            int ordinal = this->exportTable.base + i;
+            int exportFunctionAddress = getInt32();
+            functions.emplace_back("", exportFunctionAddress);
+        }
+
+        fseek(exe, namesAddress, SEEK_SET);
+        for (int i = 0; i < this->exportTable.namesCount; i++) {
+            int nameAddress = rvaToOffset(getInt32());
+            long curPos = ftell(exe);
+            fseek(exe, ordinalTableAddress + 2 * i, SEEK_SET);
+            int ordinalIndex = getInt16();
+
+            if (functions[ordinalIndex].second >= this->exportTableAddress &&
+                    functions[ordinalIndex].second < this->exportTableAddress + this->exportTableSize) {
+                int redirectionNameAddress = rvaToOffset(functions[ordinalIndex].second);
+                fseek(exe, redirectionNameAddress, SEEK_SET);
+                int redirectionNameLength = getStringLength();
+                fseek(exe, redirectionNameAddress, SEEK_SET);
+                string redirectionName = getString(redirectionNameLength);
+                functions[ordinalIndex].first = redirectionName;
+            } else {
+                fseek(exe, nameAddress, SEEK_SET);
+                int nameLength = getStringLength();
+                fseek(exe, nameAddress, SEEK_SET);
+                string name = getString(nameLength);
+                functions[ordinalIndex].first = name;
+            }
+            fseek(exe, curPos, SEEK_SET);
+        }
+    }
+
+    struct ImportFunction {
+        string dllName;
+        struct Function {
+            string name;
+            int hint;
+        };
+        vector<Function> functions;
+
+        ImportFunction() = default;
+    };
+
+
+    vector<ImportFunction> importFunctions;
+
+    void getImportTable() {
+        for (int i = 0; i < this->importTable.size(); i++) {
+            this->importFunctions.push_back({});
+            int dllNameAddress = rvaToOffset(this->importTable[i].nameRva);
+            fseek(exe, dllNameAddress, SEEK_SET);
+            int dllNameLength = getStringLength();
+            fseek(exe, dllNameAddress, SEEK_SET);
+            this->importFunctions.back().dllName = getString(dllNameLength);
+
+            int ilt = rvaToOffset(this->importTable[i].importLookupTableRva);
+            fseek(exe, ilt, SEEK_SET);
+            if (this->magicNumber == 0x10b) {
+                while (true) {
+                    fseek(exe, 4, SEEK_CUR);
+                    uint32_t function = getInt32();
+                    uint32_t ordinal = getInt32();
+                    uint32_t addressOfData = getInt32();
+                    if (function == 0) {
+                        break;
+                    }
+                    long curPos = ftell(exe);
+                    if (!(addressOfData & (1ull << 31))) {
+                        ImportFunction::Function x;
+                        int offset = rvaToOffset(function);
+                        fseek(exe, offset, SEEK_SET);
+                        x.hint = getInt16();
+                        int nameLength = getStringLength();
+                        fseek(exe, rvaToOffset(function) + 2, SEEK_SET);
+                        x.name = getString(nameLength);
+                        this->importFunctions.back().functions.push_back(x);
+
+                        fseek(exe, curPos, SEEK_SET);
+                    }
+                }
+            } else {
+                while (true) {
+                    fseek(exe, 8, SEEK_CUR);
+                    uint64_t function = getInt64();
+                    uint64_t ordinal = getInt64();
+                    uint64_t addressOfData = getInt64();
+                    if (function == 0) {
+                        break;
+                    }
+                    long curPos = ftell(exe);
+                    if (!(addressOfData & (uint64_t(1) << 63))) {
+                        ImportFunction::Function x;
+                        int offset = rvaToOffset(function);
+                        fseek(exe, offset, SEEK_SET);
+                        x.hint = getInt16();
+                        int nameLength = getStringLength();
+                        fseek(exe, rvaToOffset(function) + 2, SEEK_SET);
+                        x.name = getString(nameLength);
+                        this->importFunctions.back().functions.push_back(x);
+
+                        fseek(exe, curPos, SEEK_SET);
+                    } else {
+                        ImportFunction::Function x;
+                        x.hint = -1;
+                        x.name = "ORDINAL: " + to_string(ordinal);
+                        this->importFunctions.back().functions.push_back(x);
+                    }
+                }
             }
         }
     }
@@ -550,6 +759,24 @@ public:
         {
             cout << "Symbol table is empty." << endl;
             return;
+        }
+    }
+
+    void showExportTable() {
+        for (const auto& function : this->functions) {
+            cout << "Name: " << function.first << endl;
+            cout << "Address: " << stringToHex(uint32_t(function.second)) << endl;
+            cout << endl;
+        }
+    }
+
+    void showImportTable() {
+        for (const auto& importFunction : this->importFunctions) {
+            cout << "DLL file: " << importFunction.dllName << endl;
+            for (const auto& function : importFunction.functions) {
+                cout << "\tHINT: " << function.hint << "\n";
+                cout << "\tNAME: " << function.name << "\n" << endl;
+            }
         }
     }
 };
