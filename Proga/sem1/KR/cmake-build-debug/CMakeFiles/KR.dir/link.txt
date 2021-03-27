@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/KR.dir/main.cpp.o  -o KR 

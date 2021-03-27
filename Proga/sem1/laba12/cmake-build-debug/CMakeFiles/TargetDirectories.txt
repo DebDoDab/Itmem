@@ -1,3 +1,0 @@
-/home/vadim/CLionProjects/laba12/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/vadim/CLionProjects/laba12/cmake-build-debug/CMakeFiles/laba12.dir
-/home/vadim/CLionProjects/laba12/cmake-build-debug/CMakeFiles/edit_cache.dir

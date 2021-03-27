@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/laba2.dir/main.cpp.o CMakeFiles/laba2.dir/SquarePolynomial.cpp.o  -o laba2 

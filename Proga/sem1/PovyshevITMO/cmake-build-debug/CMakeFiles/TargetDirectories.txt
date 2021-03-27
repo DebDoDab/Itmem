@@ -1,3 +1,0 @@
-/home/vadim/CLionProjects/PovyshevITMO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/vadim/CLionProjects/PovyshevITMO/cmake-build-debug/CMakeFiles/PovyshevITMO.dir
-/home/vadim/CLionProjects/PovyshevITMO/cmake-build-debug/CMakeFiles/edit_cache.dir

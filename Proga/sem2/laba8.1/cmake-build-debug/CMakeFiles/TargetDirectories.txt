@@ -1,3 +1,0 @@
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8.1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8.1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/vadim/Desktop/MoeGovno/Proga/sem2/laba8.1/cmake-build-debug/CMakeFiles/Lab8.dir

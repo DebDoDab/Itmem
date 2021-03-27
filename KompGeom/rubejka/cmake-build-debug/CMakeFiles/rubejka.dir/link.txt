@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/rubejka.dir/main.cpp.o  -o rubejka 

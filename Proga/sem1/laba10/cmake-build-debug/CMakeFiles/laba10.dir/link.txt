@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/laba10.dir/main.c.o  -o laba10 -lm 

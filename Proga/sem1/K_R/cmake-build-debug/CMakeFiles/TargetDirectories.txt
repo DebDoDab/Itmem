@@ -1,3 +1,0 @@
-/home/vadim/CLionProjects/K_R/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/vadim/CLionProjects/K_R/cmake-build-debug/CMakeFiles/K_R.dir
-/home/vadim/CLionProjects/K_R/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/laba13.dir/main.c.o CMakeFiles/laba13.dir/Settings.c.o CMakeFiles/laba13.dir/mp3.c.o  -o laba13 

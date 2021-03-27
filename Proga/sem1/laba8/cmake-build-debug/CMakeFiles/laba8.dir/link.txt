@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/laba8.dir/main.c.o  -o laba8 
