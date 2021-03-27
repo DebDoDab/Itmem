@@ -1,0 +1,3 @@
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/laba1.dir
+/home/vadim/Desktop/MoeGovno/KompGeom/laba1/cmake-build-debug/CMakeFiles/edit_cache.dir

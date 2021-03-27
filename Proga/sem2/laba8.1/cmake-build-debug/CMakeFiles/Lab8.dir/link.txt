@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Lab8.dir/main.cpp.o CMakeFiles/Lab8.dir/cube_sweep.cpp.o CMakeFiles/Lab8.dir/brink.cpp.o CMakeFiles/Lab8.dir/cube_solver.cpp.o CMakeFiles/Lab8.dir/cube.cpp.o CMakeFiles/Lab8.dir/small_cube.cpp.o  -o Lab8  -lglut -lGL -lGLU 

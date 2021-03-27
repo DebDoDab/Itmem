@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/CLionProjects/laba11/Pentagon.c
+Pentagon.h
+/home/vadim/CLionProjects/laba11/Pentagon.h
+math.h
+-
+
+/home/vadim/CLionProjects/laba11/Pentagon.h
+
+/home/vadim/CLionProjects/laba11/main.c
+stdio.h
+-
+Pentagon.h
+/home/vadim/CLionProjects/laba11/Pentagon.h
+

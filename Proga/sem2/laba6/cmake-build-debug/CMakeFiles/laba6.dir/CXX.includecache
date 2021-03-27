@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/CLionProjects/laba6/functions.h
+bits/stdc++.h
+-
+functions.tpp
+/home/vadim/CLionProjects/laba6/functions.tpp
+
+/home/vadim/CLionProjects/laba6/functions.tpp
+
+/home/vadim/CLionProjects/laba6/main.cpp
+bits/stdc++.h
+-
+functions.h
+/home/vadim/CLionProjects/laba6/functions.h
+

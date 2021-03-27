@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/laba3_1.dir/main.cpp.o CMakeFiles/laba3_1.dir/Exceptions.cpp.o CMakeFiles/laba3_1.dir/Settings.cpp.o CMakeFiles/laba3_1.dir/Image.cpp.o  -o laba3_1 

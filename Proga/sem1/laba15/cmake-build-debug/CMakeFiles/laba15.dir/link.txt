@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/laba15.dir/main.c.o CMakeFiles/laba15.dir/settings.c.o CMakeFiles/laba15.dir/arch.c.o CMakeFiles/laba15.dir/files.c.o  -o laba15 

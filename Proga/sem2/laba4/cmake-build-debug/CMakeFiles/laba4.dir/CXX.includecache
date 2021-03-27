@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vadim/CLionProjects/laba4/Figures.cpp
+bits/stdc++.h
+-
+Figures.h
+/home/vadim/CLionProjects/laba4/Figures.h
+
+/home/vadim/CLionProjects/laba4/Figures.h
+bits/stdc++.h
+-
+
+/home/vadim/CLionProjects/laba4/main.cpp
+bits/stdc++.h
+-
+Figures.h
+/home/vadim/CLionProjects/laba4/Figures.h
+
