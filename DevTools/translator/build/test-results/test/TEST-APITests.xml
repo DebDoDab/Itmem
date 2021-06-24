@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="APITests" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-06-05T02:56:19" hostname="timurbabs" time="52.062">
+  <properties/>
+  <testcase name="fromFrenchTranslateTests()" classname="APITests" time="7.502"/>
+  <testcase name="fromRussianTranslateTests()" classname="APITests" time="7.572"/>
+  <testcase name="fromItalianoTranslateTests()" classname="APITests" time="7.343"/>
+  <testcase name="fromChineseTranslateTests()" classname="APITests" time="7.195"/>
+  <testcase name="fromGermanTranslateTests()" classname="APITests" time="7.984"/>
+  <testcase name="fromCzechTranslateTests()" classname="APITests" time="7.169"/>
+  <testcase name="fromEnglishTranslateTests()" classname="APITests" time="7.29"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

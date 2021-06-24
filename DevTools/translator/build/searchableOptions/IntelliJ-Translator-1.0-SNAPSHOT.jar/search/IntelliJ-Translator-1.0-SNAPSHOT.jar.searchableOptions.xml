@@ -1,0 +1,34 @@
+<options>
+  <configurable id="preferences.keymap" configurable_name="Keymap">
+    <option name="input" path="ActionManager" hit="Input PopUp " />
+    <option name="popup" path="ActionManager" hit="Input PopUp " />
+    <option name="popup" path="ActionManager" hit="PopUp" />
+    <option name="replacing" path="ActionManager" hit="Replacing" />
+    <option name="selected" path="ActionManager" hit="Selected Text Translate" />
+    <option name="text" path="ActionManager" hit="Selected Text Translate" />
+    <option name="translate" path="ActionManager" hit="Selected Text Translate" />
+    <option name="default" path="ActionManager" hit="Set Default Languages" />
+    <option name="languages" path="ActionManager" hit="Set Default Languages" />
+    <option name="set" path="ActionManager" hit="Set Default Languages" />
+  </configurable>
+  <configurable id="properties.AppSettingsConfigurable" configurable_name="Translator Settings">
+    <option name="chinese" hit="Chinese" />
+    <option name="czech" hit="Czech" />
+    <option name="default" hit="Default language settings:" />
+    <option name="language" hit="Default language settings:" />
+    <option name="settings" hit="Default language settings:" />
+    <option name="english" hit="English" />
+    <option name="french" hit="French" />
+    <option name="german" hit="German" />
+    <option name="italian" hit="Italian" />
+    <option name="japanese" hit="Japanese" />
+    <option name="korean" hit="Korean" />
+    <option name="from" hit="Language from: " />
+    <option name="language" hit="Language from: " />
+    <option name="language" hit="Language to: " />
+    <option name="to" hit="Language to: " />
+    <option name="russian" hit="Russian" />
+    <option name="settings" hit="Translator Settings" />
+    <option name="translator" hit="Translator Settings" />
+  </configurable>
+</options>

@@ -1,0 +1,52 @@
+<application>
+  <component name="ActionsLocalSummary">
+    <e n="$Undo">
+      <i c="8" l="1624518044452" />
+    </e>
+    <e n="CommentByLineComment">
+      <i c="1" l="1624517844808" />
+    </e>
+    <e n="EditorBackSpace">
+      <i c="2" l="1624517949753" />
+    </e>
+    <e n="EditorDeleteToWordStart">
+      <i c="3" l="1624517871932" />
+    </e>
+    <e n="EditorEnter">
+      <i c="1" l="1624517838691" />
+    </e>
+    <e n="EditorPreviousWordWithSelection">
+      <i c="4" l="1624517874167" />
+    </e>
+    <e n="EditorRight">
+      <i c="2" l="1624517871499" />
+    </e>
+    <e n="EditorSelectWord">
+      <i c="2" l="1624517998712" />
+    </e>
+    <e n="EditorUp">
+      <i c="1" l="1624517845521" />
+    </e>
+    <e n="NewClass">
+      <i c="1" l="1624517830710" />
+    </e>
+    <e n="Replace">
+      <i c="1" l="1624517974127" />
+    </e>
+    <e n="SaveAll">
+      <i c="1" l="1624517877541" />
+    </e>
+    <e n="ShowSettings">
+      <i c="2" l="1624527121509" />
+    </e>
+    <e n="WelcomeScreen.CreateNewProject">
+      <i c="1" l="1624517783519" />
+    </e>
+    <e n="com.intellij.find.SearchReplaceComponent$11">
+      <i c="1" l="1624517975183" />
+    </e>
+    <e n="com.intellij.openapi.ui.impl.DialogWrapperPeerImpl$AnCancelAction">
+      <i c="2" l="1624527175950" />
+    </e>
+  </component>
+</application>
